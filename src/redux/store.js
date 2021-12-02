@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import allStatesSlice from "./allStatesSlice";
+import cockTailSlice from "./cockTailSlice";
 export const store = configureStore({
   reducer: {
-    states: allStatesSlice,
+    states: cockTailSlice,
   },
 });

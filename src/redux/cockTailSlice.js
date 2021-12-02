@@ -1,21 +1,26 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 const initialState = {
-  pastaList: [],
+  list: [],
   loading: false,
+  showLess: false,
 };
 
-export const fetchData = createAsyncThunk("users/fetchPasta", async () => {
+export const fetchData = createAsyncThunk("users/fetchCockTail", async () => {
   const res = await axios.get(
     "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
   );
-  return res.data;
+  return res.data.drinks;
 });
 
-const allStatesSlice = createSlice({
+const cockTailSlice = createSlice({
   name: "states",
   initialState,
-  reducers: {},
+  reducers: {
+    setShowLess: (state, action) => {
+      state.showLess = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchData.pending, (state) => {
@@ -23,8 +28,7 @@ const allStatesSlice = createSlice({
       })
       .addCase(fetchData.fulfilled, (state, { payload }) => {
         state.loading = true;
-        state.pastaList = payload;
-        console.log(state.pastaList);
+        state.list = payload;
       })
       .addCase(fetchData.rejected, (state, { payload }) => {
         console.log(state.error);
@@ -32,5 +36,5 @@ const allStatesSlice = createSlice({
   },
 });
 
-export const { bah } = allStatesSlice.actions;
-export default allStatesSlice.reducer;
+export const { setShowLess } = cockTailSlice.actions;
+export default cockTailSlice.reducer;
