@@ -4,9 +4,9 @@
   box-sizing: border-box;
 }
 .header-img {
-  background-image: url("./images/hero.jpg");
+  background-image: url("./pictures/barPic.jpg");
   background-size: cover;
-  height: 80vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,7 +1,7 @@
 import React from "react";
 
 function pasta() {
-  return <div>pasta component</div>;
+  return <div>cockTail component</div>;
 }
 
 export default pasta;

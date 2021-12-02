@@ -1,7 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import Pasta from "./pasta";
+import CockTail from "./cockTail";
+import { useDispatch } from "react-redux";
+import { fetchData } from "./redux/allStatesSlice";
+
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
+
   return (
     <main>
       <Nav>
@@ -19,7 +27,7 @@ function App() {
               d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
             />
           </svg>
-          <h1>Pasta Shop _React</h1>
+          <h1>The Bar</h1>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -39,13 +47,13 @@ function App() {
         <div className="header-img">
           <div className="header-box">
             <h1 className="header-p">
-              Welcome to our <span>restaurant</span>
+              Welcome to our <span>Bar</span>
             </h1>
           </div>
         </div>
       </Header>
       <Section>
-        <Pasta />
+        <CockTail />
       </Section>
     </main>
   );
