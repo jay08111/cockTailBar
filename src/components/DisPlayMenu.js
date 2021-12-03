@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-function DisPlayMenu({ name, image, info, glass, description }) {
+import { Link } from "react-router-dom";
+function DisPlayMenu({ name, image, info, glass, description, id }) {
   const [read, setRead] = useState(false);
   return (
     <Wrapper>
@@ -13,6 +14,7 @@ function DisPlayMenu({ name, image, info, glass, description }) {
           {read ? "Show Less" : "Read More"}
         </button>
       </div>
+      <Link to={`/singlePage/${id}`}>single page</Link>
     </Wrapper>
   );
 }

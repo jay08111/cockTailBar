@@ -1,4 +1,6 @@
 import CockTail from "./CockTail";
 import Footer from "./Footer";
 import DisPlayMenu from "./DisPlayMenu";
-export { CockTail, Footer, DisPlayMenu };
+import NavBar from "./Navbar";
+import Header from "./Header";
+export { CockTail, Footer, DisPlayMenu, NavBar, Header };
