@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+const url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
 const initialState = {
   list: [],
   loading: false,
@@ -7,10 +8,31 @@ const initialState = {
 };
 
 export const fetchData = createAsyncThunk("users/fetchCockTail", async () => {
-  const res = await axios.get(
-    "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
-  );
-  return res.data.drinks;
+  const res = await axios.get(url);
+  const { drinks } = res.data;
+  if (drinks) {
+    const newCocktails = drinks.map((item) => {
+      const {
+        idDrink,
+        strDrink,
+        strDrinkThumb,
+        strAlcoholic,
+        strGlass,
+        strInstructions,
+      } = item;
+      return {
+        id: idDrink,
+        name: strDrink,
+        image: strDrinkThumb,
+        info: strAlcoholic,
+        glass: strGlass,
+        description: strInstructions,
+      };
+    });
+    return newCocktails;
+  } else {
+    return null;
+  }
 });
 
 const cockTailSlice = createSlice({
@@ -19,6 +41,9 @@ const cockTailSlice = createSlice({
   reducers: {
     setShowLess: (state, action) => {
       state.showLess = action.payload;
+    },
+    setList: (state, action) => {
+      state.list = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -36,5 +61,5 @@ const cockTailSlice = createSlice({
   },
 });
 
-export const { setShowLess } = cockTailSlice.actions;
+export const { setShowLess, setList } = cockTailSlice.actions;
 export default cockTailSlice.reducer;
