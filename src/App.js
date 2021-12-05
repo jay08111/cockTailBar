@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
 import { CockTail, Header } from "./components/index";
 import { useDispatch } from "react-redux";
 import { fetchData } from "./redux/cockTailSlice";
@@ -9,18 +8,12 @@ function App() {
     dispatch(fetchData());
   }, [dispatch]);
   return (
-    <Main>
+    <main>
       <Header />
-      <section>
+      <section className="section-center marginTop3">
         <CockTail />
       </section>
-    </Main>
+    </main>
   );
 }
-const Main = styled.main`
-  section {
-    width: 90vw;
-    margin: 2rem auto;
-  }
-`;
 export default App;

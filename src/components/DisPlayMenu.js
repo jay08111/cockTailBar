@@ -14,7 +14,7 @@ function DisPlayMenu({ name, image, info, glass, description, id }) {
           {read ? "Show Less" : "Read More"}
         </button>
       </div>
-      <Link to={`/singlePage/${id}`}>single page</Link>
+      <StyledLink to={`/singlePage/${id}`}>single page</StyledLink>
     </Wrapper>
   );
 }
@@ -50,6 +50,17 @@ const Wrapper = styled.div`
     border: none;
     background-color: #fff;
     cursor: pointer;
+  }
+`;
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #000;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
   }
 `;
 

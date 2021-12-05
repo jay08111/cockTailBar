@@ -99,7 +99,7 @@ const cockTailSlice = createSlice({
           console.log(state.singleCockTailList);
         }
       })
-      .addCase(fetchData.rejected, (state, { payload }) => {
+      .addCase(fetchData.rejected, (state) => {
         console.log(state.error);
       });
   },

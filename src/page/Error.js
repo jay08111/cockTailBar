@@ -1,11 +1,47 @@
 import React from "react";
-
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 function Error() {
   return (
-    <div>
-      <h1>error</h1>
-    </div>
+    <Wrapper>
+      <div>
+        <h1>404 page not found</h1>
+        <h2>there is no page that you are looking for </h2>
+      </div>
+      <StyledLink to="/" className="marginTop3">
+        Go back to home
+      </StyledLink>
+    </Wrapper>
   );
 }
-
+const Wrapper = styled.div`
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3rem;
+  div {
+    margin-bottom: 3rem;
+  }
+  h1 {
+    font-size: 5rem;
+    text-align: center;
+  }
+  h2 {
+    font-size: 4rem;
+    text-align: center;
+  }
+`;
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #000;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+`;
 export default Error;

@@ -1,9 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { DisPlayMenu } from "./index";
+import { DisPlayMenu, Loading } from "./index";
 function CockTail() {
-  const { list } = useSelector((state) => state.states);
+  const { list, loading } = useSelector((state) => state.states);
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <Wrapper>
       <h1>Menu</h1>
