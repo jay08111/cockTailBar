@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 function Navbar() {
   return (
     <Nav>
@@ -17,7 +18,9 @@ function Navbar() {
             d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
           />
         </svg>
-        <h1>The Bar</h1>
+        <StyledLink to="/">
+          <h1>The Bar</h1>
+        </StyledLink>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -55,6 +58,17 @@ const Nav = styled.nav`
   svg {
     width: 40px;
     cursor: pointer;
+  }
+`;
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #000;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
   }
 `;
 export default Navbar;
