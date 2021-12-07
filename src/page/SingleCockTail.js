@@ -6,8 +6,6 @@ import { Loading } from "../components/index";
 function SingleCockTail() {
   const { singleCockTailList, loading } = useSelector((state) => state.states);
   const { id } = useParams();
-  const params = useParams();
-  console.log(params);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchData(id));

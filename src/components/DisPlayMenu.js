@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-function DisPlayMenu({ name, image, info, glass, description, id }) {
+function DisPlayMenu({ name, image, description, id }) {
   const [read, setRead] = useState(false);
   return (
     <Wrapper>
       <img src={image} alt={name} />
       <div className="description">
         <p className="des-p">
-          {read ? description : `${description.substring(0, 15)}...`}
+          {read ? description : `${description.substring(0, 20)}...`}
         </p>
         <button className="des-btn" onClick={() => setRead(!read)}>
           {read ? "Show Less" : "Read More"}
         </button>
       </div>
-      <StyledLink to={`/singlePage/${id}`}>single page</StyledLink>
+      <StyledLink to={`/singlePage/${id}`} className="btn">
+        details
+      </StyledLink>
     </Wrapper>
   );
 }
@@ -62,6 +64,11 @@ const StyledLink = styled(Link)`
   &:active {
     text-decoration: none;
   }
+  text-align: center;
+  padding: 0.9rem 0;
+  background-color: #ffec99;
+  font-size: 1.8rem;
+  margin-top: 5rem;
 `;
 
 export default DisPlayMenu;
