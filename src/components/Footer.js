@@ -12,6 +12,7 @@ const Wrapper = styled.footer`
   justify-content: center;
   align-items: center;
   min-height: 10vh;
+  text-transform: capitalize;
 `;
 
 export default Footer;

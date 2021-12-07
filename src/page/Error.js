@@ -31,6 +31,7 @@ const Wrapper = styled.div`
   h2 {
     font-size: 4rem;
     text-align: center;
+    text-transform: capitalize;
   }
 `;
 const StyledLink = styled(Link)`
