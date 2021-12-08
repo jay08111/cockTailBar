@@ -5,7 +5,12 @@ import { store } from "./redux/store";
 import { Provider } from "react-redux";
 import { render } from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { SingleCockTail, CartPage, Error, Review } from "./page/index";
+import {
+  ReviewPage,
+  CartPage,
+  ErrorPage,
+  SingleLiquorPage,
+} from "./page/index";
 import { Footer, NavBar } from "./components/index";
 const rootElement = document.getElementById("root");
 render(
@@ -15,10 +20,10 @@ render(
         <NavBar />
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="/singlePage/:id" element={<SingleCockTail />} />
+          <Route path="/singlePage/:id" element={<SingleLiquorPage />} />
           <Route path="/cartPage" element={<CartPage />} />
-          <Route path="/review" element={<Review />} />
-          <Route path="*" element={<Error />} />
+          <Route path="/review" element={<ReviewPage />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Footer />
       </React.StrictMode>

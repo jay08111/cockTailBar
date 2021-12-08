@@ -1,5 +1,5 @@
 import CartPage from "./CartPage";
-import Error from "./Error";
-import SingleCockTail from "./SingleCockTail";
-import Review from "./Review";
-export { CartPage, Error, SingleCockTail, Review };
+import ErrorPage from "./ErrorPage";
+import SingleLiquorPage from "./SingleLiquorPage";
+import ReviewPage from "./ReviewPage";
+export { CartPage, ErrorPage, SingleLiquorPage, ReviewPage };

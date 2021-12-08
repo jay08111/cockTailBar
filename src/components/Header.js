@@ -3,9 +3,9 @@ import styled from "styled-components";
 function Header() {
   return (
     <Wrapper>
-      <div className="header-img">
-        <div className="header-box">
-          <h1 className="header-p">
+      <div className="header__img">
+        <div className="header__box">
+          <h1 className="header__p">
             Welcome to our <span>Bar</span>
           </h1>
         </div>
@@ -14,12 +14,12 @@ function Header() {
   );
 }
 const Wrapper = styled.header`
-  .header-box {
+  .header__box {
     background: rgba(255, 255, 255, 0.2);
     padding: 5rem;
     text-align: center;
   }
-  .header-p {
+  .header__p {
     color: #000;
     padding: 5rem;
     border: 7px solid #ffc078;

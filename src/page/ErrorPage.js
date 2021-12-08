@@ -8,9 +8,7 @@ function Error() {
         <h1>404 page not found</h1>
         <h2>there is no page that you are looking for </h2>
       </div>
-      <StyledLink to="/" className="marginTop3">
-        Go back to home
-      </StyledLink>
+      <StyledLink to="/">Go back to home</StyledLink>
     </Wrapper>
   );
 }
@@ -44,5 +42,6 @@ const StyledLink = styled(Link)`
   &:active {
     text-decoration: none;
   }
+  margin-top: 3rem auto;
 `;
 export default Error;
