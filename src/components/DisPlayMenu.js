@@ -2,21 +2,19 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 function DisPlayMenu({ name, image, description, id }) {
-  const [read, setRead] = useState(false);
+  const [readMore, setReadMore] = useState(false);
   return (
     <Wrapper>
       <img src={image} alt={name} />
       <div className="description">
-        <p className="des-p">
-          {read ? description : `${description.substring(0, 20)}...`}
+        <p className="des__p">
+          {readMore ? description : `${description.substring(0, 20)}...`}
         </p>
-        <button className="des-btn" onClick={() => setRead(!read)}>
-          {read ? "Show Less" : "Read More"}
+        <button className="des__btn" onClick={() => setReadMore(!readMore)}>
+          {readMore ? "Show Less" : "Read More"}
         </button>
       </div>
-      <StyledLink to={`/singlePage/${id}`} className="btn">
-        details
-      </StyledLink>
+      <StyledLink to={`/singlePage/${id}`}>details</StyledLink>
     </Wrapper>
   );
 }
@@ -28,26 +26,25 @@ const Wrapper = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
   .description {
     display: flex;
     align-items: center;
-    gap: 5px;
+    justify-content: space-between;
   }
   img {
     width: 100%;
     height: 70%;
-    object-fit: cover;
     transition: all 0.5s ease;
     &:hover {
       transform: scale(1.1);
       cursor: pointer;
     }
   }
-  .des-p {
+  .des__p {
     padding: 1rem;
   }
-  .des-btn {
+  .des__btn {
     padding: 0.4rem 1.2rem;
     border: none;
     background-color: #fff;
@@ -68,7 +65,7 @@ const StyledLink = styled(Link)`
   padding: 0.9rem 0;
   background-color: #ffec99;
   font-size: 1.8rem;
-  margin-top: 5rem;
+  margin-top: 16px;
 `;
 
 export default DisPlayMenu;

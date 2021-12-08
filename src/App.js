@@ -1,19 +1,25 @@
 import React, { useEffect } from "react";
-import { CockTail, Header } from "./components/index";
+import { Liquors, Header } from "./components/index";
 import { useDispatch } from "react-redux";
-import { fetchData } from "./redux/cockTailSlice";
+import { fetchData } from "./redux/liquorSlice";
+import styled from "styled-components";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
   return (
-    <main>
+    <Main>
       <Header />
-      <section className="section-center marginTop3">
-        <CockTail />
+      <section className="section__center">
+        <Liquors />
       </section>
-    </main>
+    </Main>
   );
 }
+const Main = styled.main`
+  .section__center {
+    margin: 3rem auto;
+  }
+`;
 export default App;

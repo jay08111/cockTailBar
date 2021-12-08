@@ -5,17 +5,18 @@ const urliD = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 const initialState = {
   list: [],
   loading: false,
-  singleCockTailList: {},
+  singleLiquorList: {},
+  error: false,
 };
 
 export const fetchData = createAsyncThunk(
-  "users/fetchCockTail",
+  "users/fetchLiquor",
   async (id = null) => {
     if (id === null) {
       const res = await axios.get(url);
       const { drinks } = res.data;
       if (drinks) {
-        const newCocktails = drinks.map((item) => {
+        const newLiquors = drinks.slice(0, 12).map((item) => {
           const {
             idDrink,
             strDrink,
@@ -33,7 +34,7 @@ export const fetchData = createAsyncThunk(
             description: strInstructions,
           };
         });
-        return { data: newCocktails, id: null };
+        return { data: newLiquors, id: null };
       }
     } else {
       const res = await axios.get(`${urliD}${id}`);
@@ -60,7 +61,7 @@ export const fetchData = createAsyncThunk(
           strIngredient4,
           strIngredient5,
         ];
-        const newCocktail = {
+        const newLiquors = {
           name,
           image,
           info,
@@ -70,14 +71,14 @@ export const fetchData = createAsyncThunk(
           ingredients,
           idDrink,
         };
-        return { data: newCocktail, id: id };
+        return { data: newLiquors, id: id };
       }
     }
   }
 );
 
-const cockTailSlice = createSlice({
-  name: "states",
+const liquorSlice = createSlice({
+  name: "liquor",
   initialState,
   reducers: {
     setList: (state, action) => {
@@ -95,15 +96,14 @@ const cockTailSlice = createSlice({
           state.list = payload.data;
         } else if (payload.id !== null) {
           state.loading = false;
-          state.singleCockTailList = payload.data;
-          console.log(state.singleCockTailList);
+          state.singleLiquorList = payload.data;
         }
       })
       .addCase(fetchData.rejected, (state) => {
-        console.log(state.error);
+        state.error = true;
       });
   },
 });
 
-export const { setList } = cockTailSlice.actions;
-export default cockTailSlice.reducer;
+export const { setList } = liquorSlice.actions;
+export default liquorSlice.reducer;

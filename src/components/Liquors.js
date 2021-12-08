@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { DisPlayMenu, Loading } from "./index";
+import { DisPlayMenu, Loading, FetchError } from "./index";
 function CockTail() {
-  const { list, loading } = useSelector((state) => state.states);
+  const { list, loading, error } = useSelector((state) => state.liquor);
   if (loading) {
     return <Loading />;
+  }
+  if (error) {
+    return <FetchError />;
   }
   return (
     <Wrapper>
@@ -23,6 +26,7 @@ const Wrapper = styled.article`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  padding: 10px 0;
   .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
