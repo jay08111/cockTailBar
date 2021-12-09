@@ -15,5 +15,13 @@
 }
 .section__center {
   width: 90vw;
-  margin: 0rem auto;
+  margin: 0 auto;
+}
+.btn {
+  border: none;
+  font-size: 18px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
 }
