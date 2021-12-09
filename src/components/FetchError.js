@@ -3,13 +3,18 @@ import styled from "styled-components";
 function FetchError() {
   return (
     <Wrapper>
-      <h1>Fetch Error ! We can't render our data. Sorry !</h1>
+      <div>
+        <h1>Fetch Error ! We can't render our data. Sorry !</h1>
+      </div>
     </Wrapper>
   );
 }
 const Wrapper = styled.section`
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   h1 {
-    text-align: center;
     font-size: 2rem;
   }
 `;
