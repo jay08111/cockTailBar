@@ -15,14 +15,14 @@ function CockTail() {
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   const currentPosts = list.slice(indexOfFirstPost, indexOfLastPost);
-  console.dir(currentPosts);
   return (
     <Wrapper>
       <h1>Menu</h1>
       <div className="grid">
-        {currentPosts.map((items) => (
-          <DisPlayMenu key={items.id} {...items} />
-        ))}
+        {loading ||
+          currentPosts.map((items) => (
+            <DisPlayMenu key={items.id} {...items} />
+          ))}
       </div>
     </Wrapper>
   );

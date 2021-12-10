@@ -9,7 +9,9 @@ function App() {
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
-
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <Main>
       <Header />

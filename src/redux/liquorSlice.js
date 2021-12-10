@@ -15,7 +15,7 @@ export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
   const res = await axios.get(url);
   const { drinks } = res.data;
   if (drinks) {
-    const newLiquors = drinks.map((item) => {
+    const newLiquors = drinks.slice(0, 24).map((item) => {
       const {
         idDrink,
         strDrink,
