@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchData } from "../redux/liquorSlice";
+import { fetchSingleData } from "../redux/liquorSlice";
 import { Loading, FetchError } from "../components/index";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -12,7 +12,7 @@ function SingleCockTail() {
   const { id } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchData(id));
+    dispatch(fetchSingleData(id));
   }, [dispatch, id]);
   if (loading) {
     return <Loading />;

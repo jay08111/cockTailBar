@@ -9,74 +9,72 @@ const initialState = {
   error: false,
 };
 
-export const fetchData = createAsyncThunk(
-  "users/fetchLiquor",
-  async (id = null) => {
-    if (id === null) {
-      const res = await axios.get(url);
-      const { drinks } = res.data;
-      if (drinks) {
-        const newLiquors = drinks.slice(0, 12).map((item) => {
-          const {
-            idDrink,
-            strDrink,
-            strDrinkThumb,
-            strAlcoholic,
-            strGlass,
-            strInstructions,
-          } = item;
-          return {
-            id: idDrink,
-            name: strDrink,
-            image: strDrinkThumb,
-            info: strAlcoholic,
-            glass: strGlass,
-            description: strInstructions,
-          };
-        });
-        return { data: newLiquors, id: null };
-      }
-    } else {
-      const res = await axios.get(`${urliD}${id}`);
-      const { drinks } = res.data;
-      if (drinks) {
-        const {
-          idDrink,
-          strDrink: name,
-          strDrinkThumb: image,
-          strAlcoholic: info,
-          strCategory: category,
-          strGlass: glass,
-          strInstructions: instructions,
-          strIngredient1,
-          strIngredient2,
-          strIngredient3,
-          strIngredient4,
-          strIngredient5,
-        } = drinks[0];
-        const ingredients = [
-          strIngredient1,
-          strIngredient2,
-          strIngredient3,
-          strIngredient4,
-          strIngredient5,
-        ];
-        const newLiquors = {
-          name,
-          image,
-          info,
-          category,
-          glass,
-          instructions,
-          ingredients,
-          idDrink,
-        };
-        return { data: newLiquors, id: id };
-      }
+export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
+  const res = await axios.get(url);
+  const { drinks } = res.data;
+  if (drinks) {
+    const newLiquors = drinks.map((item) => {
+      const {
+        idDrink,
+        strDrink,
+        strDrinkThumb,
+        strAlcoholic,
+        strGlass,
+        strInstructions,
+      } = item;
+      return {
+        id: idDrink,
+        name: strDrink,
+        image: strDrinkThumb,
+        info: strAlcoholic,
+        glass: strGlass,
+        description: strInstructions,
+      };
+    });
+    return newLiquors;
+  }
+});
+export const fetchSingleData = createAsyncThunk(
+  "users/fetchSingleLiquor",
+  async (id) => {
+    const res = await axios.get(`${urliD}${id}`);
+    const { drinks } = res.data;
+    if (drinks) {
+      const {
+        idDrink,
+        strDrink: name,
+        strDrinkThumb: image,
+        strAlcoholic: info,
+        strCategory: category,
+        strGlass: glass,
+        strInstructions: instructions,
+        strIngredient1,
+        strIngredient2,
+        strIngredient3,
+        strIngredient4,
+        strIngredient5,
+      } = drinks[0];
+      const ingredients = [
+        strIngredient1,
+        strIngredient2,
+        strIngredient3,
+        strIngredient4,
+        strIngredient5,
+      ];
+      const newLiquors = {
+        name,
+        image,
+        info,
+        category,
+        glass,
+        instructions,
+        ingredients,
+        idDrink,
+      };
+      return newLiquors;
     }
   }
 );
-
 const liquorSlice = createSlice({
   name: "liquor",
   initialState,
@@ -91,15 +89,20 @@ const liquorSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchData.fulfilled, (state, { payload }) => {
-        if (payload.id === null) {
-          state.loading = false;
-          state.list = payload.data;
-        } else if (payload.id !== null) {
-          state.loading = false;
-          state.singleLiquorList = payload.data;
-        }
+        state.loading = false;
+        state.list = payload;
       })
       .addCase(fetchData.rejected, (state) => {
+        state.error = true;
+      })
+      .addCase(fetchSingleData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchSingleData.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.singleLiquorList = payload;
+      })
+      .addCase(fetchSingleData.rejected, (state) => {
         state.error = true;
       });
   },
