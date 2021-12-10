@@ -7,6 +7,8 @@ const initialState = {
   loading: false,
   singleLiquorList: {},
   error: false,
+  currentPage: 1,
+  postPerPage: 8,
 };
 
 export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
@@ -82,6 +84,9 @@ const liquorSlice = createSlice({
     setList: (state, action) => {
       state.list = action.payload;
     },
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -108,5 +113,5 @@ const liquorSlice = createSlice({
   },
 });
 
-export const { setList } = liquorSlice.actions;
+export const { setList, setCurrentPage } = liquorSlice.actions;
 export default liquorSlice.reducer;
