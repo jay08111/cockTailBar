@@ -1,5 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+// const url = "https://www.thecocktaildb.com/api/json/v1/1";
+// const url_KEY = process.env.REACT_APP_PUBLIC_API;
+// const urliD_KEY = process.env.REACT_APP_PUBLIC_API_SORT_BY_ID;
 const url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
 const urliD = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 const initialState = {
@@ -7,8 +10,10 @@ const initialState = {
   loading: false,
   singleLiquorList: {},
   error: false,
+  currentPage: 1,
+  postPerPage: 8,
 };
-
+// console.log(url_KEY, urliD_KEY);
 export const fetchData = createAsyncThunk(
   "users/fetchLiquor",
   async (id = null) => {
@@ -16,7 +21,7 @@ export const fetchData = createAsyncThunk(
       const res = await axios.get(url);
       const { drinks } = res.data;
       if (drinks) {
-        const newLiquors = drinks.slice(0, 12).map((item) => {
+        const newLiquors = drinks.map((item) => {
           const {
             idDrink,
             strDrink,
@@ -36,8 +41,8 @@ export const fetchData = createAsyncThunk(
         });
         return { data: newLiquors, id: null };
       }
-    } else {
-      const res = await axios.get(`${urliD}${id}`);
+    } else if (id !== null) {
+      const res = await axios.get(urliD);
       const { drinks } = res.data;
       if (drinks) {
         const {
@@ -84,6 +89,9 @@ const liquorSlice = createSlice({
     setList: (state, action) => {
       state.list = action.payload;
     },
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -105,5 +113,5 @@ const liquorSlice = createSlice({
   },
 });
 
-export const { setList } = liquorSlice.actions;
+export const { setList, setPage, setCurrentPage } = liquorSlice.actions;
 export default liquorSlice.reducer;
