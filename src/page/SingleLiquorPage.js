@@ -10,6 +10,7 @@ function SingleCockTail() {
     (state) => state.liquor
   );
   const { id } = useParams();
+  console.log(singleLiquorList);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchData(id));
@@ -20,17 +21,8 @@ function SingleCockTail() {
   if (error) {
     return <FetchError />;
   }
-  const {
-    name,
-    image,
-    info,
-    category,
-    glass,
-    instructions,
-    ingredients,
-    idDrink,
-  } = singleLiquorList;
-
+  const { name, image, info, category, glass, instructions, ingredients } =
+    singleLiquorList;
   return (
     <Wrapper className="section-center">
       <div className="container">
@@ -43,7 +35,7 @@ function SingleCockTail() {
           <p>Instructions: {instructions}</p>
           <p>Ingredients:</p>
           {ingredients &&
-            ingredients.map((item) => <p key={idDrink}>{item}</p>)}
+            ingredients.map((item, index) => <p key={index}>{item}</p>)}
           <button className="btn container__btn">add to cart</button>
           <StyledLink to="/">Back to Home</StyledLink>
         </div>

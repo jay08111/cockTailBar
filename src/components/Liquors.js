@@ -3,18 +3,24 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { DisPlayMenu, Loading, FetchError } from "./index";
 function CockTail() {
-  const { list, loading, error } = useSelector((state) => state.liquor);
+  const { list, loading, error, postPerPage, currentPage } = useSelector(
+    (state) => state.liquor
+  );
   if (loading) {
     return <Loading />;
   }
   if (error) {
     return <FetchError />;
   }
+  const indexOfLastPost = currentPage * postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const currentPosts = list.slice(indexOfFirstPost, indexOfLastPost);
+  console.dir(currentPosts);
   return (
     <Wrapper>
       <h1>Menu</h1>
       <div className="grid">
-        {list.map((items) => (
+        {currentPosts.map((items) => (
           <DisPlayMenu key={items.id} {...items} />
         ))}
       </div>
