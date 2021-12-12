@@ -9,6 +9,7 @@ const initialState = {
   error: false,
   currentPage: 1,
   postPerPage: 8,
+  reviewList: [],
 };
 
 export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {

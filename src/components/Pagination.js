@@ -50,8 +50,8 @@ const Wrapper = styled.div`
     cursor: pointer;
     transition: all 0.5s;
     &:hover {
-      background-color: #cba779;
       color: #fff;
+      background-color: #cba779;
     }
   }
   .active {
