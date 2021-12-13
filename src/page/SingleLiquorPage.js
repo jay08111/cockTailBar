@@ -62,6 +62,9 @@ const Wrapper = styled.section`
     flex-direction: column;
     gap: 15px;
   }
+  p {
+    line-height: 1.3;
+  }
   .container__btn {
     padding: 0.5rem;
     width: 30%;

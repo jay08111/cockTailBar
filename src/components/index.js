@@ -6,6 +6,7 @@ import Header from "./Header";
 import Loading from "./Loading";
 import FetchError from "./FetchError";
 import Pagination from "./Pagination";
+import ReviewComment from "./ReviewComment";
 export {
   Liquors,
   Footer,
@@ -15,4 +16,5 @@ export {
   Loading,
   FetchError,
   Pagination,
+  ReviewComment,
 };

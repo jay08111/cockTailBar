@@ -43,12 +43,17 @@ const Wrapper = styled.div`
   }
   .des__p {
     padding: 1rem;
+    line-height: 1.4;
   }
   .des__btn {
     padding: 0.4rem 1.2rem;
     border: none;
     background-color: #fff;
     cursor: pointer;
+  }
+  .details {
+    margin-top: auto;
+    width: 100%;
   }
 `;
 const StyledLink = styled(Link)`
@@ -65,7 +70,7 @@ const StyledLink = styled(Link)`
   padding: 0.9rem 0;
   background-color: #ffec99;
   font-size: 1.8rem;
-  margin-top: 16px;
+  margin-top: auto;
 `;
 
 export default DisPlayMenu;

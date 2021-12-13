@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { nanoid } from "nanoid";
+import { reviewData } from "../data";
 const url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
 const urliD = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 const initialState = {
@@ -9,7 +11,10 @@ const initialState = {
   error: false,
   currentPage: 1,
   postPerPage: 8,
-  reviewList: [],
+  reviewList: reviewData,
+  reviewNameValue: "",
+  reviewCommentValue: "",
+  clickLike: false,
 };
 
 export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
@@ -88,6 +93,32 @@ const liquorSlice = createSlice({
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;
     },
+    setReviewValue: (state, action) => {
+      state.reviewNameValue = action.payload;
+    },
+    setCommentValue: (state, action) => {
+      state.reviewCommentValue = action.payload;
+    },
+    addReviews: (state) => {
+      if (state.reviewNameValue && state.reviewCommentValue) {
+        const newValue = {
+          id: nanoid(),
+          name: state.reviewNameValue,
+          review: state.reviewCommentValue,
+          like: 0,
+        };
+        state.reviewList = [...state.reviewList, newValue];
+        state.reviewNameValue = "";
+        state.reviewCommentValue = "";
+      } else if (!state.reviewNameValue) {
+        window.alert("이름을 입력해 주세요");
+      } else if (!state.reviewCommentValue) {
+        window.alert("코멘트를 입력해 주세요");
+      }
+    },
+    deleteReviews: (state, { payload }) => {
+      state.reviewList = state.reviewList.filter((item) => item.id !== payload);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -114,5 +145,12 @@ const liquorSlice = createSlice({
   },
 });
 
-export const { setList, setCurrentPage } = liquorSlice.actions;
+export const {
+  setList,
+  setCurrentPage,
+  setReviewValue,
+  addReviews,
+  setCommentValue,
+  deleteReviews,
+} = liquorSlice.actions;
 export default liquorSlice.reducer;

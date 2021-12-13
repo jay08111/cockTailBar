@@ -1,27 +1,46 @@
 import React from "react";
 import styled from "styled-components";
-import { reviewData } from "../data";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setReviewValue,
+  addReviews,
+  setCommentValue,
+} from "../redux/liquorSlice";
+import { ReviewComment } from "../components/index";
 function Review() {
-  const { reviewList } = useSelector((state) => state.liquor);
-  console.log(reviewData);
+  const dispatch = useDispatch();
+  const { reviewList, reviewNameValue, reviewCommentValue } = useSelector(
+    (state) => state.liquor
+  );
   return (
     <Wrapper className="review__page">
       <h1>Reviews</h1>
-      {reviewData.map((reviews) => {
-        const { id, name, review } = reviews;
-        return (
-          <div key={id} className="review__container">
-            <p>{name}</p>
-            <p>{review}</p>
-          </div>
-        );
-      })}
-      <div className="review__inputField">
-        <input type="text" placeholder="name" />
-        <textarea type="text" placeholder="comment" />
-      </div>
-      <button className="btn review__btn">comment</button>
+      <form onSubmit={(e) => e.preventDefault()}>
+        {reviewList.map((reviews) => {
+          return <ReviewComment key={reviews.id} {...reviews} />;
+        })}
+        <div className="review__inputField">
+          <input
+            type="text"
+            placeholder="name"
+            value={reviewNameValue}
+            onChange={(e) => dispatch(setReviewValue(e.target.value))}
+          />
+          <textarea
+            type="text"
+            placeholder="comment"
+            value={reviewCommentValue}
+            onChange={(e) => dispatch(setCommentValue(e.target.value))}
+          />
+        </div>
+        <button
+          className="review__btn btn"
+          type="submit"
+          onClick={() => dispatch(addReviews())}
+        >
+          comment
+        </button>
+      </form>
     </Wrapper>
   );
 }
@@ -31,19 +50,9 @@ const Wrapper = styled.section`
   align-items: center;
   gap: 30px;
   min-height: 90vh;
-  background-color: #e57124;
+  background-color: #fff;
   h1 {
     margin-top: 2rem;
-  }
-  .review__container {
-    padding: 10px;
-    width: 60vw;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background-color: #fff;
   }
   .review__inputField {
     display: flex;
