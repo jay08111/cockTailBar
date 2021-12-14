@@ -10,7 +10,6 @@ function SingleCockTail() {
     (state) => state.liquor
   );
   const { id } = useParams();
-  console.log(singleLiquorList);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchSingleData(id));

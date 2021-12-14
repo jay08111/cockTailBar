@@ -8,13 +8,14 @@ function ReviewComment({ id, name, review, like }) {
   const dispatch = useDispatch();
   const [clickLike, setClickLike] = useState(false);
   const [likeNumber, setLikeNumber] = useState(like);
+
   const addLikeNumber = () => {
-    if (clickLike === true) {
+    setClickLike(!clickLike);
+    if (clickLike) {
       setLikeNumber(likeNumber - 1);
-    } else if (clickLike === false) {
+    } else if (!clickLike) {
       setLikeNumber(likeNumber + 1);
     }
-    setClickLike(!clickLike);
   };
   return (
     <Wrapper className="review__container">
@@ -25,7 +26,11 @@ function ReviewComment({ id, name, review, like }) {
           <BsTrash />
         </button>
         <button onClick={addLikeNumber}>
-          {clickLike ? <AiTwotoneHeart /> : <AiOutlineHeart />}
+          {clickLike ? (
+            <AiTwotoneHeart className="red__Heart" />
+          ) : (
+            <AiOutlineHeart />
+          )}
           <span>{likeNumber}</span>
         </button>
       </div>
@@ -41,24 +46,28 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 10px;
   background-color: #fff;
+  margin-bottom: 30px;
   .review__btn__container {
     display: flex;
     justify-content: flex-end;
-    gap: 5px;
-    margin-bottom: ;
+    gap: 2px;
+    margin-bottom: 3px;
   }
   .review__btn__container button {
     display: flex;
     justify-content: center;
     align-items: center;
     border: none;
-    background-color: none;
-    width: 30px;
+    background: none;
+    width: 40px;
     font-size: 1.4rem;
     cursor: pointer;
   }
   .review__btn__container span {
     margin-left: 1px;
+  }
+  .red__Heart {
+    color: red;
   }
 `;
 export default ReviewComment;

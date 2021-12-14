@@ -5,7 +5,9 @@ function DisPlayMenu({ name, image, description, id }) {
   const [readMore, setReadMore] = useState(false);
   return (
     <Wrapper>
-      <img src={image} alt={name} />
+      <Link to={`/singlePage/${id}`}>
+        <img src={image} alt={name} />
+      </Link>
       <div className="description">
         <p className="des__p">
           {readMore ? description : `${description.substring(0, 20)}...`}
@@ -14,7 +16,7 @@ function DisPlayMenu({ name, image, description, id }) {
           {readMore ? "Show Less" : "Read More"}
         </button>
       </div>
-      <StyledLink to={`/singlePage/${id}`}>details</StyledLink>
+      <StyledLink to={`/singlePage/${id}`}>add to cart</StyledLink>
     </Wrapper>
   );
 }
@@ -33,12 +35,16 @@ const Wrapper = styled.div`
     justify-content: space-between;
   }
   img {
-    width: 100%;
-    height: 70%;
+    max-width: 100%;
+    max-height: 100%;
     transition: all 0.5s ease;
     &:hover {
       transform: scale(1.1);
       cursor: pointer;
+    }
+    &::after {
+      content: "go to details";
+      z-index: 2;
     }
   }
   .des__p {
@@ -71,6 +77,7 @@ const StyledLink = styled(Link)`
   background-color: #ffec99;
   font-size: 1.8rem;
   margin-top: auto;
+  text-transform: capitalize;
 `;
 
 export default DisPlayMenu;

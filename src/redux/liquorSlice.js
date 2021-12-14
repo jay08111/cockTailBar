@@ -110,10 +110,6 @@ const liquorSlice = createSlice({
         state.reviewList = [...state.reviewList, newValue];
         state.reviewNameValue = "";
         state.reviewCommentValue = "";
-      } else if (!state.reviewNameValue) {
-        window.alert("이름을 입력해 주세요");
-      } else if (!state.reviewCommentValue) {
-        window.alert("코멘트를 입력해 주세요");
       }
     },
     deleteReviews: (state, { payload }) => {
