@@ -1,42 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { MdOutlineRateReview } from "react-icons/md";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 function Navbar() {
   return (
-    <Nav>
+    <Nav className="nav__bar">
       <div>
         <StyledLink to="/review">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-            />
-          </svg>
+          <MdOutlineRateReview className="review__icon" />
         </StyledLink>
         <StyledLink to="/">
           <h1>The Bar</h1>
         </StyledLink>
         <StyledLink to="/cartPage">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-            />
-          </svg>
+          <AiOutlineShoppingCart className="cartPage__icon" />
+          <div className="cart__itemAmount">0</div>
         </StyledLink>
       </div>
     </Nav>
@@ -59,9 +38,28 @@ const Nav = styled.nav`
     align-items: center;
     font-size: 1.5rem;
   }
-  svg {
-    width: 40px;
+  .review__icon {
+    font-size: 40px;
     cursor: pointer;
+    display: flex;
+  }
+  .cartPage__icon {
+    font-size: 40px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+  }
+  .cart__itemAmount {
+    position: absolute;
+    top: 8px;
+    right: -8px;
+    height: 30px;
+    width: 30px;
+    padding: 0 9px;
+    background-color: #ffffda;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    font-family: "Dosis", sans-serif;
   }
 `;
 const StyledLink = styled(Link)`

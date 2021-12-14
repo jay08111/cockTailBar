@@ -3,6 +3,18 @@
   margin: 0;
   box-sizing: border-box;
 }
+body {
+  font-family: "Dosis", sans-serif;
+}
+input {
+  font-family: "Dosis", sans-serif;
+}
+textarea {
+  font-family: "Dosis", sans-serif;
+}
+.nav__bar {
+  font-family: "Dancing Script", cursive;
+}
 .header__img {
   background-image: url("./pictures/barPic.jpg");
   background-position: center;

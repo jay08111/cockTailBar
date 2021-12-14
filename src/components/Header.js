@@ -23,8 +23,9 @@ const Wrapper = styled.header`
     color: #000;
     padding: 5rem;
     border: 7px solid #ffc078;
-    font-size: 2.8rem;
+    font-size: 3.5rem;
     text-transform: capitalize;
+    font-family: "Dancing Script", cursive;
   }
 
   span {

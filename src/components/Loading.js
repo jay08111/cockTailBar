@@ -1,9 +1,17 @@
 import React from "react";
 import styled from "styled-components";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
 function Loading() {
   return (
     <Wrapper>
-      <h1>Loading ...</h1>
+      <Loader
+        type="Audio"
+        color="#000"
+        height={400}
+        width={400}
+        timeout={10000}
+      />
     </Wrapper>
   );
 }
