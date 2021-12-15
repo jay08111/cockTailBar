@@ -19,7 +19,7 @@ function CockTail() {
   return (
     <Wrapper>
       <h1>Menu</h1>
-      <ToastContainer autoClose={2000} transition={Zoom} />
+      <ToastContainer autoClose={2000} transition={Zoom} position="top-left" />
       <div className="grid">
         {loading ||
           currentPosts.map((items) => (

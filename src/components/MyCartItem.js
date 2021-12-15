@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { deleteCartItem } from "../redux/liquorSlice";
+import { BsTrash } from "react-icons/bs";
+import { useDispatch } from "react-redux";
 function MyCartItem({ id, amount, name, image, info }) {
+  const dispatch = useDispatch();
   return (
     <Wrapper>
       <div className="cart__container">
@@ -9,6 +13,9 @@ function MyCartItem({ id, amount, name, image, info }) {
           <p>{name}</p>
           <p>{info}</p>
           <p>amount : {amount}</p>
+          <button onClick={() => dispatch(deleteCartItem(id))}>
+            <BsTrash />
+          </button>
         </div>
       </div>
     </Wrapper>

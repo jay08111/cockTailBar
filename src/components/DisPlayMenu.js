@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { addItemToCart } from "../redux/liquorSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function DisPlayMenu({ name, image, description, id }) {
   const dispatch = useDispatch();
   const [readMore, setReadMore] = useState(false);
-
+  const [disable, setDisable] = useState(false);
+  const { cart } = useSelector((state) => state.liquor);
+  const buttonRef = useRef();
+  const disableButton = (e) => {
+    setDisable(true);
+    buttonRef.current.disabled = true;
+  };
   return (
     <Wrapper>
       <Link to={`/singlePage/${id}`}>
@@ -24,12 +30,15 @@ function DisPlayMenu({ name, image, description, id }) {
       </div>
       <button
         className="addItem"
-        onClick={() => {
+        data-id={id}
+        ref={buttonRef}
+        onClick={(e) => {
           dispatch(addItemToCart(id));
           toast.success("예약목록에 추가 완료!");
+          disableButton(e);
         }}
       >
-        add to cart
+        {disable ? "added already" : "add to cart"}
       </button>
     </Wrapper>
   );
