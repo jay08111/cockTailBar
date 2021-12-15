@@ -60,7 +60,7 @@ function Review() {
           </button>
         </form>
       </Wrapper>
-      <ToastContainer autoClose={2000} transition={Zoom} />;
+      <ToastContainer autoClose={2000} transition={Zoom} position="top-left" />;
     </>
   );
 }

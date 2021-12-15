@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { NoItems, MyCartItem } from "../components/index";
+import { deleteCartItemAll } from "../redux/liquorSlice";
 function CartPage() {
   const { cart } = useSelector((state) => state.liquor);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
   if (cart.length === 0) {
     return <NoItems />;
   }
@@ -15,6 +20,11 @@ function CartPage() {
       ))}
       <div className="underline"></div>
       <button>예약하기!</button>
+      {cart.length > 0 && (
+        <button onClick={() => dispatch(deleteCartItemAll())}>
+          delete all
+        </button>
+      )}
     </Wrapper>
   );
 }

@@ -4,6 +4,14 @@ import { nanoid } from "nanoid";
 import { reviewData } from "../data";
 const url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
 const urliD = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
+export const getLocalStorage = () => {
+  let cart = localStorage.getItem("cart");
+  if (cart) {
+    return (cart = JSON.parse(localStorage.getItem("cart")));
+  } else {
+    return [];
+  }
+};
 const initialState = {
   list: [],
   loading: false,
@@ -15,7 +23,8 @@ const initialState = {
   reviewNameValue: "",
   reviewCommentValue: "",
   clickLike: false,
-  cart: [],
+  cart: getLocalStorage(),
+  disable: false,
 };
 
 export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
@@ -100,6 +109,9 @@ const liquorSlice = createSlice({
     setCommentValue: (state, action) => {
       state.reviewCommentValue = action.payload;
     },
+    setDisable: (state, action) => {
+      state.disable = action.payload;
+    },
     addReviews: (state) => {
       if (state.reviewNameValue && state.reviewCommentValue) {
         const newValue = {
@@ -124,6 +136,12 @@ const liquorSlice = createSlice({
         const newCartItem = { id: nanoid(), ...findItem, amount: 1 };
         state.cart = [...state.cart, newCartItem];
       }
+    },
+    deleteCartItem: (state, { payload }) => {
+      state.cart = state.cart.filter((item) => item.id !== payload);
+    },
+    deleteCartItemAll: (state) => {
+      state.cart = [];
     },
   },
   extraReducers: (builder) => {
@@ -159,5 +177,7 @@ export const {
   setCommentValue,
   deleteReviews,
   addItemToCart,
+  deleteCartItem,
+  deleteCartItemAll,
 } = liquorSlice.actions;
 export default liquorSlice.reducer;
