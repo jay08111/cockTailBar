@@ -3,7 +3,9 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { MdOutlineRateReview } from "react-icons/md";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { useSelector } from "react-redux";
 function Navbar() {
+  const { cart } = useSelector((state) => state.liquor);
   return (
     <Nav className="nav__bar">
       <div>
@@ -15,7 +17,7 @@ function Navbar() {
         </StyledLink>
         <StyledLink to="/cartPage">
           <AiOutlineShoppingCart className="cartPage__icon" />
-          <div className="cart__itemAmount">0</div>
+          <div className="cart__itemAmount">{cart.length}</div>
         </StyledLink>
       </div>
     </Nav>
@@ -55,7 +57,7 @@ const Nav = styled.nav`
     right: -8px;
     height: 30px;
     width: 30px;
-    padding: 0 9px;
+    padding: 0 10px;
     background-color: #ffffda;
     border-radius: 50%;
     font-size: 1.3rem;

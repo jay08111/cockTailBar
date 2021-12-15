@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import axios from "axios";
 import { nanoid } from "nanoid";
 import { reviewData } from "../data";
@@ -15,6 +15,7 @@ const initialState = {
   reviewNameValue: "",
   reviewCommentValue: "",
   clickLike: false,
+  cart: [],
 };
 
 export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
@@ -115,6 +116,15 @@ const liquorSlice = createSlice({
     deleteReviews: (state, { payload }) => {
       state.reviewList = state.reviewList.filter((item) => item.id !== payload);
     },
+    addItemToCart: (state, { payload }) => {
+      const id = state.list.map((item) => item.id);
+      const findItemId = id.find((item) => item === payload);
+      const findItem = state.list.find((item) => item.id === findItemId);
+      if (findItemId === payload) {
+        const newCartItem = { id: nanoid(), ...findItem, amount: 1 };
+        state.cart = [...state.cart, newCartItem];
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -148,5 +158,6 @@ export const {
   addReviews,
   setCommentValue,
   deleteReviews,
+  addItemToCart,
 } = liquorSlice.actions;
 export default liquorSlice.reducer;
