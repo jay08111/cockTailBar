@@ -20,9 +20,6 @@ const Wrapper = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  h1 {
-    font-size: 8rem;
-  }
 `;
 
 export default Loading;

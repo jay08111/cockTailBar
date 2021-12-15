@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { DisPlayMenu, Loading, FetchError } from "./index";
+import { ToastContainer, Zoom } from "react-toastify";
 function CockTail() {
   const { list, loading, error, postPerPage, currentPage } = useSelector(
     (state) => state.liquor
@@ -18,6 +19,7 @@ function CockTail() {
   return (
     <Wrapper>
       <h1>Menu</h1>
+      <ToastContainer autoClose={2000} transition={Zoom} />
       <div className="grid">
         {loading ||
           currentPosts.map((items) => (

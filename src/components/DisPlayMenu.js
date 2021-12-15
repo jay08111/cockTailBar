@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { addItemToCart } from "../redux/liquorSlice";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function DisPlayMenu({ name, image, description, id }) {
+  const dispatch = useDispatch();
   const [readMore, setReadMore] = useState(false);
+
   return (
     <Wrapper>
       <Link to={`/singlePage/${id}`}>
@@ -16,7 +22,15 @@ function DisPlayMenu({ name, image, description, id }) {
           {readMore ? "Show Less" : "Read More"}
         </button>
       </div>
-      <StyledLink to={`/singlePage/${id}`}>add to cart</StyledLink>
+      <button
+        className="addItem"
+        onClick={() => {
+          dispatch(addItemToCart(id));
+          toast.success("예약목록에 추가 완료!");
+        }}
+      >
+        add to cart
+      </button>
     </Wrapper>
   );
 }
@@ -29,6 +43,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+
   .description {
     display: flex;
     align-items: center;
@@ -41,10 +56,6 @@ const Wrapper = styled.div`
     &:hover {
       transform: scale(1.1);
       cursor: pointer;
-    }
-    &::after {
-      content: "go to details";
-      z-index: 2;
     }
   }
   .des__p {
@@ -61,23 +72,18 @@ const Wrapper = styled.div`
     margin-top: auto;
     width: 100%;
   }
-`;
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: #000;
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
+  .addItem {
+    color: #000;
+    border: none;
+    text-align: center;
+    padding: 0.9rem 0;
+    background-color: #ffec99;
+    font-size: 1.8rem;
+    margin-top: auto;
+    text-transform: capitalize;
+    cursor: pointer;
+    font-family: "Dosis", sans-serif;
   }
-  text-align: center;
-  padding: 0.9rem 0;
-  background-color: #ffec99;
-  font-size: 1.8rem;
-  margin-top: auto;
-  text-transform: capitalize;
 `;
 
 export default DisPlayMenu;
