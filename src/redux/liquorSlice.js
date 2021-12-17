@@ -131,9 +131,9 @@ const liquorSlice = createSlice({
     addItemToCart: (state, { payload }) => {
       const id = state.list.map((item) => item.id);
       const findItemId = id.find((item) => item === payload);
-      const findItem = state.list.find((item) => item.id === findItemId);
+      const findItemById = state.list.find((item) => item.id === findItemId);
       if (findItemId === payload) {
-        const newCartItem = { id: nanoid(), ...findItem, amount: 1 };
+        const newCartItem = { ...findItemById, amount: 1 };
         state.cart = [...state.cart, newCartItem];
       }
     },

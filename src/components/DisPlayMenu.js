@@ -1,20 +1,14 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { addItemToCart } from "../redux/liquorSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
+import { AddButton } from "./index";
 function DisPlayMenu({ name, image, description, id }) {
-  const dispatch = useDispatch();
   const [readMore, setReadMore] = useState(false);
-  const [disable, setDisable] = useState(false);
   const { cart } = useSelector((state) => state.liquor);
-  const buttonRef = useRef();
-  const disableButton = (e) => {
-    setDisable(true);
-    buttonRef.current.disabled = true;
-  };
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
   return (
     <Wrapper>
       <Link to={`/singlePage/${id}`}>
@@ -28,18 +22,7 @@ function DisPlayMenu({ name, image, description, id }) {
           {readMore ? "Show Less" : "Read More"}
         </button>
       </div>
-      <button
-        className="addItem"
-        data-id={id}
-        ref={buttonRef}
-        onClick={(e) => {
-          dispatch(addItemToCart(id));
-          toast.success("예약목록에 추가 완료!");
-          disableButton(e);
-        }}
-      >
-        {disable ? "added already" : "add to cart"}
-      </button>
+      <AddButton id={id} />
     </Wrapper>
   );
 }
@@ -80,18 +63,6 @@ const Wrapper = styled.div`
   .details {
     margin-top: auto;
     width: 100%;
-  }
-  .addItem {
-    color: #000;
-    border: none;
-    text-align: center;
-    padding: 0.9rem 0;
-    background-color: #ffec99;
-    font-size: 1.8rem;
-    margin-top: auto;
-    text-transform: capitalize;
-    cursor: pointer;
-    font-family: "Dosis", sans-serif;
   }
 `;
 
