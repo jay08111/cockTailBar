@@ -10,6 +10,7 @@ import ReviewComment from "./ReviewComment";
 import Nocomment from "./Nocomment";
 import NoItems from "./NoItems";
 import MyCartItem from "./MyCartItem";
+import AddButton from "./AddButton";
 export {
   Liquors,
   Footer,
@@ -23,4 +24,5 @@ export {
   Nocomment,
   NoItems,
   MyCartItem,
+  AddButton,
 };
