@@ -37,6 +37,6 @@ textarea {
   cursor: pointer;
   transition: all 0.4s;
 }
-.disabled {
+.disable {
   background-color: #ad4300;
 }

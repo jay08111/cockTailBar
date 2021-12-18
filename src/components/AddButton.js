@@ -23,7 +23,7 @@ function AddButton({ id }) {
   });
   return (
     <Button
-      disable="true"
+      className={disable && "disable"}
       ref={buttonRef}
       onClick={() => {
         dispatch(addItemToCart(id));
