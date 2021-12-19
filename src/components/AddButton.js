@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart } from "../redux/liquorSlice";
 import styled from "styled-components";
@@ -23,7 +22,7 @@ function AddButton({ id }) {
   });
   return (
     <Button
-      className={disable && "disable"}
+      className={disable && "active"}
       ref={buttonRef}
       onClick={() => {
         dispatch(addItemToCart(id));
