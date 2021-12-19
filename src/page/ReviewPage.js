@@ -8,7 +8,6 @@ import {
 } from "../redux/liquorSlice";
 import { ReviewComment, Nocomment } from "../components/index";
 import { toast, ToastContainer, Zoom } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 function Review() {
   const dispatch = useDispatch();
   const { reviewList, reviewNameValue, reviewCommentValue } = useSelector(
