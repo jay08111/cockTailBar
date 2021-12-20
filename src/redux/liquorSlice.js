@@ -1,7 +1,8 @@
-import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { nanoid } from "nanoid";
 import { reviewData } from "../data";
+import { toast } from "react-toastify";
 const url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
 const urliD = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 export const getLocalStorage = () => {
@@ -19,12 +20,16 @@ const initialState = {
   error: false,
   currentPage: 1,
   postPerPage: 8,
+  currentPosts: [],
   reviewList: reviewData,
   reviewNameValue: "",
   reviewCommentValue: "",
   clickLike: false,
   cart: getLocalStorage(),
-  disable: false,
+  selected: "all",
+  category: [],
+  filter: false,
+  filteredList: [],
 };
 
 export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
@@ -39,6 +44,7 @@ export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
         strAlcoholic,
         strGlass,
         strInstructions,
+        strCategory,
       } = item;
       return {
         id: idDrink,
@@ -47,6 +53,7 @@ export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
         info: strAlcoholic,
         glass: strGlass,
         description: strInstructions,
+        category: strCategory,
       };
     });
     return newLiquors;
@@ -112,6 +119,9 @@ const liquorSlice = createSlice({
     setDisable: (state, action) => {
       state.disable = action.payload;
     },
+    setSelected: (state, action) => {
+      state.selected = action.payload;
+    },
     addReviews: (state) => {
       if (state.reviewNameValue && state.reviewCommentValue) {
         const newValue = {
@@ -123,6 +133,12 @@ const liquorSlice = createSlice({
         state.reviewList = [...state.reviewList, newValue];
         state.reviewNameValue = "";
         state.reviewCommentValue = "";
+      } else if (!state.reviewNameValue && !state.reviewCommentValue) {
+        toast.error("입력을 해주세요 !");
+      } else if (!state.reviewNameValue) {
+        toast.error("이름을 입력해 주세요!");
+      } else if (!state.reviewCommentValue) {
+        toast.error("코멘트를 입력해 주세요!");
       }
     },
     deleteReviews: (state, { payload }) => {
@@ -143,6 +159,43 @@ const liquorSlice = createSlice({
     deleteCartItemAll: (state) => {
       state.cart = [];
     },
+    filterList: (state) => {
+      let tempCart = [...state.filteredList];
+      switch (state.selected) {
+        case "all":
+          state.filter = false;
+          break;
+        case "Ordinary Drink":
+          state.filter = true;
+          tempCart = tempCart.filter(
+            (item) => item.category === "Ordinary Drink"
+          );
+          break;
+        case "Cocktail":
+          state.filter = true;
+          tempCart = tempCart.filter((item) => item.category === "Cocktail");
+          break;
+        case "Shot":
+          state.filter = true;
+          tempCart = tempCart.filter((item) => item.category === "Shot");
+          break;
+        case "Coffee / Tea":
+          state.filter = true;
+          tempCart = tempCart.filter(
+            (item) => item.category === "Coffee / Tea"
+          );
+          break;
+        case "Punch / Party Drink":
+          state.filter = true;
+          tempCart = tempCart.filter(
+            (item) => item.category === "Punch / Party Drink"
+          );
+          break;
+        default:
+          break;
+      }
+      state.filteredList = tempCart;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -152,6 +205,11 @@ const liquorSlice = createSlice({
       .addCase(fetchData.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.list = payload;
+        state.category = [
+          "all",
+          ...new Set(state.list.map((item) => item.category)),
+        ];
+        state.filteredList = state.list;
       })
       .addCase(fetchData.rejected, (state) => {
         state.error = true;
@@ -173,11 +231,14 @@ export const {
   setList,
   setCurrentPage,
   setReviewValue,
+  setSelected,
   addReviews,
   setCommentValue,
   deleteReviews,
   addItemToCart,
   deleteCartItem,
   deleteCartItemAll,
+  getCategory,
+  filterList,
 } = liquorSlice.actions;
 export default liquorSlice.reducer;

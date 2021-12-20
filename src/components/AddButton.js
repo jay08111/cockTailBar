@@ -8,18 +8,17 @@ function AddButton({ id }) {
   const [disable, setDisable] = useState(false);
   const { cart } = useSelector((state) => state.liquor);
   const buttonRef = useRef();
-
-  const forbiddenDuplicates = (id) => {
-    const cartItemsId = cart.map((cart) => cart.id);
-    const compareIdToCartId = cartItemsId.find((item) => item === id);
-    if (compareIdToCartId) {
-      setDisable(true);
-      buttonRef.current.disabled = true;
-    }
-  };
   useEffect(() => {
+    const forbiddenDuplicates = (id) => {
+      const cartItemsId = cart.map((cart) => cart.id);
+      const compareIdToCartId = cartItemsId.find((item) => item === id);
+      if (compareIdToCartId) {
+        setDisable(true);
+        buttonRef.current.disabled = true;
+      }
+    };
     forbiddenDuplicates(id);
-  });
+  }, [cart, id]);
   return (
     <Button
       className={disable && "active"}

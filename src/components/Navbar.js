@@ -39,29 +39,29 @@ const Nav = styled.nav`
     justify-content: space-between;
     align-items: center;
     font-size: 1.5rem;
-  }
-  .review__icon {
-    font-size: 40px;
-    cursor: pointer;
-    display: flex;
-  }
-  .cartPage__icon {
-    font-size: 40px;
-    cursor: pointer;
-    position: relative;
-    display: flex;
-  }
-  .cart__itemAmount {
-    position: absolute;
-    top: 8px;
-    right: -8px;
-    height: 30px;
-    width: 30px;
-    padding: 0 10px;
-    background-color: #ffffda;
-    border-radius: 50%;
-    font-size: 1.3rem;
-    font-family: "Dosis", sans-serif;
+    .review__icon {
+      font-size: 40px;
+      cursor: pointer;
+      display: flex;
+    }
+    .cartPage__icon {
+      font-size: 40px;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+    }
+    .cart__itemAmount {
+      position: absolute;
+      top: 8px;
+      right: -8px;
+      height: 30px;
+      width: 30px;
+      padding: 0 10px;
+      background-color: #ffffda;
+      border-radius: 50%;
+      font-size: 1.3rem;
+      font-family: "Dosis", sans-serif;
+    }
   }
 `;
 const StyledLink = styled(Link)`

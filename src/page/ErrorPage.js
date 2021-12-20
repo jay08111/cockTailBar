@@ -21,15 +21,15 @@ const Wrapper = styled.div`
   gap: 3rem;
   div {
     margin-bottom: 3rem;
-  }
-  h1 {
-    font-size: 5rem;
-    text-align: center;
-  }
-  h2 {
-    font-size: 4rem;
-    text-align: center;
-    text-transform: capitalize;
+    h1 {
+      font-size: 5rem;
+      text-align: center;
+    }
+    h2 {
+      font-size: 4rem;
+      text-align: center;
+      text-transform: capitalize;
+    }
   }
 `;
 const StyledLink = styled(Link)`

@@ -4,7 +4,7 @@ import { setCurrentPage } from "../redux/liquorSlice";
 import styled from "styled-components";
 function Pagination() {
   const dispatch = useDispatch();
-  const { postPerPage, list, currentPage } = useSelector(
+  const { postPerPage, list, currentPage, filter } = useSelector(
     (state) => state.liquor
   );
   const pageNumbers = [];
@@ -14,20 +14,21 @@ function Pagination() {
 
   return (
     <Wrapper>
-      {pageNumbers.map((number) => (
-        <li key={number} className="pagination__list">
-          <button
-            className={
-              number === currentPage
-                ? "pagination__btn active"
-                : "pagination__btn"
-            }
-            onClick={() => dispatch(setCurrentPage(number))}
-          >
-            {number}
-          </button>
-        </li>
-      ))}
+      {!filter &&
+        pageNumbers.map((number) => (
+          <li key={number} className="pagination__list">
+            <button
+              className={
+                number === currentPage
+                  ? "pagination__btn active"
+                  : "pagination__btn"
+              }
+              onClick={() => dispatch(setCurrentPage(number))}
+            >
+              {number}
+            </button>
+          </li>
+        ))}
     </Wrapper>
   );
 }

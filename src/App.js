@@ -17,7 +17,7 @@ function App() {
       <Header />
       <section className="section__center">
         <Liquors />
-        {loading || <Pagination />}
+        {!loading && <Pagination />}
       </section>
     </Main>
   );

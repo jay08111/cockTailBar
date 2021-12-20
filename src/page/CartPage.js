@@ -15,16 +15,22 @@ function CartPage() {
   return (
     <Wrapper>
       <h1>My Cart</h1>
-      {cart.map((cartItem) => (
-        <MyCartItem key={cartItem.id} {...cartItem} />
-      ))}
-      <div className="underline"></div>
-      <button>예약하기!</button>
-      {cart.length > 0 && (
-        <button onClick={() => dispatch(deleteCartItemAll())}>
-          delete all
-        </button>
-      )}
+      <div className="cart__item">
+        {cart.map((cartItem) => (
+          <MyCartItem key={cartItem.id} {...cartItem} />
+        ))}
+      </div>
+      <div className="btn-container">
+        <button className="btn btn__book">예약하기!</button>
+        {cart.length > 0 && (
+          <button
+            onClick={() => dispatch(deleteCartItemAll())}
+            className="btn btn__delete__all"
+          >
+            delete all
+          </button>
+        )}
+      </div>
     </Wrapper>
   );
 }
@@ -41,12 +47,29 @@ const Wrapper = styled.section`
   }
   button {
     width: 6rem;
-    padding: 20px 20px;
+    padding: 10px;
   }
-  .underline {
-    height: 0.01rem;
-    border: 1px solid #000;
-    width: 90vw;
+  .cart__item {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+  .btn-container {
+    display: flex;
+    gap: 100px;
+    .btn__book {
+      background-color: #ffa153;
+      &:hover {
+        background-color: #ffefc1;
+        color: #000;
+      }
+    }
+    .btn__delete__all {
+      background-color: #cd5c5c;
+      &:hover {
+        background-color: red;
+      }
+    }
   }
 `;
 export default CartPage;

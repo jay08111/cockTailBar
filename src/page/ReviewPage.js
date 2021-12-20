@@ -7,7 +7,7 @@ import {
   setCommentValue,
 } from "../redux/liquorSlice";
 import { ReviewComment, Nocomment } from "../components/index";
-import { toast, ToastContainer, Zoom } from "react-toastify";
+
 function Review() {
   const dispatch = useDispatch();
   const { reviewList, reviewNameValue, reviewCommentValue } = useSelector(
@@ -16,18 +16,9 @@ function Review() {
   if (reviewList.length === 0) {
     return <Nocomment />;
   }
-  const thereIsNoValue = () => {
-    if (!reviewNameValue && !reviewCommentValue) {
-      toast.error("입력을 해주세요 !");
-    } else if (!reviewNameValue) {
-      toast.error("이름을 입력해 주세요!");
-    } else if (!reviewCommentValue) {
-      toast.error("코멘트를 입력해 주세요!");
-    }
-  };
   return (
     <>
-      <Wrapper className="review__page">
+      <Wrapper>
         <h1>Reviews</h1>
         <form onSubmit={(e) => e.preventDefault()}>
           {reviewList.map((reviews) => {
@@ -52,14 +43,12 @@ function Review() {
             type="submit"
             onClick={() => {
               dispatch(addReviews());
-              thereIsNoValue();
             }}
           >
             comment
           </button>
         </form>
       </Wrapper>
-      <ToastContainer autoClose={2000} transition={Zoom} position="top-left" />;
     </>
   );
 }
@@ -80,23 +69,23 @@ const Wrapper = styled.section`
     gap: 15px;
     justify-content: flex-end;
     margin-top: 2rem;
-  }
-  input {
-    width: 50vw;
-    min-height: 30px;
-    padding: 5px;
-  }
-  input[type="text"]::placeholder {
-    text-align: left;
-  }
-  textarea {
-    resize: none;
-    min-height: 60px;
-    padding: 5px;
-    width: 50vw;
-  }
-  textarea[type="text"]::placeholder {
-    text-align: left;
+    input {
+      width: 50vw;
+      min-height: 30px;
+      padding: 5px;
+    }
+    input[type="text"]::placeholder {
+      text-align: left;
+    }
+    textarea {
+      resize: none;
+      min-height: 60px;
+      padding: 5px;
+      width: 50vw;
+    }
+    textarea[type="text"]::placeholder {
+      text-align: left;
+    }
   }
   .review__btn {
     background-color: #cba779;

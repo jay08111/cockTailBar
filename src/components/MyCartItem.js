@@ -13,7 +13,10 @@ function MyCartItem({ id, amount, name, image, info }) {
           <p>{name}</p>
           <p>{info}</p>
           <p>amount : {amount}</p>
-          <button onClick={() => dispatch(deleteCartItem(id))}>
+          <button
+            onClick={() => dispatch(deleteCartItem(id))}
+            className="btn btn__delete"
+          >
             <BsTrash />
           </button>
         </div>
@@ -30,19 +33,30 @@ const Wrapper = styled.div`
   align-items: center;
   border-radius: 10px;
   overflow: hidden;
+  width: 40vw;
+  .cart__container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    .cart__info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
   img {
     display: block;
     width: 150px;
     height: 150px;
   }
-  .cart__container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+  .btn {
+    font-size: 20px;
+    padding: 5px;
   }
-  .cart__info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .btn__delete {
+    background-color: #ff5966;
+    &:hover {
+      background-color: #dc143c;
+    }
   }
 `;
 export default MyCartItem;
