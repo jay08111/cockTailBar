@@ -18,18 +18,17 @@ const Wrapper = styled.header`
     background: rgba(255, 255, 255, 0.2);
     padding: 5rem;
     text-align: center;
-  }
-  .header__p {
-    color: #000;
-    padding: 5rem;
-    border: 7px solid #ffc078;
-    font-size: 3.5rem;
-    text-transform: capitalize;
-    font-family: "Dancing Script", cursive;
-  }
-
-  span {
-    color: #ffc078;
+    .header__p {
+      color: #000;
+      padding: 5rem;
+      border: 7px solid #ffc078;
+      font-size: 3.5rem;
+      text-transform: capitalize;
+      font-family: "Dancing Script", cursive;
+    }
+    span {
+      color: #ffc078;
+    }
   }
 `;
 export default Header;

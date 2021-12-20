@@ -40,6 +40,16 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    .des__p {
+      padding: 1rem;
+      line-height: 1.4;
+    }
+    .des__btn {
+      padding: 0.4rem 1.2rem;
+      border: none;
+      background-color: #fff;
+      cursor: pointer;
+    }
   }
   img {
     max-width: 100%;
@@ -49,20 +59,6 @@ const Wrapper = styled.div`
       transform: scale(1.1);
       cursor: pointer;
     }
-  }
-  .des__p {
-    padding: 1rem;
-    line-height: 1.4;
-  }
-  .des__btn {
-    padding: 0.4rem 1.2rem;
-    border: none;
-    background-color: #fff;
-    cursor: pointer;
-  }
-  .details {
-    margin-top: auto;
-    width: 100%;
   }
 `;
 

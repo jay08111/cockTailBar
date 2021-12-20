@@ -18,7 +18,7 @@ function ReviewComment({ id, name, review, like }) {
     }
   };
   return (
-    <Wrapper className="review__container">
+    <Wrapper>
       <p>{name}</p>
       <p>{review}</p>
       <div className="review__btn__container">
@@ -52,22 +52,22 @@ const Wrapper = styled.div`
     justify-content: flex-end;
     gap: 2px;
     margin-bottom: 3px;
-  }
-  .review__btn__container button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    background: none;
-    width: 40px;
-    font-size: 1.4rem;
-    cursor: pointer;
-  }
-  .review__btn__container span {
-    margin-left: 1px;
-  }
-  .red__Heart {
-    color: red;
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      background: none;
+      width: 40px;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+    span {
+      margin-left: 1px;
+    }
+    .red__Heart {
+      color: red;
+    }
   }
 `;
 export default ReviewComment;

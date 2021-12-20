@@ -2,6 +2,7 @@ import React from "react";
 import App from "./App";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, Zoom } from "react-toastify";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
 import { render } from "react-dom";
@@ -15,9 +16,9 @@ import {
 import { Footer, NavBar } from "./components/index";
 const rootElement = document.getElementById("root");
 render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <React.StrictMode>
+  <React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
         <NavBar />
         <Routes>
           <Route path="/" element={<App />} />
@@ -26,9 +27,14 @@ render(
           <Route path="/review" element={<ReviewPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
+        <ToastContainer
+          autoClose={2000}
+          transition={Zoom}
+          position="top-left"
+        />
         <Footer />
-      </React.StrictMode>
-    </BrowserRouter>
-  </Provider>,
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>,
   rootElement
 );

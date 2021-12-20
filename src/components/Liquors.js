@@ -1,30 +1,60 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { DisPlayMenu, Loading, FetchError } from "./index";
-import { ToastContainer, Zoom } from "react-toastify";
+import { setSelected, filterList, fetchData } from "../redux/liquorSlice";
 function CockTail() {
-  const { list, loading, error, postPerPage, currentPage } = useSelector(
-    (state) => state.liquor
-  );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(filterList());
+  }, [dispatch]);
+  const {
+    list,
+    loading,
+    error,
+    postPerPage,
+    currentPage,
+    selected,
+    category,
+    filter,
+    filteredList,
+  } = useSelector((state) => state.liquor);
+  const indexOfLastPost = currentPage * postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const currentPosts = list.slice(indexOfFirstPost, indexOfLastPost);
+
   if (loading) {
     return <Loading />;
   }
   if (error) {
     return <FetchError />;
   }
-  const indexOfLastPost = currentPage * postPerPage;
-  const indexOfFirstPost = indexOfLastPost - postPerPage;
-  const currentPosts = list.slice(indexOfFirstPost, indexOfLastPost);
+
   return (
     <Wrapper>
       <h1>Menu</h1>
-      <ToastContainer autoClose={2000} transition={Zoom} position="top-left" />
+      <select
+        className="liquor__select"
+        onChange={(e) => {
+          dispatch(setSelected(e.target.value));
+          dispatch(filterList());
+        }}
+        value={selected}
+      >
+        {category.map((item, index) => (
+          <option value={item} key={index}>
+            {item}
+          </option>
+        ))}
+      </select>
       <div className="grid">
-        {loading ||
-          currentPosts.map((items) => (
-            <DisPlayMenu key={items.id} {...items} />
-          ))}
+        {!loading && filter
+          ? filteredList.map((items) => (
+              <DisPlayMenu key={items.id} {...items} />
+            ))
+          : currentPosts.map((items) => (
+              <DisPlayMenu key={items.id} {...items} />
+            ))}
       </div>
     </Wrapper>
   );
@@ -35,16 +65,23 @@ const Wrapper = styled.article`
   flex-direction: column;
   align-items: center;
   padding: 10px 0;
+  .liquor__select {
+    margin-left: 92%;
+    width: 120px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 3rem;
+  }
+
   .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 60px;
     margin-top: 4rem;
   }
-  h1 {
-    text-align: center;
-    font-size: 3rem;
-  }
+
   @media screen and (max-width: 1200px) {
     .grid {
       grid-template-columns: repeat(3, 1fr);
