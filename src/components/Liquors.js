@@ -2,12 +2,8 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { DisPlayMenu, Loading, FetchError } from "./index";
-import { setSelected, filterList, fetchData } from "../redux/liquorSlice";
+import { setSelected, filterList, setFilter } from "../redux/liquorSlice";
 function CockTail() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(filterList());
-  }, [dispatch]);
   const {
     list,
     loading,
@@ -19,17 +15,20 @@ function CockTail() {
     filter,
     filteredList,
   } = useSelector((state) => state.liquor);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setFilter(false));
+  }, [dispatch]);
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   const currentPosts = list.slice(indexOfFirstPost, indexOfLastPost);
-
   if (loading) {
     return <Loading />;
   }
   if (error) {
     return <FetchError />;
   }
-
   return (
     <Wrapper>
       <h1>Menu</h1>

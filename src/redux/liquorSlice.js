@@ -122,6 +122,9 @@ const liquorSlice = createSlice({
     setSelected: (state, action) => {
       state.selected = action.payload;
     },
+    setFilter: (state, action) => {
+      state.filter = action.payload;
+    },
     addReviews: (state) => {
       if (state.reviewNameValue && state.reviewCommentValue) {
         const newValue = {
@@ -240,5 +243,6 @@ export const {
   deleteCartItemAll,
   getCategory,
   filterList,
+  setFilter,
 } = liquorSlice.actions;
 export default liquorSlice.reducer;
