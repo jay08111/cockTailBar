@@ -19,7 +19,9 @@ function CockTail() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setFilter(false));
+    dispatch(setSelected("all"));
   }, [dispatch]);
+
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   const currentPosts = list.slice(indexOfFirstPost, indexOfLastPost);

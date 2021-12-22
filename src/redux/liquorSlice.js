@@ -30,6 +30,11 @@ const initialState = {
   category: [],
   filter: false,
   filteredList: [],
+  ordinaryDrink: [],
+  cockTail: [],
+  shot: [],
+  coffeeAndTea: [],
+  punchAndParty: [],
 };
 
 export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
@@ -163,41 +168,42 @@ const liquorSlice = createSlice({
       state.cart = [];
     },
     filterList: (state) => {
-      let tempCart = [...state.filteredList];
+      state.filter = true;
       switch (state.selected) {
         case "all":
           state.filter = false;
           break;
         case "Ordinary Drink":
-          state.filter = true;
-          tempCart = tempCart.filter(
+          const ordinaryDrink = state.ordinaryDrink.filter(
             (item) => item.category === "Ordinary Drink"
           );
+          state.filteredList = ordinaryDrink;
           break;
         case "Cocktail":
-          state.filter = true;
-          tempCart = tempCart.filter((item) => item.category === "Cocktail");
+          const cockTail = state.cockTail.filter(
+            (item) => item.category === "Cocktail"
+          );
+          state.filteredList = cockTail;
           break;
         case "Shot":
-          state.filter = true;
-          tempCart = tempCart.filter((item) => item.category === "Shot");
+          const shot = state.shot.filter((item) => item.category === "Shot");
+          state.filteredList = shot;
           break;
         case "Coffee / Tea":
-          state.filter = true;
-          tempCart = tempCart.filter(
+          const coffeeAndTea = state.coffeeAndTea.filter(
             (item) => item.category === "Coffee / Tea"
           );
+          state.filteredList = coffeeAndTea;
           break;
         case "Punch / Party Drink":
-          state.filter = true;
-          tempCart = tempCart.filter(
+          const punchandPartyDrink = state.punchAndParty.filter(
             (item) => item.category === "Punch / Party Drink"
           );
+          state.filteredList = punchandPartyDrink;
           break;
         default:
           break;
       }
-      state.filteredList = tempCart;
     },
   },
   extraReducers: (builder) => {
@@ -213,6 +219,11 @@ const liquorSlice = createSlice({
           ...new Set(state.list.map((item) => item.category)),
         ];
         state.filteredList = state.list;
+        state.ordinaryDrink = state.list;
+        state.cockTail = state.list;
+        state.shot = state.list;
+        state.coffeeAndTea = state.list;
+        state.punchAndParty = state.list;
       })
       .addCase(fetchData.rejected, (state) => {
         state.error = true;
@@ -241,7 +252,6 @@ export const {
   addItemToCart,
   deleteCartItem,
   deleteCartItemAll,
-  getCategory,
   filterList,
   setFilter,
 } = liquorSlice.actions;

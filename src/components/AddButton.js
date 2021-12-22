@@ -28,7 +28,7 @@ function AddButton({ id }) {
         toast.success("예약목록에 추가 완료!");
       }}
     >
-      {disable ? "added already" : "add to cart"}
+      {disable ? "in cart" : "add to cart"}
     </Button>
   );
 }
