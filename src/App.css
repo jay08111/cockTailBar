@@ -3,15 +3,12 @@
   margin: 0;
   box-sizing: border-box;
 }
-body {
-  font-family: "Dosis", sans-serif;
-}
-input {
-  font-family: "Dosis", sans-serif;
-}
+body,
+input,
 textarea {
   font-family: "Dosis", sans-serif;
 }
+
 .nav__bar {
   font-family: "Dancing Script", cursive;
 }
@@ -31,7 +28,7 @@ textarea {
 }
 .btn {
   border: none;
-  font-size: 18px;
+  font-size: 1rem;
   border-radius: 5px;
   color: #fff;
   cursor: pointer;
