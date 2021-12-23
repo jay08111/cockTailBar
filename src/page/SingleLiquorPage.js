@@ -9,7 +9,10 @@ function SingleCockTail() {
   const { singleLiquorList, loading, error } = useSelector(
     (state) => state.liquor
   );
+  const { name, image, info, category, glass, instructions, ingredients } =
+    singleLiquorList;
   const { id } = useParams();
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchSingleData(id));
@@ -20,8 +23,6 @@ function SingleCockTail() {
   if (error) {
     return <FetchError />;
   }
-  const { name, image, info, category, glass, instructions, ingredients } =
-    singleLiquorList;
   return (
     <Wrapper className="section-center">
       <div className="container">
@@ -35,8 +36,11 @@ function SingleCockTail() {
           <p>Ingredients:</p>
           {ingredients &&
             ingredients.map((item, index) => <p key={index}>{item}</p>)}
-          <button className="btn container__btn">add to cart</button>
-          <StyledLink to="/">Back to Home</StyledLink>
+          <div className="btn__container">
+            <StyledLink to="/" className="btn link__btn">
+              Back to Home
+            </StyledLink>
+          </div>
         </div>
       </div>
     </Wrapper>
@@ -52,18 +56,28 @@ const Wrapper = styled.section`
     .container__img {
       display: block;
       object-fit: cover;
-      width: 80%;
+      /* width: 37.5rem; */
+      /* height: 660px; */
+      width: 90%;
+      height: auto;
+      margin: 0 auto;
+      border-radius: 10px;
     }
     .container__right {
-      margin-left: 10rem;
+      margin-left: 8rem;
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 12.5px;
     }
     p {
       line-height: 1.3;
     }
-    .container__btn {
+    .btn__container {
+      display: flex;
+      margin-top: 15px;
+      gap: 15px;
+    }
+    .addcart__btn {
       padding: 0.5rem;
       width: 30%;
       background-color: #e57124;
@@ -71,11 +85,35 @@ const Wrapper = styled.section`
         background-color: #ffa153;
       }
     }
+    .link__btn {
+      padding: 0.5rem;
+      width: 30%;
+      background-color: #e57124;
+
+      &:hover {
+        background-color: #ffa153;
+      }
+    }
+  }
+  @media screen and (max-width: 1220px) {
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      width: 90%;
+      height: auto;
+      margin: 0 auto;
+      .container__right {
+        width: 90%;
+        margin: 0 auto;
+      }
+    }
   }
 `;
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: #000;
+  color: #fff;
+  text-align: center;
   &:focus,
   &:hover,
   &:visited,
