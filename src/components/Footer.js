@@ -11,8 +11,9 @@ const Wrapper = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 10vh;
+  min-height: 3vh;
   text-transform: capitalize;
+  background-color: #ffd8a8;
 `;
 
 export default Footer;

@@ -8,19 +8,26 @@ input,
 textarea {
   font-family: "Dosis", sans-serif;
 }
-
+.main {
+  background-image: url("pictures/background.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .nav__bar {
   font-family: "Dancing Script", cursive;
 }
 .header__img {
   background-image: url("./pictures/barPic.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 90vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .section__center {
   width: 90vw;
@@ -37,4 +44,24 @@ textarea {
 .active {
   background-color: #ad4300 !important;
   color: #fff !important;
+}
+@media screen and (max-width: 963px) {
+  .cart__wrapper {
+    width: 50vw !important;
+  }
+}
+@media screen and (max-width: 492px) {
+  .cart__wrapper {
+    width: 55vw !important;
+  }
+}
+@media screen and (max-width: 385px) {
+  .cart__wrapper {
+    width: 70vw !important;
+  }
+}
+@media screen and (max-width: 317px) {
+  .cart__wrapper {
+    width: 80vw !important;
+  }
 }

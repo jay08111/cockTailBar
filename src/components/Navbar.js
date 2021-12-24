@@ -63,6 +63,16 @@ const Nav = styled.nav`
       font-family: "Dosis", sans-serif;
     }
   }
+  @media screen and (max-width: 492px) {
+    div {
+      margin: 0 2rem;
+    }
+  }
+  @media screen and (max-width: 277px) {
+    div {
+      margin: 0 1rem;
+    }
+  }
 `;
 const StyledLink = styled(Link)`
   text-decoration: none;
