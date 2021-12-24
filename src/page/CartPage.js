@@ -85,5 +85,11 @@ const Wrapper = styled.section`
       }
     }
   }
+  @media screen and (max-width: 963px) {
+    .cart__item {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
 `;
 export default CartPage;

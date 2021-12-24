@@ -13,7 +13,7 @@ function App() {
     return <Loading />;
   }
   return (
-    <Main>
+    <Main className="main">
       <Header />
       <section className="section__center">
         <Liquors />

@@ -77,6 +77,17 @@ const Wrapper = styled.section`
     input[type="text"]::placeholder {
       text-align: left;
     }
+    input[type="text"],
+    textarea[type="text"] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 20px;
+    }
+
     textarea {
       resize: none;
       min-height: 60px;
@@ -91,6 +102,10 @@ const Wrapper = styled.section`
     background-color: #cba779;
     padding: 1rem;
     margin-top: 1rem;
+    transition: all 0.5s;
+    &:hover {
+      background-color: #e57124;
+    }
   }
 `;
 export default Review;

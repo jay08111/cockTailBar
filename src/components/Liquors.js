@@ -88,5 +88,23 @@ const Wrapper = styled.article`
       grid-template-columns: repeat(3, 1fr);
     }
   }
+  @media screen and (max-width: 860px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .liquor__select {
+      width: 30vw;
+      margin: 10px auto 0 auto;
+    }
+  }
+  @media screen and (max-width: 540px) {
+    .grid {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    .liquor__select {
+      width: 30vw;
+      margin: 10px auto 0 auto;
+    }
+  }
 `;
 export default CockTail;
