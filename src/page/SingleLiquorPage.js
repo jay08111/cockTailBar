@@ -89,6 +89,7 @@ const Wrapper = styled.section`
       padding: 0.5rem;
       width: 30%;
       background-color: #e57124;
+      font-size: 1.4rem;
 
       &:hover {
         background-color: #ffa153;

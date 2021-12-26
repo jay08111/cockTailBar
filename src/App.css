@@ -8,13 +8,7 @@ input,
 textarea {
   font-family: "Dosis", sans-serif;
 }
-.main {
-  background-image: url("pictures/background.jpg");
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+
 .nav__bar {
   font-family: "Dancing Script", cursive;
 }
