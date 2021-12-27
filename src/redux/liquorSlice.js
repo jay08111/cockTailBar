@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import axios from "axios";
 import { nanoid } from "nanoid";
 import { reviewData } from "../data";
@@ -35,6 +35,7 @@ const initialState = {
   shot: [],
   coffeeAndTea: [],
   punchAndParty: [],
+  amount: 1,
 };
 
 export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
@@ -157,7 +158,7 @@ const liquorSlice = createSlice({
       const findItemId = id.find((item) => item === payload);
       const findItemById = state.list.find((item) => item.id === findItemId);
       if (findItemId === payload) {
-        const newCartItem = { ...findItemById, amount: 1 };
+        const newCartItem = { ...findItemById };
         state.cart = [...state.cart, newCartItem];
       }
     },
@@ -205,6 +206,11 @@ const liquorSlice = createSlice({
           break;
       }
     },
+    handleAmount: (state, { payload }) => {
+      let item = state.cart.find((item) => item.id === payload);
+      item = item.amount + 1;
+      console.log(item);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -246,6 +252,7 @@ export const {
   setCurrentPage,
   setReviewValue,
   setSelected,
+  setFilter,
   addReviews,
   setCommentValue,
   deleteReviews,
@@ -253,6 +260,6 @@ export const {
   deleteCartItem,
   deleteCartItemAll,
   filterList,
-  setFilter,
+  handleAmount,
 } = liquorSlice.actions;
 export default liquorSlice.reducer;

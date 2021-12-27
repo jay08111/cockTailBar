@@ -39,23 +39,3 @@ textarea {
   background-color: #ad4300 !important;
   color: #fff !important;
 }
-@media screen and (max-width: 963px) {
-  .cart__wrapper {
-    width: 50vw !important;
-  }
-}
-@media screen and (max-width: 492px) {
-  .cart__wrapper {
-    width: 55vw !important;
-  }
-}
-@media screen and (max-width: 385px) {
-  .cart__wrapper {
-    width: 70vw !important;
-  }
-}
-@media screen and (max-width: 317px) {
-  .cart__wrapper {
-    width: 80vw !important;
-  }
-}

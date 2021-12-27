@@ -1,18 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { deleteCartItem } from "../redux/liquorSlice";
 import { BsTrash } from "react-icons/bs";
-import { useDispatch } from "react-redux";
-function MyCartItem({ id, amount, name, image, info }) {
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+function MyCartItem({ id, name, image, info }) {
   const dispatch = useDispatch();
+  const [amount, setAmount] = useState(1);
+  const { cart } = useSelector((state) => state.liquor);
+  const increaseAmount = (id) => {
+    const findIncId = cart.find((item) => item.id === id);
+    if (findIncId) {
+      setAmount(amount + 1);
+    }
+  };
+  const decreaseAmount = (id) => {
+    const findIncId = cart.find((item) => item.id === id);
+    if (findIncId) {
+      if (amount === 1) {
+        dispatch(deleteCartItem(id));
+      } else {
+        setAmount(amount - 1);
+      }
+    }
+  };
   return (
     <Wrapper className="cart__wrapper">
       <div className="cart__container">
-        <img src={image} alt={name} />
+        <Link to={`/singlePage/${id}`}>
+          <img src={image} alt={name} />
+        </Link>
         <div className="cart__info">
           <p>{name}</p>
           <p>{info}</p>
-          <p>잔 : {amount}</p>
+          <div className="cart__amount">
+            <div
+              className="arrow arrow-down"
+              onClick={() => decreaseAmount(id)}
+            >
+              <AiOutlineArrowLeft />
+            </div>
+            <p> 잔 : {amount}</p>
+            <div>
+              <AiOutlineArrowRight
+                className="arrow arrow-up"
+                onClick={() => increaseAmount(id)}
+              />
+            </div>
+          </div>
           <button
             onClick={() => dispatch(deleteCartItem(id))}
             className="btn btn__delete"
@@ -32,8 +68,7 @@ const Wrapper = styled.div`
   align-items: center;
   border-radius: 10px;
   overflow: hidden;
-  width: 30vw;
- 
+  width: auto;
   .cart__container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -43,6 +78,16 @@ const Wrapper = styled.div`
       align-items: center;
       justify-content: center;
       gap:7px;
+    }
+    .cart__amount {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      .arrow {
+        cursor: pointer;
+        display: flex;
+      }
     }
   }
   img {
@@ -55,6 +100,8 @@ const Wrapper = styled.div`
     padding: 5px;
   }
   .btn__delete {
+    display:flex;
+    justify-content: center;
     background-color: #ff5966;
     &:hover {
       background-color: #dc143c;
