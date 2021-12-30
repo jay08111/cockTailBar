@@ -87,10 +87,10 @@ const Wrapper = styled.section`
     }
     .link__btn {
       padding: 0.5rem;
-      width: 30%;
+      width: 50%;
+      margin: 0 auto;
       background-color: #e57124;
       font-size: 1.4rem;
-
       &:hover {
         background-color: #ffa153;
       }
@@ -107,6 +107,58 @@ const Wrapper = styled.section`
       .container__right {
         width: 90%;
         margin: 0 auto;
+      }
+    }
+  }
+  @media screen and (max-width: 625px) {
+    .container {
+      .container__right {
+        font-size: 1.7rem;
+      }
+    }
+  }
+  @media screen and (max-width: 554px) {
+    .container {
+      padding: 5rem 3rem;
+      .container__right {
+        font-size: 1.4rem;
+        .link__btn {
+          font-size: 1rem;
+        }
+      }
+      }
+    }
+  }
+  @media screen and (max-width: 420px) {
+    .container {
+      .container__right {
+        font-size: 1.2rem;
+        .link__btn {
+          font-size: 0.8rem;
+        }
+      }
+      }
+    }
+  }
+  @media screen and (max-width: 360px) {
+    .container {
+      width: 100%;
+      padding: 5rem 3rem;
+      .container__right {
+        font-size: 1.2rem;
+        .link__btn {
+          font-size: 0.3rem;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 277px) {
+    .container {
+      .container__right {
+        font-size: 0.9rem;
+        .link__btn {
+          font-size: 0.3rem;
+        }
       }
     }
   }
