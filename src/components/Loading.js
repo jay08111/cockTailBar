@@ -5,13 +5,15 @@ import Loader from "react-loader-spinner";
 function Loading() {
   return (
     <Wrapper>
-      <Loader
-        type="Audio"
-        color="#000"
-        height={400}
-        width={400}
-        timeout={10000}
-      />
+      <div>
+        <Loader
+          type="Audio"
+          color="#000"
+          height={300}
+          width={400}
+          timeout={10000}
+        />
+      </div>
     </Wrapper>
   );
 }
@@ -20,6 +22,9 @@ const Wrapper = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  div {
+    height: 50vh;
+  }
 `;
 
 export default Loading;
