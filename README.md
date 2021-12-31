@@ -31,8 +31,10 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
+ <li><a href="#git-flow">git-flow</a></li>
     <li><a href="#description">Description</a></li>
     <li><a href="#contact">Contact</a></li>
+   <li><a href="#url">project URL</a></li> 
   </ol>
 </details>
 
@@ -94,7 +96,21 @@
    ```
    <p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- USAGE EXAMPLES -->
+## git-flow
+
+<p>git-flow는 git branch 전략 중 하나입니다 .</p>
+<p>여러 기업에서 채택해서 사용하고있는것을 보았고 , 지금은 비록 혼자 작업하고있지만 , 협업을 한다는 가정하에 저또한 이런 전략을 채택해서 사용하였습니다 .</p>
+<p>Git-flow를 사용했을 때 작업을 어떻게 하는지 살펴보기 전에 먼저 Git-flow에 대해서 간단히 살펴보겠습니다.</p>
+<p>Git-flow에는 5가지 종류의 브랜치가 존재합니다. 항상 유지되는 메인 브랜치들(master, develop)과 일정 기간 동안만 유지되는 보조 브랜치들(feature, release, hotfix)이 있습니다.</p>
+<ul>
+<li>master : 제품으로 출시될 수 있는 브랜치</li>
+<li>develop : 다음 출시 버전을 개발하는 브랜치</li>
+<li>feature : 기능을 개발하는 브랜치</li>
+<li>release : 이번 출시 버전을 준비하는 브랜치</li>
+<li>hotfix : 출시 버전에서 발생한 버그를 수정 하는 브랜치</li>
+</ul>
+
+<p>저 같은경우엔 여기서 develop브렌치만 따로 쳐서 거기서 작업하고 main(master)로 merge 하는 방식으로 작업을 하였습니다 .</p>
 
 ## Description
 
@@ -124,7 +140,7 @@ axios를 활용해 비동기로 data를 fetch 했습니다 .
 <li>아이템들이 많아서 아이템들을 한페이지에 8개씩만 보여주고 페이지를 넘겨 다음 아이템들을 볼수 있는 pagination 기능</li>
 <li>각 아이템들의 카테고리 별로 필터링 기능</li>
 <li>각 아이템들을 카트에 담을 수 있음</li>
-<li>바에대한 댓글 추가 기능 , 아이디와 비밀번호를 등록해야 등록이 됌</li>
+<li>바에대한 댓글 추가 기능 , 아이디와 코멘트를 등록해야 등록이 됌</li>
 <li>댓글 삭제와 댓글 좋아요 기능</li>
 <li>댓글이 아무것도 없다면 댓글이 달리지 않았다는 컴포넌트를 렌더링</li>
 <li>카트에 담긴 목록을 지우기 , 한번에 모든 아이템 지우기</li>
@@ -715,6 +731,20 @@ deleteCartItem: (state, { payload }) => {
 ```
 
 <p>해당 array를 빈 array로 초기화를 시켜 전체를 한번에 삭제시킵니다 .</p>
+
+#### 무엇인가 값을 만족할때 어떠한 컴포넌트를 return해주고싶다 , 할때 쓰는 방법
+
+```
+  if (loading) {
+    return <Loading />;
+  }
+  if (error) {
+    return <FetchError />;
+  }
+```
+
+<p>loading , error의 값이 true일때 각 조건에 맞는 컴포넌트를 이런식으로 return 해 줄수 있습니다 .</p>
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONTACT -->
@@ -723,12 +753,14 @@ deleteCartItem: (state, { payload }) => {
 
 gmail - qusghdus12345@gmail.com
 
-프로젝트 url: [https://thebar-react.netlify.app](https://thebar-react.netlify.app)
-
 블로그 [https://jay0811.tistory.com/](https://jay0811.tistory.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## 읽어주셔서 감사합니다
+## url
+
+프로젝트 url: [https://thebar-react.netlify.app](https://thebar-react.netlify.app)
+
+## 긴글 읽어주셔서 감사합니다
 
 <p align="right">(<a href="#top">back to top</a>)</p>
