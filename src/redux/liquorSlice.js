@@ -35,7 +35,6 @@ const initialState = {
   shot: [],
   coffeeAndTea: [],
   punchAndParty: [],
-  amount: 1,
 };
 
 export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
