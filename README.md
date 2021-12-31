@@ -747,7 +747,17 @@ deleteCartItem: (state, { payload }) => {
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- CONTACT -->
+#### 각종 문제가 있었던 부분들
+
+<ol>
+<li>redux proxy가 console창에 출력되는 문제</li>
+<li>Button Disabled하는 과정에서 double click 해야 작동이 되는 문제</li>
+<li>Map을 하는 과정에서 component state가 동시에 작동 (readMore)</li>
+<li>singlePage에서 ingredients가 혼자 늦게 렌더링 되는 문제</li>
+<li>Create Thunk에서 fetch를 id별로 하지 못하는 문제</li>
+<li>useEffect에서 빈 dependency를 넣었더니 계속 경고문구가 뜨는 문제</li>
+<li>Filter진행시 첫렌더링은 되나 두번째 부터 렌더링이 전혀 되지않는 문제</li>
+</ol>
 
 ## Contact
 
