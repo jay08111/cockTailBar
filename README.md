@@ -40,10 +40,11 @@
 
 ## About The Project
 
-  <a href="https://github.com/jay08111/cockTailBar.git">
-    <img src="src/pictures/barsite.png" alt="Logo" width="500" height="500">
+<div align="center">
+  <a href="https://thebar-react.netlify.app">
+    <img src="src/pictures/barsite.png" alt="Logo" width="300" height="300">
   </a>
-
+</div>
 <p>외부 API를 사용하여 각 항목을 렌더링 , 데이터를 사용 용도에 맞게 sorting , 등등 기본작업과 ,
 반응형작업을 하였습니다 . </p>
 <p>git flow 방식을 채택하여 진행하였습니다 .</p>
