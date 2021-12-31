@@ -513,6 +513,208 @@ export default Pagination;
 <p>for loop을 돌려서 list.lenght / postPerPage 즉 3개의 페이지를 생성합니다. 정보는 pageNumbers라는 array에 push하여 저장합니다 .</p>
 <p>후에 그 array를 map을 돌려서 숫자를 렌더링 합니다 . onClick에 페이지 숫자 버튼을 누르면 setCurrentPage function을 실행시키고 , 그안에 array안에 있는 숫자를 set 시킴으로써 currentPage를 변화 시키고 , 변화시킨 currentPage는 indexOfLastPost를 변화시키고 , 더 나아가 결국 currentPost를 변화시켜 다른 화면을 렌더링 시키게 됩니다 .</p>
 
+#### 각 아이템들의 카테고리 별로 필터링 기능
+
+```
+liquors.js
+
+ <select
+        className="liquor__select"
+        onChange={(e) => {
+          dispatch(setSelected(e.target.value));
+          dispatch(filterList());
+        }}
+        value={selected}
+      >
+        {category.map((item, index) => (
+          <option value={item} key={index}>
+            {item}
+          </option>
+        ))}
+      </select>
+```
+
+<p>우선 select를 만들어서 , select의 value가 선택되면 조건에 맞는 아이템들을 필터링하여 렌더링 하는 방식으로  구현을 하고 싶었습니다 .</p>
+<p>그러기 위해서는 우선 api에서 받아온 아이템들의 카테고리들을 전부 모은후 , 중복값을 없앤 array를 만들어야 하는데요 , 그것은 이렇게 구현했습니다 .</p>
+
+```
+ state.category = ["all",  ...new Set(state.list.map((item) => item.category)), ];
+```
+
+<p>redux 측에서 category라는 state를 생성했고 , 그 state의 initial value는 array입니다 .</p>
+<p>list는 모든 아이템의 정보가 담긴 array입니다 .</p>
+<p>Set을 이용하여 중복값을 빼기를 원하여 , 처음에 코드를 이렇게 작성하였습니다</p>
+
+```
+state.category = new Set(state.list.map((item) => item.category);
+```
+
+<p>이렇게 작성하였더니 문제가 발생하였는데 , 바로 Set이 값을 object로 return해주는것이었습니다 .</p>
+<p>저는 map을 돌려야 했기 때문에 array가 필요했습니다 . 나중에 값을 동적으로 삽입하거나 삭제할때에도 편리하기 때문에 저는 주로 값을 array로 만들어서 high-order functions를 사용합니다 . </p> 
+<p>또한 저는 'all'이라는 value를 추가 삽입시켜 , 전체를 렌더링 해야했기때문에 ES6 spread operator를 사용해서 shallow copy를 하여 객체의 값을 복사해서 새 array로 만들었습니다 . </p>
+<p>카테고리는 값을 불러오는데 성공이었고 , 나머지는 이 카테고리와 filter function을 연결시켜서 조건에 맞는 렌더링을 진행시키는 일이 남았었습니다 .</p>
+<p>우선 여러가지 문제가 있었는데요 , select를 처음 쓰는 저로써는 select에는 onClick을 사용할 수 없다는걸 몰랐습니다 .</p>
+<p>검색해보니 onChange로 대체를 할수 있다고 해서 onChange로 대체를 하여 사용하였습니다 .</p>
+
+```
+liquorSlice.js
+
+filterList: (state) => {
+      state.filter = true;
+      switch (state.selected) {
+        case "all":
+          state.filter = false;
+          break;
+        case "Ordinary Drink":
+          const ordinaryDrink = state.ordinaryDrink.filter(
+            (item) => item.category === "Ordinary Drink"
+          );
+          state.filteredList = ordinaryDrink;
+          break;
+        case "Cocktail":
+          const cockTail = state.cockTail.filter(
+            (item) => item.category === "Cocktail"
+          );
+          state.filteredList = cockTail;
+          break;
+        case "Shot":
+          const shot = state.shot.filter((item) => item.category === "Shot");
+          state.filteredList = shot;
+          break;
+        case "Coffee / Tea":
+          const coffeeAndTea = state.coffeeAndTea.filter(
+            (item) => item.category === "Coffee / Tea"
+          );
+          state.filteredList = coffeeAndTea;
+          break;
+        case "Punch / Party Drink":
+          const punchandPartyDrink = state.punchAndParty.filter(
+            (item) => item.category === "Punch / Party Drink"
+          );
+          state.filteredList = punchandPartyDrink;
+          break;
+        default:
+          break;
+      }
+    },
+```
+
+<p>개인적으로 이 부분에서 고민을 많이  했고 , 마음에 들지 않는 코드중 하나입니다 . 구현하는데에는 성공을 했지만, 
+정말 비 효율적으로 짰습니다 .</p>
+<p>select쪽 onChange에서 event.target.value로 값을 selected state에 넘겨주면 switch statement에서 selected state 에 들어온 value에 따라서 case별로 logic을 실행시켜주는 코드입니다.</p>
+<p> 제가 지금은 정말 완벽히 이해하지만 , filter method에 대해서 이해가 부족했던것 같습니다.</p>
+<p> 정확한 문제점은 , 항상 첫 필터링은 잘 됐습니다 , 그러나 그다음 필터링을 연속적으로 하게된다면 아무것도 렌더링되지않는 현상이 발생을 하였습니다 , 밑 코드가 당시의 코드입니다 .</p>
+
+```
+   filterList: (state) => {
+      let tempCart = [...state.filteredList];
+      switch (state.selected) {
+        case "all":
+          state.filter = false;
+          break;
+        case "Ordinary Drink":
+          state.filter = true;
+          tempCart = tempCart.filter(
+            (item) => item.category === "Ordinary Drink"
+          );
+          break;
+        case "Cocktail":
+          state.filter = true;
+          tempCart = tempCart.filter((item) => item.category === "Cocktail");
+          break;
+        case "Shot":
+          state.filter = true;
+          tempCart = tempCart.filter((item) => item.category === "Shot");
+          break;
+        case "Coffee / Tea":
+          state.filter = true;
+          tempCart = tempCart.filter(
+            (item) => item.category === "Coffee / Tea"
+          );
+          break;
+        case "Punch / Party Drink":
+          state.filter = true;
+          tempCart = tempCart.filter(
+            (item) => item.category === "Punch / Party Drink"
+          );
+          break;
+        default:
+          break;
+      }
+      state.filteredList = tempCart;
+    },
+```
+
+<p>filteredList는 전체 아이템들이 담겨져 있는 리스트입니다 .</p>
+<p>해당 코드를 살펴보면 , tempCart를 만들어서 filteredList의 값을 복사한후 ,  case에 따라서 tempCart의 값을 계속 필터링 해 나가는것을 알 수 있습니다 ,</p>
+<p>여기서의 문제점은 , 해당 tempCart를 필터링한 상태에서 다시한번 필터링을 하기때문에 (연속으로) 첫번째에서는 렌더링이 잘 됐지만 두번째부터 아무 값도 렌더링이 되지 않는것이었습니다 .</p>
+<p>이 문제를 어떻게 해결하였냐면 .. </p>
+
+```
+        state.filteredList = state.list;
+        state.ordinaryDrink = state.list;
+        state.cockTail = state.list;
+        state.shot = state.list;
+        state.coffeeAndTea = state.list;
+        state.punchAndParty = state.list;
+```
+
+<p>이런식으로 value 1개마다 state를 1개씩 총 5개의 state를 만들어서 ,</p>
+<p>필터링할때 한 array에서 필터링을 하도록 만들어 랜더링에 지장이 없게 만들었지만 .. 다시봐도 무식(?) 한 방법인것 같습니다 . 누군가 피드백을 주시면 좋을거 같습니다 .. </p>
+<p>개인적으로 코드를 제대로 구현하는 만큼이나 코드를 깨끗하게 하는것도 똑같이 중요하다고 생각하여 , 리펙토링에 관심이 많습니다 .</p>
+
+#### 아이템을 카트에 담는 기능
+
+```
+addItemToCart: (state, { payload }) => {
+      const id = state.list.map((item) => item.id);
+      const findItemId = id.find((item) => item === payload);
+      const findItemById = state.list.find((item) => item.id === findItemId);
+      if (findItemId === payload) {
+        const newCartItem = { ...findItemById };
+        state.cart = [...state.cart, newCartItem];
+      }
+    },
+```
+
+<p>먼저 모든 아이템들이 들어있는 list라는 array에서 id만을 추출합니다 . </p>
+<p>그리고 난후 그 id와 function을 실행하는곳에서 넘긴 parameter를 대조하여 같은 값을 가지고있는 객체를 반환합니다 .  (  findItemById )</p>
+<p>그리고 list 에서 추출한 id와 function을 실행하는곳에서 넘긴 id값이 같으면 해당 if statement을 실행시킵니다 .</p>
+<p>새 객체를 만들어서 findItemById 에서 찾은 객체 데이터를 복사해서 할당합니다 .</p>
+<p>해당 아이템을 맵으로 뿌려줄것이기때문에 array로 데이터를 만들어서 state.cart에 할당합니다 .</p>
+<p>cart라는 state를 이제 페이지에서 맵으로 뿌려줍니다. 항목이 수정되면 동적으로 반영합니다 .</p>
+
+```
+Proxy {i: 0, A: {…}, P: false, I: false, D: {…}, …}
+```
+
+<p>간혹 redux slice에서 console.log로 어떤 데이터를 확인하려 할때 , 이렇게 proxy형태로 출력이 되어 값을 확인 할수 없는 경우가 있는데요 ,이럴때엔  </p>
+
+```
+import { current } from "@reduxjs/toolkit";
+```
+
+<p>current라는 toolkit에서 제공되는 method를 추가하여 console.log(current(something)) 을 실행시키면 정상적으로 작동이 됩니다 .</p>
+
+#### 해당 항목 삭제 기능
+
+```
+deleteCartItem: (state, { payload }) => {
+      state.cart = state.cart.filter((item) => item.id !== payload);
+    },
+```
+
+<p>무엇인가 삭제할때 가장 많이 , 흔하게 사용하는 방법입니다 . filter를 통해 다른 id값을 가지고있는 객체를 돌려줌으로써 삭제를 시킵니다 .</p>
+
+#### 전체 삭제 기능
+
+```
+ deleteCartItemAll: (state) => {
+      state.cart = [];
+    },
+```
+
+<p>해당 array를 빈 array로 초기화를 시켜 전체를 한번에 삭제시킵니다 .</p>
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONTACT -->
