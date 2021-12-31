@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/jay08111/cockTailBar.git">
-    <img src="/src/pictures/TheBar.png" alt="Logo" width="80" height="80">
+    <img src="/src/pictures/TheBar.png" alt="Logo" width="100" height="100">
   </a>
 
 <h3 align="center">The Bar</h3>
@@ -31,8 +31,8 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
+    <li><a href="#usage">usage</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -40,7 +40,9 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+  <a href="https://github.com/jay08111/cockTailBar.git">
+    <img src="src/pictures/barsite.png" alt="Logo" width="500" height="500">
+  </a>
 
 <p>외부 API를 사용하여 각 항목을 렌더링 , 데이터를 사용 용도에 맞게 sorting , 등등 기본작업과 ,
 반응형작업을 하였습니다 . </p>
