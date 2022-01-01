@@ -18,7 +18,7 @@ const Wrapper = styled.header`
     background: rgba(255, 255, 255, 0.2);
     padding: 5rem;
     text-align: center;
-    width: 100vw;
+    width: 40vw;
     .header__p {
       color: #000;
       padding: 5rem;
@@ -29,6 +29,11 @@ const Wrapper = styled.header`
     }
     span {
       color: #ffc078;
+    }
+  }
+  @media screen and (max-width: 1200px) {
+    .header__box {
+      width: 100vw;
     }
   }
   @media screen and (max-width: 469px) {
