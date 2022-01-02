@@ -690,7 +690,7 @@ addItemToCart: (state, { payload }) => {
       const id = state.list.map((item) => item.id);
       const findItemId = id.find((item) => item === payload);
       const findItemById = state.list.find((item) => item.id === findItemId);
-      if (findItemId === payload) {
+      if (findItemId) {
         const newCartItem = { ...findItemById };
         state.cart = [...state.cart, newCartItem];
       }
@@ -698,8 +698,8 @@ addItemToCart: (state, { payload }) => {
 ```
 
 <p>먼저 모든 아이템들이 들어있는 list라는 array에서 id만을 추출합니다 . </p>
-<p>그리고 난후 그 id와 function을 실행하는곳에서 넘긴 parameter를 대조하여 같은 값을 가지고있는 객체를 반환합니다 .  (  findItemById )</p>
-<p>그리고 list 에서 추출한 id와 function을 실행하는곳에서 넘긴 id값이 같으면 해당 if statement을 실행시킵니다 .</p>
+<p>그리고 난후 그 id와 function을 실행하는곳에서 넘긴 parameter를 대조하여 같은 값을 가지고있는 객체를 반환합니다 .  ( findItemById )</p>
+<p>findItemById가 true 면 if statement를 실행시킵니다 .</p>
 <p>새 객체를 만들어서 findItemById 에서 찾은 객체 데이터를 복사해서 할당합니다 .</p>
 <p>해당 아이템을 맵으로 뿌려줄것이기때문에 array로 데이터를 만들어서 state.cart에 할당합니다 .</p>
 <p>cart라는 state를 이제 페이지에서 맵으로 뿌려줍니다. 항목이 수정되면 동적으로 반영합니다 .</p>
