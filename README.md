@@ -747,17 +747,42 @@ deleteCartItem: (state, { payload }) => {
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#### 각종 문제가 있었던 부분들
+## 각종 문제가 있었던 부분들
 
 <ol>
 <li>redux proxy가 console창에 출력되는 문제</li>
+      => redux 에서 제공하는 current라는 method로 랩핑하니 문제 해결 
 <li>Button Disabled하는 과정에서 double click 해야 작동이 되는 문제</li>
+      => 따로 하단에 서술하였습니다 .
 <li>Map을 하는 과정에서 component state가 동시에 작동 (readMore)</li>
-<li>singlePage에서 ingredients가 혼자 늦게 렌더링 되는 문제</li>
+   => 따로 state를 만들어서 각자 동작하도록 수정하여 문제 해결
+<li>singlePage에서 ingredients가 혼자 늦게 렌더링 되는 문제</li> 
+   => 따로 하단에 서술하였습니다 .
 <li>Create Thunk에서 fetch를 id별로 하지 못하는 문제</li>
+ =>  상단에서 진행하였던것처럼 thunk를 2개 만들어서 문제 해결 *만족스럽지못함
 <li>useEffect에서 빈 dependency를 넣었더니 계속 경고문구가 뜨는 문제</li>
+ => 따로 하단에 서술하였습니다 .
 <li>Filter진행시 첫렌더링은 되나 두번째 부터 렌더링이 전혀 되지않는 문제</li>
+=> 상단에서 진행한것처럼 각 카테고리마다 따로 array를 만들어서 값을 담아 문제 해결 *비효율적임
 </ol>
+
+##### 4번. singlePage에서 ingredient요소가 혼자 늦게 렌더링 되는 문제
+
+```
+<p>Ingredients:
+  {ingredients.map((item, index) => <p key={index}>{item}</p>)}
+</p>
+```
+
+<p>ingredients를 array로 제가 redux slice에서 일부로 만들어서 map을 돌렸는데요 , </p> <p>Cannot read properties of undefined (reading 'map') 이라는 오류가 계속 잡히더라구요 ,개인적인 경험으로 데이터가 전송이 완료되지않으면 이런 오류가 발생하는것을 자주 보았는데 , 이번에도 그런 오류인것같아서 </p>
+
+```
+<p>Ingredients:
+  {ingredients && ingredients.map((item, index) => <p key={index}>{item}</p>)}
+</p>
+```
+
+<p>간단하게 ingredients가 들어오면 map을 실행하는 코드로 변경하였더니 오류가 해결되었습니다 .</p>
 
 ## Contact
 
