@@ -148,6 +148,10 @@ axios를 활용해 비동기로 data를 fetch 했습니다 .
 <li>카트의 아이템 수량 조절 가능</li>
 </ol>
 
+#### 간단한 조직도
+
+ <img src="/src/pictures/cockTailBarMap.png" alt="Logo" width="1850" height="746">
+
 #### Router
 
 ```
