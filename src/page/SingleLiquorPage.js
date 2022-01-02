@@ -33,9 +33,12 @@ function SingleCockTail() {
           <p>Category: {category}</p>
           <p>Glass: {glass}</p>
           <p>Instructions: {instructions}</p>
-          <p>Ingredients:</p>
-          {ingredients &&
-            ingredients.map((item, index) => <p key={index}>{item}</p>)}
+          <p>
+            Ingredients:
+            {ingredients &&
+              ingredients.map((item, index) => <p key={index}>{item}</p>)}
+          </p>
+
           <div className="btn__container">
             <StyledLink to="/" className="btn link__btn">
               Back to Home

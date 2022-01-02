@@ -148,6 +148,10 @@ axios를 활용해 비동기로 data를 fetch 했습니다 .
 <li>카트의 아이템 수량 조절 가능</li>
 </ol>
 
+#### 간단한 조직도
+
+ <img src="/src/pictures/cockTailBarMap.png" alt="Logo" width="800" height="800">
+
 #### Router
 
 ```
@@ -747,17 +751,233 @@ deleteCartItem: (state, { payload }) => {
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#### 각종 문제가 있었던 부분들
+## 각종 문제가 있었던 부분들과 해결과정
 
 <ol>
 <li>redux proxy가 console창에 출력되는 문제</li>
-<li>Button Disabled하는 과정에서 double click 해야 작동이 되는 문제</li>
+      => redux 에서 제공하는 current라는 method로 랩핑하니 문제 해결 
+<li>Button Disabled하는 과정</li>
+      => 따로 하단에 서술하였습니다 .
 <li>Map을 하는 과정에서 component state가 동시에 작동 (readMore)</li>
-<li>singlePage에서 ingredients가 혼자 늦게 렌더링 되는 문제</li>
+   => 따로 state를 만들어서 각자 동작하도록 수정하여 문제 해결
+<li>singlePage에서 ingredients가 혼자 늦게 렌더링 되는 문제</li> 
+   => 따로 하단에 서술하였습니다 .
 <li>Create Thunk에서 fetch를 id별로 하지 못하는 문제</li>
+ =>  상단에서 진행하였던것처럼 thunk를 2개 만들어서 문제 해결 *만족스럽지못함
 <li>useEffect에서 빈 dependency를 넣었더니 계속 경고문구가 뜨는 문제</li>
+ => 따로 하단에 서술하였습니다 .
 <li>Filter진행시 첫렌더링은 되나 두번째 부터 렌더링이 전혀 되지않는 문제</li>
+=> 상단에서 진행한것처럼 각 카테고리마다 따로 array를 만들어서 값을 담아 문제 해결 *비효율적임
+<li>svg파일의 class를 e.target 으로 접근하려고하는데 발생하는 문제</li>
 </ol>
+
+##### 2번. Button Disabled하는 과정
+
+<p>버튼을 disabled하려면 바닐라자바스크립트로 하려면 그냥 DOM을 잡아와 disabled속성값에 true를 주면 된다는것은 알았는데 , 정확히 React에서는 어떻게 구현을 해야할지 감이 잘 오지않았습니다 . </p>
+<p>예전에 React Hook에 대해서 공부할때 , useRef를 어디에 써야할지 좀 이해가 안갔었는데 , 이런경우에 Ref를 쓰면 정말 효율적일거같다는 생각이 들었고 , 바로 구현을 해보았습니다.</p>
+
+```
+const forbiddenDuplicates = (id) => {
+      const cartItemsId = cart.map((cart) => cart.id);
+      const compareIdToCartId = cartItemsId.find((item) => item === id);
+      if (compareIdToCartId) {
+        setDisable(true);
+        buttonRef.current.disabled = true;
+      }
+    };
+
+    <button
+      ref={buttonRef}
+      onClick={() => {
+        forbiddenDuplicates(id);
+      }}
+    >
+      {disable ? "in cart" : "add to cart"}
+    </button>
+```
+
+<p>제 아이디어는 간단했습니다 . id 를 추출하여 클라이언트가 onClick 을 실행시킬때에 같은 id를 가지고있는 버튼을 disabled시키는것이었습니다.</p>
+
+<p>위의 코드는 정상적으로 작동 하였으나 렌더링을 다시하면 전부 disabled가 풀리고 다시 클릭을 할수 있도록 돌아오는것이 또다른 문제였습니다 .</p>
+
+<p>이렇게 렌더링시에 다시 돌아오는것을 보니 렌더링을 할때마다 이 함수를 실행시켜 이런일이 없도록 방지를 했어야 했는데 , 이런일에는 useEffect가 제격이죠 .</p>
+
+##### 6번 . useEffect에서 빈 dependency를 넣었더니 계속 경고문구가 뜨는 문제
+
+<p>그래서 onClick에서 함수를 실행하지말고 useEffect에서 실행을 해보기로했습니다 . </p>
+
+```
+useEffect(() => {
+        forbiddenDuplicates(id)
+} , [id] )
+```
+
+<p>id값은 부모컴포넌트에서 넘겨받았습니다 .</p>
+<p>이렇게 코드를 작성하였더니 , 리액트 터미널에서 오류가 하나 발생하였습니다 , 그 오류는</p>
+<p>React Hook useEffect has a missing dependency: 'forbiddenDuplicates'. Either include it or remove the dependency array 라는 경고문이었습니다 .</p>
+<p>useEffect 에서 empty dependency(의존성 배열) 을 쓸거면 , forbiddenDuplicates를 배열에 추가하고 , 쓰지않을거면 빈 배열을 삭제하라는 경고문이었는데요 , </p>
+<p>dependency를 삭제하면 useEffect에 지장이 생기지 않을까 ?를 고려해서 한번 이문제에 대해 공부를 해보았습니다.</p>
+<p>리액트 공식문서에 따르면 ,useEffect 내부에서 사용하는 외부의 값이 없다면</p>
+<p> dependency를 []로 적는 것이 안전하다고 얘기하고 있으며, dependency를 제거하기 위해 함수를 effect 내부로 이동시키는 것을 권하고 있습니다. </p>
+<p>그리고 제가 읽은 블로그 글의 저자의 의견은 , </p>
+<p>Hook을 사용할 때 dependency 배열을 생략하는 것은 좋지 않은 습관이라 생각한다고 합니다 .
+<p>왜냐하면 , useEffect 안에 존재하는 state, prosp, 함수 등의 모든 값은 dependency 배열로 존재해야 하는데, 무한루프에 빠지는 현상 등을 막기 위해 dependency를 제거하게 될 경우, 렌더링이 무시되거나 전달해야 할 값이 갱신되지 않는 등 다른 문제를 일으킬 수 있어 좋은 해결 방법이라 생각되지 않는다고 합니다 .
+<p>그래서 저는 이문제를 이렇게 해결하였습니다 .</p>
+
+```
+useEffect(() => {
+    const forbiddenDuplicates = (id) => {
+      const cartItemsId = cart.map((cart) => cart.id);
+      const compareIdToCartId = cartItemsId.find((item) => item === id);
+      if (compareIdToCartId) {
+        setDisable(true);
+        buttonRef.current.disabled = true;
+      }
+    };
+    forbiddenDuplicates(id);
+  }, [cart, id]);
+```
+
+<p>useEffect안에서 함수를 정의하고 바로 실행해서 , dependency에 함수를 넣지 않아도 됐고 , 경고문도 더이상 뜨지 않았습니다 .</p>
+
+출처: https://jungpaeng.tistory.com/61 [개발자스러운 블로그]</p>
+
+##### 4번. singlePage에서 ingredient요소가 혼자 늦게 렌더링 되는 문제
+
+```
+<p>Ingredients:
+  {ingredients.map((item, index) => <p key={index}>{item}</p>)}
+</p>
+```
+
+<p>ingredients를 array로 제가 redux slice에서 일부로 만들어서 map을 돌렸는데요 , </p> <p>Cannot read properties of undefined (reading 'map') 이라는 오류가 계속 잡히더라구요 ,개인적인 경험으로 데이터가 전송이 완료되지않으면 이런 오류가 발생하는것을 자주 보았는데 , 이번에도 그런 오류인것같아서 </p>
+
+```
+<p>Ingredients:
+  {ingredients && ingredients.map((item, index) => <p key={index}>{item}</p>)}
+</p>
+```
+
+<p>간단하게 ingredients가 들어오면 map을 실행하는 코드로 변경하였더니 오류가 해결되었습니다 .</p>
+
+#### 8번 svg파일의 class를 e.target 으로 접근하려고하는데 발생하는 문제
+
+<p>개인적으로 아직까지 이해가 잘 가지않고 , 왜 이런 문제가 발생하는지 모르겠는 문제입니다 .
+</p>
+<p>타겟의 classList에 접근을 하여 , class의 이름이 A면 a로직을 , B면 b로직을 실행하는 if 문을 만들려고 했습니다.</p>
+<p>타겟은 react-icon에서 가져다쓴 svg파일이었구요 , 함수는 onClick에 붙여 사용했습니다.
+접근은 e.target.classList로 하였습니다.</p>
+
+```
+const handleAmount = (e, id) => {
+    const findId = cart.find((item) => item.id === id);
+    if (e.target.classList[1] === "arrow-up") {
+      console.log(e.target.classList);
+      if (findId) {
+        setAmount(amount + 1);
+      }
+    } else if (e.target.classList[1] === "arrow-down") {
+      if (findId) {
+        console.log(e.target.classList);
+        if (amount === 1) {
+          dispatch(deleteCartItem(id));
+        } else {
+          setAmount(amount - 1);
+        }
+      }
+    }
+  };
+```
+
+<p>초기 코드입니다 . e.target.classList를 확인해보니</p>
+
+```
+DOMTokenList(2) ['arrow', 'arrow-up', value: 'arrow arrow-up']
+```
+
+<p>이라는 배열이 출력이 되어서 , [1]번째 값이 arrow-up이면 값을 증가시키는 코드입니다 .
+</p>
+
+```
+ <AiOutlineArrowLeft
+                className="arrow arrow-down"
+                onClick={(e) => handleAmount(e, id)}
+              />
+```
+
+<p>이렇게 onClick을 붙여서 사용하였구요 ,</p>
+
+<p>솔직하게 말씀드리면 , 이코드에서 문제점은 잘 모르겠습니다 . 이코드의 희한한점은 실행이 될때가 있고 안됄때가 있다는것이었습니다 . 처음에 클릭을 하면 실행이 안됐고 , 두번째일때는 됄때가있고 안됄때가있고 , 세번째 네번째가지 안됄때가 있었습니다 . 저는 이벤트 버블링과 관련된 문제인가 싶었는데 , 실행이 됐다안됐다하는 규칙(?) 을 찾을수 없었고 , 다른식으로 짜기로 결심했습니다 .</p>
+
+<p>우선 class의 이름을 잡아와야 조정이 가능했기때문에 , 콘솔을 찍어보았습니다.</p>
+
+```
+  console.log(e.target.classList);
+```
+
+<p>한번도보지못한? 결과가 나왔습니다 .</p>
+
+```
+SVGAnimatedString {baseVal: 'arrow arrow-up', animVal: 'arrow arrow-up'}
+```
+
+<p>이런 객체가 출력이 되었는데요 , 저는 "어차피 객체던 , 배열이던 접근만 해서 데이터만 추출하면 되니 상관 없겠구나" 라고 생각을했는데 여기서 또다른 문제가 발생합니다 .</p>
+
+```
+SVGAnimatedString {baseVal: '', animVal: ''}
+```
+
+<p>가끔 이렇게 값이 없는 null의 상태가 반환이 된다는것이었습니다 . 저는 이때 조금 당황했습니다 . </p>
+<p>같은 코드가 실행이 될때가 있고 안됄때가 있다면 이렇게 신뢰성없는 코드를 절때 사용할수 없을 뿐더러 , 저는 무엇인가 할때 이해가 되지않는 부분에 있어서 굉장히 찜찜함을 느끼는 편인데 저의 그런 부분을 자극하여 , 구글링을 통해 검색을 좀 해보았습니다 .</p>
+<p>StackOverflow를 참조해보니 , 어떤분이 저와 같은 현상을 겪고 계시고 , 밑에 여러가지 답변들이 달려서 참조를 좀 하였습니다 .</p>
+<p>답변 1 :I think a good solution would be to use element.classList instead of element.className, because the classList API works on both html elements and svg elements .</p>
+<p>className대신 classList를 써서 접근하라고 하셨는데 , 저는 classList를 쓰다가 안되서 classList로 왔기 때문에 ...</p>
+
+<p>답변2 : </p>
+<p>
+
+Simplest way:
+
+```
+e.target.className.baseVal
+```
+
+</p>
+<p>
+Another way:
+</p>
+
+```
+e.target.getAttribute("class")
+```
+
+<p>첫번째 simplest way의 방법은 제가 사용해보니 자꾸 null을 반환해서 코드가 실행이 될때가있고 안됄때가 있어서 실패했고 , 두번째 Another way로 해보기로 했습니다 .</p>
+
+<p>정말 재미있는점은 여기서또한 null이 사정없이 뜨더라구요 , 안뜰때는 class가 잘 잡히구요 . 저는 여기서 매우 혼란했고 그냥 함수를 분리해서 간단하게 작성하기로 합니다.</p>
+
+```
+  const increaseAmount = (e, id) => {
+    console.log(e.target.getAttribute("class"));
+    const findIncId = cart.find((item) => item.id === id);
+    if (findIncId) {
+      setAmount(amount + 1);
+    }
+  };
+  const decreaseAmount = (id) => {
+    const findIncId = cart.find((item) => item.id === id);
+    if (findIncId) {
+      if (amount === 1) {
+        dispatch(deleteCartItem(id));
+      } else {
+        setAmount(amount - 1);
+      }
+    }
+  };
+```
+
+<p>amount가 1보다 작아지면 목록에서 삭제를시키고 , 아닐땐 빼거나 더할수 있는 함수로 대체를 했습니다 .</p>
+
+출처 : https://stackoverflow.com/questions/29454340/detecting-classname-of-svganimatedstring/29454358
 
 ## Contact
 

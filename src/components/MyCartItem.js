@@ -9,7 +9,8 @@ function MyCartItem({ id, name, image, info }) {
   const dispatch = useDispatch();
   const [amount, setAmount] = useState(1);
   const { cart } = useSelector((state) => state.liquor);
-  const increaseAmount = (id) => {
+  const increaseAmount = (e, id) => {
+    console.log(e.target.getAttribute("class"));
     const findIncId = cart.find((item) => item.id === id);
     if (findIncId) {
       setAmount(amount + 1);
@@ -45,7 +46,7 @@ function MyCartItem({ id, name, image, info }) {
             <div>
               <AiOutlineArrowRight
                 className="arrow arrow-up"
-                onClick={() => increaseAmount(id)}
+                onClick={(e) => increaseAmount(e, id)}
               />
             </div>
           </div>
