@@ -747,12 +747,12 @@ deleteCartItem: (state, { payload }) => {
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## 각종 문제가 있었던 부분들
+## 각종 문제가 있었던 부분들과 해결과정
 
 <ol>
 <li>redux proxy가 console창에 출력되는 문제</li>
       => redux 에서 제공하는 current라는 method로 랩핑하니 문제 해결 
-<li>Button Disabled하는 과정에서 double click 해야 작동이 되는 문제</li>
+<li>Button Disabled하는 과정</li>
       => 따로 하단에 서술하였습니다 .
 <li>Map을 하는 과정에서 component state가 동시에 작동 (readMore)</li>
    => 따로 state를 만들어서 각자 동작하도록 수정하여 문제 해결
@@ -765,6 +765,77 @@ deleteCartItem: (state, { payload }) => {
 <li>Filter진행시 첫렌더링은 되나 두번째 부터 렌더링이 전혀 되지않는 문제</li>
 => 상단에서 진행한것처럼 각 카테고리마다 따로 array를 만들어서 값을 담아 문제 해결 *비효율적임
 </ol>
+
+##### 2번. Button Disabled하는 과정
+
+<p>버튼을 disabled하려면 바닐라자바스크립트로 하려면 그냥 DOM을 잡아와 disabled속성값에 true를 주면 된다는것은 알았는데 , 정확히 React에서는 어떻게 구현을 해야할지 감이 잘 오지않았습니다 . </p>
+<p>예전에 React Hook에 대해서 공부할때 , useRef를 어디에 써야할지 좀 이해가 안갔었는데 , 이런경우에 Ref를 쓰면 정말 효율적일거같다는 생각이 들었고 , 바로 구현을 해보았습니다.</p>
+
+```
+const forbiddenDuplicates = (id) => {
+      const cartItemsId = cart.map((cart) => cart.id);
+      const compareIdToCartId = cartItemsId.find((item) => item === id);
+      if (compareIdToCartId) {
+        setDisable(true);
+        buttonRef.current.disabled = true;
+      }
+    };
+
+    <button
+      ref={buttonRef}
+      onClick={() => {
+        forbiddenDuplicates(id);
+      }}
+    >
+      {disable ? "in cart" : "add to cart"}
+    </button>
+```
+
+<p>제 아이디어는 간단했습니다 . id 를 추출하여 클라이언트가 onClick 을 실행시킬때에 같은 id를 가지고있는 버튼을 disabled시키는것이었습니다.</p>
+
+<p>위의 코드는 정상적으로 작동 하였으나 렌더링을 다시하면 전부 disabled가 풀리고 다시 클릭을 할수 있도록 돌아오는것이 또다른 문제였습니다 .</p>
+
+<p>이렇게 렌더링시에 다시 돌아오는것을 보니 렌더링을 할때마다 이 함수를 실행시켜 이런일이 없도록 방지를 했어야 했는데 , 이런일에는 useEffect가 제격이죠 .</p>
+
+##### 6번 . useEffect에서 빈 dependency를 넣었더니 계속 경고문구가 뜨는 문제
+
+<p>그래서 onClick에서 함수를 실행하지말고 useEffect에서 실행을 해보기로했습니다 . </p>
+
+```
+useEffect(() => {
+        forbiddenDuplicates(id)
+} , [id] )
+```
+
+<p>id값은 부모컴포넌트에서 넘겨받았습니다 .</p>
+<p>이렇게 코드를 작성하였더니 , 리액트 터미널에서 오류가 하나 발생하였습니다 , 그 오류는</p>
+<p>React Hook useEffect has a missing dependency: 'forbiddenDuplicates'. Either include it or remove the dependency array 라는 경고문이었습니다 .</p>
+<p>useEffect 에서 empty dependency(의존성 배열) 을 쓸거면 , forbiddenDuplicates를 배열에 추가하고 , 쓰지않을거면 빈 배열을 삭제하라는 경고문이었는데요 , </p>
+<p>dependency를 삭제하면 useEffect에 지장이 생기지 않을까 ?를 고려해서 한번 이문제에 대해 공부를 해보았습니다.</p>
+<p>리액트 공식문서에 따르면 ,useEffect 내부에서 사용하는 외부의 값이 없다면</p>
+<p> dependency를 []로 적는 것이 안전하다고 얘기하고 있으며, dependency를 제거하기 위해 함수를 effect 내부로 이동시키는 것을 권하고 있습니다. </p>
+<p>그리고 제가 읽은 블로그 글의 저자의 의견은 , </p>
+<p>Hook을 사용할 때 dependency 배열을 생략하는 것은 좋지 않은 습관이라 생각한다고 합니다 .
+<p>왜냐하면 , useEffect 안에 존재하는 state, prosp, 함수 등의 모든 값은 dependency 배열로 존재해야 하는데, 무한루프에 빠지는 현상 등을 막기 위해 dependency를 제거하게 될 경우, 렌더링이 무시되거나 전달해야 할 값이 갱신되지 않는 등 다른 문제를 일으킬 수 있어 좋은 해결 방법이라 생각되지 않는다고 합니다 .
+<p>그래서 저는 이문제를 이렇게 해결하였습니다 .</p>
+
+```
+useEffect(() => {
+    const forbiddenDuplicates = (id) => {
+      const cartItemsId = cart.map((cart) => cart.id);
+      const compareIdToCartId = cartItemsId.find((item) => item === id);
+      if (compareIdToCartId) {
+        setDisable(true);
+        buttonRef.current.disabled = true;
+      }
+    };
+    forbiddenDuplicates(id);
+  }, [cart, id]);
+```
+
+<p>useEffect안에서 함수를 정의하고 바로 실행해서 , dependency에 함수를 넣지 않아도 됐고 , 경고문도 더이상 뜨지 않았습니다 .</p>
+
+출처: https://jungpaeng.tistory.com/61 [개발자스러운 블로그]</p>
 
 ##### 4번. singlePage에서 ingredient요소가 혼자 늦게 렌더링 되는 문제
 
