@@ -150,7 +150,7 @@ axios를 활용해 비동기로 data를 fetch 했습니다 .
 
 #### 간단한 조직도
 
- <img src="/src/pictures/cockTailBarMap.png" alt="Logo" width="700" height="700">
+ <img src="/src/pictures/cockTailBarMap.png" alt="Logo" width="800" height="800">
 
 #### Router
 
