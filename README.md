@@ -768,6 +768,7 @@ deleteCartItem: (state, { payload }) => {
  => 따로 하단에 서술하였습니다 .
 <li>Filter진행시 첫렌더링은 되나 두번째 부터 렌더링이 전혀 되지않는 문제</li>
 => 상단에서 진행한것처럼 각 카테고리마다 따로 array를 만들어서 값을 담아 문제 해결 *비효율적임
+<li>svg파일의 class를 e.target 으로 접근하려고하는데 발생하는 문제</li>
 </ol>
 
 ##### 2번. Button Disabled하는 과정
@@ -858,6 +859,125 @@ useEffect(() => {
 ```
 
 <p>간단하게 ingredients가 들어오면 map을 실행하는 코드로 변경하였더니 오류가 해결되었습니다 .</p>
+
+#### 8번 svg파일의 class를 e.target 으로 접근하려고하는데 발생하는 문제
+
+<p>개인적으로 아직까지 이해가 잘 가지않고 , 왜 이런 문제가 발생하는지 모르겠는 문제입니다 .
+</p>
+<p>타겟의 classList에 접근을 하여 , class의 이름이 A면 a로직을 , B면 b로직을 실행하는 if 문을 만들려고 했습니다.</p>
+<p>타겟은 react-icon에서 가져다쓴 svg파일이었구요 , 함수는 onClick에 붙여 사용했습니다.
+접근은 e.target.classList로 하였습니다.</p>
+
+```
+const handleAmount = (e, id) => {
+    const findId = cart.find((item) => item.id === id);
+    if (e.target.classList[1] === "arrow-up") {
+      console.log(e.target.classList);
+      if (findId) {
+        setAmount(amount + 1);
+      }
+    } else if (e.target.classList[1] === "arrow-down") {
+      if (findId) {
+        console.log(e.target.classList);
+        if (amount === 1) {
+          dispatch(deleteCartItem(id));
+        } else {
+          setAmount(amount - 1);
+        }
+      }
+    }
+  };
+```
+
+<p>초기 코드입니다 . e.target.classList를 확인해보니</p>
+
+```
+DOMTokenList(2) ['arrow', 'arrow-up', value: 'arrow arrow-up']
+```
+
+<p>이라는 배열이 출력이 되어서 , [1]번째 값이 arrow-up이면 값을 증가시키는 코드입니다 .
+</p>
+
+```
+ <AiOutlineArrowLeft
+                className="arrow arrow-down"
+                onClick={(e) => handleAmount(e, id)}
+              />
+```
+
+<p>이렇게 onClick을 붙여서 사용하였구요 ,</p>
+
+<p>솔직하게 말씀드리면 , 이코드에서 문제점은 잘 모르겠습니다 . 이코드의 희한한점은 실행이 될때가 있고 안됄때가 있다는것이었습니다 . 처음에 클릭을 하면 실행이 안됐고 , 두번째일때는 됄때가있고 안됄때가있고 , 세번째 네번째가지 안됄때가 있었습니다 . 저는 이벤트 버블링과 관련된 문제인가 싶었는데 , 실행이 됐다안됐다하는 규칙(?) 을 찾을수 없었고 , 다른식으로 짜기로 결심했습니다 .</p>
+
+<p>우선 class의 이름을 잡아와야 조정이 가능했기때문에 , 콘솔을 찍어보았습니다.</p>
+
+```
+  console.log(e.target.classList);
+```
+
+<p>한번도보지못한? 결과가 나왔습니다 .</p>
+
+```
+SVGAnimatedString {baseVal: 'arrow arrow-up', animVal: 'arrow arrow-up'}
+```
+
+<p>이런 객체가 출력이 되었는데요 , 저는 "어차피 객체던 , 배열이던 접근만 해서 데이터만 추출하면 되니 상관 없겠구나" 라고 생각을했는데 여기서 또다른 문제가 발생합니다 .</p>
+
+```
+SVGAnimatedString {baseVal: '', animVal: ''}
+```
+
+<p>가끔 이렇게 값이 없는 null의 상태가 반환이 된다는것이었습니다 . 저는 이때 조금 당황했습니다 . </p>
+<p>같은 코드가 실행이 될때가 있고 안됄때가 있다면 이렇게 신뢰성없는 코드를 절때 사용할수 없을 뿐더러 , 저는 무엇인가 할때 이해가 되지않는 부분에 있어서 굉장히 찜찜함을 느끼는 편인데 저의 그런 부분을 자극하여 , 구글링을 통해 검색을 좀 해보았습니다 .</p>
+<p>StackOverflow를 참조해보니 , 어떤분이 저와 같은 현상을 겪고 계시고 , 밑에 여러가지 답변들이 달려서 참조를 좀 하였습니다 .</p>
+<p>답변 1 :I think a good solution would be to use element.classList instead of element.className, because the classList API works on both html elements and svg elements .</p>
+<p>className대신 classList를 써서 접근하라고 하셨는데 , 저는 classList를 쓰다가 안되서 classList로 왔기 때문에 ...</p>
+
+<p>답변2 : </p>
+<p>
+
+Simplest way:
+
+```
+e.target.className.baseVal
+```
+
+</p>
+<p>
+Another way:
+</p>
+
+```
+e.target.getAttribute("class")
+```
+
+<p>첫번째 simplest way의 방법은 제가 사용해보니 자꾸 null을 반환해서 코드가 실행이 될때가있고 안됄때가 있어서 실패했고 , 두번째 Another way로 해보기로 했습니다 .</p>
+
+<p>정말 재미있는점은 여기서또한 null이 사정없이 뜨더라구요 , 안뜰때는 class가 잘 잡히구요 . 저는 여기서 매우 혼란했고 그냥 함수를 분리해서 간단하게 작성하기로 합니다.</p>
+
+```
+  const increaseAmount = (e, id) => {
+    console.log(e.target.getAttribute("class"));
+    const findIncId = cart.find((item) => item.id === id);
+    if (findIncId) {
+      setAmount(amount + 1);
+    }
+  };
+  const decreaseAmount = (id) => {
+    const findIncId = cart.find((item) => item.id === id);
+    if (findIncId) {
+      if (amount === 1) {
+        dispatch(deleteCartItem(id));
+      } else {
+        setAmount(amount - 1);
+      }
+    }
+  };
+```
+
+<p>amount가 1보다 작아지면 목록에서 삭제를시키고 , 아닐땐 빼거나 더할수 있는 함수로 대체를 했습니다 .</p>
+
+출처 : https://stackoverflow.com/questions/29454340/detecting-classname-of-svganimatedstring/29454358
 
 ## Contact
 
