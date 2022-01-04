@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/jay08111/cockTailBar.git">
+  <a href="https://thebar-react.netlify.app/">
     <img src="/src/pictures/TheBar.png" alt="Logo" width="100" height="100">
   </a>
 
