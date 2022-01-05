@@ -48,7 +48,7 @@ function CockTail() {
           </option>
         ))}
       </select>
-      <div className="grid">
+      <div className="flex">
         {!loading && filter
           ? filteredList.map((items) => (
               <DisPlayMenu key={items.id} {...items} />
@@ -74,13 +74,13 @@ const Wrapper = styled.article`
   h1 {
     text-align: center;
     font-size: 3rem;
+    color: #fff;
   }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+  .flex {
+    display: flex;
+    flex-direction: column;
     gap: 60px;
-    margin-top: 4rem;
   }
 
   @media screen and (max-width: 1200px) {

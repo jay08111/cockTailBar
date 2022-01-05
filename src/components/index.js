@@ -11,6 +11,7 @@ import Nocomment from "./Nocomment";
 import NoItems from "./NoItems";
 import MyCartItem from "./MyCartItem";
 import AddButton from "./AddButton";
+import BarDescription from "./BarDescription";
 export {
   Liquors,
   Footer,
@@ -25,4 +26,5 @@ export {
   NoItems,
   MyCartItem,
   AddButton,
+  BarDescription,
 };

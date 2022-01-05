@@ -6,14 +6,15 @@
 body,
 input,
 textarea {
-  font-family: "Dosis", sans-serif;
+  font-family: "Oswald", sans-serif;
 }
 
 .nav__bar {
   font-family: "Dancing Script", cursive;
 }
 .header__img {
-  background-image: url("./pictures/barPic.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), #000),
+    url("./pictures/barPic2.jpg");
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -22,6 +23,9 @@ textarea {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+.main {
+  background-image: url("https://images.getbento.com/accounts/b407703cbc06b7de17a1aab05567665c/media/images/90545bg_finished.png");
 }
 .section__center {
   width: 90vw;

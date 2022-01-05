@@ -19,7 +19,7 @@ const initialState = {
   singleLiquorList: {},
   error: false,
   currentPage: 1,
-  postPerPage: 8,
+  postPerPage: 4,
   currentPosts: [],
   reviewList: reviewData,
   reviewNameValue: "",

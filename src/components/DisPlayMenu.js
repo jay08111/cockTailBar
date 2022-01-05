@@ -11,9 +11,11 @@ function DisPlayMenu({ name, image, description, id }) {
   }, [cart]);
   return (
     <Wrapper>
-      <Link to={`/singlePage/${id}`}>
-        <img src={image} alt={name} />
-      </Link>
+      <div>
+        <Link to={`/singlePage/${id}`}>
+          <img src={image} alt={name} />
+        </Link>
+      </div>
       <div className="description">
         <p className="des__p">
           {readMore ? description : `${description.substring(0, 20)}...`}
@@ -32,8 +34,8 @@ const Wrapper = styled.div`
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2,1fr)
   gap: 20px;
 
   .description {

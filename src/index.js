@@ -19,7 +19,6 @@ render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <NavBar />
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/singlePage/:id" element={<SingleLiquorPage />} />
