@@ -50,6 +50,7 @@ export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
         strGlass,
         strInstructions,
         strCategory,
+        price = [100, 200],
       } = item;
       return {
         id: idDrink,
@@ -59,6 +60,7 @@ export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
         glass: strGlass,
         description: strInstructions,
         category: strCategory,
+        price,
       };
     });
     return newLiquors;
@@ -204,11 +206,6 @@ const liquorSlice = createSlice({
         default:
           break;
       }
-    },
-    handleAmount: (state, { payload }) => {
-      let item = state.cart.find((item) => item.id === payload);
-      item = item.amount + 1;
-      console.log(item);
     },
   },
   extraReducers: (builder) => {

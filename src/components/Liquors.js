@@ -33,7 +33,6 @@ function CockTail() {
   }
   return (
     <Wrapper>
-      <h1>Menu</h1>
       <select
         className="liquor__select"
         onChange={(e) => {
@@ -67,20 +66,19 @@ const Wrapper = styled.article`
   align-items: center;
   padding: 10px 0;
   .liquor__select {
-    margin-left: 92%;
+    text-align: center;
+    margin-bottom: 2rem;
     width: 120px;
   }
-
   h1 {
     text-align: center;
     font-size: 3rem;
     color: #fff;
   }
-
   .flex {
     display: flex;
     flex-direction: column;
-    gap: 60px;
+    min-width: 90vw;
   }
 
   @media screen and (max-width: 1200px) {

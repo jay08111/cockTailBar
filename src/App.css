@@ -40,6 +40,6 @@ textarea {
   transition: all 0.4s;
 }
 .active {
-  background-color: #ad4300 !important;
-  color: #fff !important;
+  background-color: #fff !important;
+  color: #000 !important;
 }

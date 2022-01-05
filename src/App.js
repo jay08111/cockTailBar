@@ -7,15 +7,19 @@ import {
   BarDescription,
 } from "./components/index";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchData } from "./redux/liquorSlice";
-
+import { fetchData, fetchSingleData } from "./redux/liquorSlice";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 function App() {
+  const { id } = useParams();
   const { loading } = useSelector((state) => state.liquor);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchSingleData(id));
+  }, [dispatch, id]);
   if (loading) {
     return <Loading />;
   }
@@ -24,7 +28,7 @@ function App() {
       <Header />
       <Main className="main">
         <BarDescription />
-        <section className="section__center">
+        <section>
           <Liquors />
           {!loading && <Pagination />}
         </section>
@@ -35,9 +39,6 @@ function App() {
 const Main = styled.main`
   .description {
     color: white;
-  }
-  .section__center {
-    margin: 3rem auto;
   }
 `;
 export default App;

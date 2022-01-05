@@ -35,29 +35,25 @@ function Pagination() {
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 3rem;
-  padding: 10px;
+  padding: 10px 0 60px 0;
   gap: 30px;
   .pagination__list {
     list-style: none;
   }
   .pagination__btn {
-    border: 1px solid #b7966d;
+    border: 1px solid #fff;
     font-size: 24px;
     height: 50px;
     width: 50px;
-    background-color: #fff;
+    background-color: transparent;
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.5s;
-    &:hover {
-      color: #fff;
-      background-color: #cba779;
-    }
-  }
-  .active {
-    background-color: #cba779;
     color: #fff;
+    &:hover {
+      color: #000;
+      background-color: #fff;
+    }
   }
 `;
 

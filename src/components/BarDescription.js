@@ -77,8 +77,7 @@ const Wrapper = styled.section`
       border-bottom: 1px dotted #fff;
       width: 100%;
       height: 5px;
-
-      margin-top: 5px;
+      margin-bottom: 10px;
     }
   }
   .heading__3 {
