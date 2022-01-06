@@ -18,7 +18,7 @@ function CartPage() {
 
   return (
     <Wrapper>
-      <h1>My Cart</h1>
+      <h2>My Cart</h2>
       <div className="cart__item">
         {cart.map((cartItem) => (
           <MyCartItem key={cartItem.id} {...cartItem} />
@@ -53,10 +53,11 @@ const Wrapper = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 25px;
-  h1 {
-    text-align: center;
-    margin-top: 4rem;
-    font-size: 2rem;
+  background-image: url("https://images.getbento.com/accounts/b407703cbc06b7de17a1aab05567665c/media/images/90545bg_finished.png");
+  h2 {
+    margin-top: 3rem;
+    color: #fff;
+    font-size: 4rem;
   }
   button {
     width: 6rem;
@@ -66,6 +67,7 @@ const Wrapper = styled.section`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 40px;
+    margin-top: 2rem;
   }
   .btn-container {
     display: flex;

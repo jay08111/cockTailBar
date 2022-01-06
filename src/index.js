@@ -13,6 +13,7 @@ import {
   CartPage,
   ErrorPage,
   SingleLiquorPage,
+  MenuPage,
 } from "./page/index";
 import { Footer, NavBar } from "./components/index";
 const rootElement = document.getElementById("root");
@@ -26,6 +27,7 @@ render(
           <Route path="/singlePage/:id" element={<SingleLiquorPage />} />
           <Route path="/cartPage" element={<CartPage />} />
           <Route path="/review" element={<ReviewPage />} />
+          <Route path="/menu" element={<MenuPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>

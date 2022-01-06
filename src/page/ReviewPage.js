@@ -58,10 +58,11 @@ const Wrapper = styled.section`
   align-items: center;
   gap: 30px;
   min-height: 90vh;
-  background-color: #fff;
+  background-image: url("https://images.getbento.com/accounts/b407703cbc06b7de17a1aab05567665c/media/images/90545bg_finished.png");
   h1 {
     font-size: 2rem;
     margin-top: 2rem;
+    color: #fff;
   }
   .review__inputField {
     display: flex;

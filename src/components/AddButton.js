@@ -42,6 +42,6 @@ const Button = styled.button`
   margin-top: auto;
   text-transform: capitalize;
   cursor: pointer;
-  font-family: "Dosis", sans-serif;
+  font-family: "Oswald", sans-serif;
 `;
 export default AddButton;

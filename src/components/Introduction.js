@@ -7,7 +7,7 @@ function CockTail() {
   useEffect(() => {
     Aos.init({ duration: 1800 });
   }, []);
-  const { loading, error } = useSelector((state) => state.liquor);
+  const { loading, error, toggleLang } = useSelector((state) => state.liquor);
   const dispatch = useDispatch();
 
   if (loading) {
@@ -24,21 +24,41 @@ function CockTail() {
         data-aos="fade-right"
       >
         <div>
-          <h2>Lucia CA</h2>
+          <h2>{toggleLang ? "루시아 역삼점" : "Lucia CA"}</h2>
           <p>
-            <strong>Lucia is open for Indoor Dining.</strong>
+            <strong>
+              {toggleLang
+                ? "루시아는 실내주점입니다 ."
+                : "Lucia is open for Indoor Dining."}
+            </strong>
           </p>
           <p>
-            <strong>Reservations are not accepted.</strong>
+            <strong>
+              {toggleLang
+                ? "예약은 받지 않고 있습니다."
+                : "Reservations are not accepted."}
+            </strong>
           </p>
           <p>
-            <strong>Seating is on a a first come, first served basis.</strong>
+            <strong>
+              {toggleLang
+                ? "먼저오신분께 먼저 자리를 드리는것을 원칙으로 하고있습니다."
+                : "Seating is on a a first come,first served basis."}
+            </strong>
           </p>
           <p>
-            <strong>Open Daily:</strong> 6pm - 1am , We can accommodate parties
-            of up to 8 people.
+            <strong>Open Daily:</strong> 6pm - 1am
           </p>
-          <p> Proof of vaccination is required.</p>
+          <p>
+            {toggleLang
+              ? " 8명까지 파티룸에 입장하실 수 있습니다."
+              : "We can accommodate parties of up to 8 people."}
+          </p>
+          <p>
+            {toggleLang
+              ? "백신패스는 필수입니다."
+              : "Proof of vaccination is required."}
+          </p>
         </div>
         <img
           src="https://www.thecocktaildb.com/images/media/drink/xxsxqy1472668106.jpg"
@@ -51,36 +71,42 @@ function CockTail() {
       >
         <div>
           <img
-            src="https://www.thecocktaildb.com/images/media/drink/xwtptq1441247579.jpg"
-            alt="alcohol"
+            className="coffee__image"
+            src="https://www.thecocktaildb.com/images/media/drink/kvvd4z1485621283.jpg"
+            alt="coffee"
           />
         </div>
         <div>
-          <h2>Lucia CA</h2>
+          <h2>{toggleLang ? "루시아 신림점" : "Lucia LA"}</h2>
           <p>
-            Lucia CA AND DC/AM COFFEE BAR OPERATE ON A FIRST COME, FIRST SERVED
-            BASIS
+            {toggleLang
+              ? "루시아 커피바는 먼저오시는분께 먼저 자리가 배정됩니다!"
+              : "Lucia CA AND COFFEE BAR OPERATE ON A FIRST COME, FIRST SERVED BASIS"}
           </p>
           <p>
-            <strong> DC/AM Coffee Bar:</strong> Breakfast & Lunch - 7am - 2pm
-            daily Open Thursday - Sunday at 5pm.
+            <strong>Coffee Bar:</strong>
+            {toggleLang
+              ? "  아침 & 점심 - 7am - 2pm 목-금 , 매일오픈 , 일요일은 5시 오픈"
+              : "Breakfast & Lunch - 7am - 2pm daily Open Thursday - Sunday at 5pm."}
           </p>
           <p>
-            <strong>Death & Co:</strong> 4pm - 12am, 1am on Thursday, Friday &
-            Saturday
+            <strong>Kitchen:</strong>{" "}
+            {toggleLang
+              ? " 4pm - 10pm , 목,금,토는 11pm"
+              : "4pm - 10pm, 11pm on Thursday, Friday & Saturday"}
           </p>
           <p>
-            <strong>Kitchen:</strong> 4pm - 10pm, 11pm on Thursday, Friday &
-            Saturday
+            <strong>
+              {toggleLang ? "15% 할인 이벤트중!" : "15% DISCOUNT EVENT"}
+            </strong>
+            {toggleLang
+              ? " 2022년도 3월까지 커피 15% 할인 이벤트중입니다!"
+              : "ALL OF COFFIES ARE DISCOUTED FOR 15% 'TILL 03/2022! HURRY UP!"}
           </p>
           <p>
-            <strong> Suite 6a: </strong>
-            "Holiday Suite" is back in our mezzanine bar Suite 6a for the fall
-            and winter 2021/2022 season.
-          </p>
-          <p>
-            For parties of 7-10 please inquire at qusghdus12345@gmail.com - all
-            parties of more than 10 guests are considered an Event
+            {toggleLang
+              ? "7-10명인원 파티룸을 예약하실분들은 qusghdus12345@gmail.com으로 연락주세요 - 10명부터는 이벤트룸을 예약하셔야 합니다."
+              : "For parties of 7-10 please inquire at qusghdus12345@gmail.com - all parties of more than 10 guests are considered an Event"}
           </p>
         </div>
       </div>
@@ -89,17 +115,30 @@ function CockTail() {
         data-aos="fade-right"
       >
         <div>
-          <h2>Lucia CA</h2>
-          <p>Lucia is open for Indoor Dining.</p>
+          <h2>{toggleLang ? "루시아 도곡점" : "Lucia NYC"}</h2>
           <p>
-            Reservations are not accepted. Seating is on a a first come, first
-            served basis.
+            {toggleLang
+              ? "루시아는 실내주점입니다."
+              : "Lucia is open for Indoor Dining."}
           </p>
           <p>
-            <strong>Open Daily:</strong> 6pm - 1am , We can accommodate parties
-            of up to 8 people.
+            {toggleLang
+              ? "일반석은 예약을 받지않고있습니다 . 먼저오신분께 자리를 먼저 배정해 드려요."
+              : " Reservations are not accepted. Seating is on a a first come, first served basis."}
           </p>
-          <p>Proof of vaccination is required.</p>
+          <p>
+            <strong>Open Daily:</strong> 6pm - 1am
+          </p>
+          <p>
+            {toggleLang
+              ? "8명이상부터는 파티룸을 예약하셔야 합니다."
+              : "We can accommodate parties of up to 8 people."}
+          </p>
+          <p>
+            {toggleLang
+              ? "백신패스는 필수입니다."
+              : "Proof of vaccination is required."}
+          </p>
         </div>
         <img
           src="https://www.thecocktaildb.com/images/media/drink/vyxwut1468875960.jpg"
@@ -115,15 +154,30 @@ function CockTail() {
           alt="alcohol"
         />
         <div>
-          <h2>Lucia CA</h2>
-          <p>Lucia is open for Indoor Dining.</p>
-          <p>Reservations are not accepted.</p>
-          <p> Seating is on a a first come, first served basis.</p>
+          <h2>{toggleLang ? "루시아 선릉점" : "Lucia Chicago,IL"}</h2>
           <p>
-            <strong>Open Daily:</strong> 6pm - 1am , We can accommodate parties
-            of up to 8 people.
+            {toggleLang
+              ? "루시아는 실내주점입니다."
+              : "Lucia is open for Indoor Dining."}
           </p>
-          <p> Proof of vaccination is required.</p>
+          <p>
+            {toggleLang
+              ? "일반석은 예약을 받지않고있습니다 . 먼저오신분께 자리를 먼저 배정해 드려요."
+              : " Reservations are not accepted."}
+          </p>
+          <p>
+            <strong>Open Daily:</strong> 6pm - 1am
+          </p>
+          <p>
+            {toggleLang
+              ? "8명이상부터는 파티룸을 예약하셔야 합니다."
+              : "We can accommodate parties of up to 8 people."}
+          </p>
+          <p>
+            {toggleLang
+              ? "백신패스는 필수입니다."
+              : "Proof of vaccination is required."}
+          </p>
         </div>
       </div>
     </Wrapper>
@@ -169,6 +223,12 @@ const Wrapper = styled.section`
       object-fit: cover;
       display: block;
     }
+    .coffee__image {
+      margin-top: 20%;
+
+      width: 85%;
+      height: 80%;
+    }
   }
   .max-min__60 {
     min-width: 60%;
@@ -179,6 +239,11 @@ const Wrapper = styled.section`
   }
   .margin-right-move {
     margin: 0 30%;
+  }
+  @media screen and (max-width: 900px) {
+    .grid__container {
+      grid-template-columns: 1fr;
+    }
   }
 `;
 

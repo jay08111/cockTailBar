@@ -12,7 +12,6 @@ import NoItems from "./NoItems";
 import MyCartItem from "./MyCartItem";
 import AddButton from "./AddButton";
 import BarDescription from "./BarDescription";
-import Menu from "./Menu";
 export {
   Introduction,
   Footer,
@@ -28,5 +27,4 @@ export {
   MyCartItem,
   AddButton,
   BarDescription,
-  Menu,
 };

@@ -24,10 +24,15 @@ function Navbar() {
       <nav className={show ? "nav__container works" : "nav__container"}>
         <div className="nav__inner">
           <div className="nav__link">
-            <StyledLink to="/">Home</StyledLink>
-            <StyledLink to="/cartPage">Cart</StyledLink>
-            <StyledLink to="/">About us</StyledLink>
-            <StyledLink to="/review">Review</StyledLink>
+            <StyledLink to="/">{toggleLang ? "홈 화면" : "Home"}</StyledLink>
+            <StyledLink to="/menu">{toggleLang ? "메뉴" : "Menu"}</StyledLink>
+            <StyledLink to="/cartPage">
+              {toggleLang ? "카트" : "Cart"}
+            </StyledLink>
+            <StyledLink to="/">{toggleLang ? "루시아" : "About us"}</StyledLink>
+            <StyledLink to="/review">
+              {toggleLang ? "리뷰" : "Review"}
+            </StyledLink>
             <div className="nav__toggle">
               <Switch>
                 <input

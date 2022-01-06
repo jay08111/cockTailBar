@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { DisPlayMenu, Loading, FetchError, Pagination } from "./index";
+import {
+  DisPlayMenu,
+  Loading,
+  FetchError,
+  Pagination,
+} from "../components/index";
 import {
   setSelected,
   filterList,
@@ -30,6 +35,7 @@ function Menu() {
   }, [dispatch]);
   return (
     <Wrapper>
+      <h2 className="heading__menu">Menu</h2>
       <Select
         onChange={(e) => {
           dispatch(setSelected(e.target.value));
@@ -57,11 +63,15 @@ function Menu() {
   );
 }
 const Wrapper = styled.article`
+  background-image: url("https://images.getbento.com/accounts/b407703cbc06b7de17a1aab05567665c/media/images/90545bg_finished.png");
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  .liquor__select {
+  .heading__menu {
+    margin-top: 3rem;
+    color: #fff;
+    font-size: 4rem;
   }
   .flex {
     display: flex;
@@ -72,6 +82,7 @@ const Wrapper = styled.article`
   }
 `;
 const Select = styled.select`
+  margin-top: 5rem;
   appearance: none;
   min-width: 300px;
   height: 35px;

@@ -22,7 +22,7 @@ function DisPlayMenu({ name, image, description, id, price }) {
           </div>
           <p className="menu__price">price : ${price.item1}</p>
           <div className="menu__description__button">
-            <AddButton />
+            <AddButton id={id} />
             <StyledLink to={`/singlePage/${id}`}>See More</StyledLink>
           </div>
         </div>
@@ -60,18 +60,6 @@ const Wrapper = styled.section`
         justify-content: center;
         gap: 10px;
         position: relative;
-
-        &:after {
-          content: "*Proof of vaccination is required.";
-          color: #fff;
-          display: block;
-          font-size: 0.8rem;
-          font-weight: 300;
-          position: absolute;
-          bottom: -40px;
-          right: 50%;
-          transform: translate(50%, 0);
-        }
         button {
           border: 1px solid #fff;
           background-color: transparent;
