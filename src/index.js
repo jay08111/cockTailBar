@@ -19,8 +19,8 @@ const rootElement = document.getElementById("root");
 render(
   <React.StrictMode>
     <Provider store={store}>
-      <NavBar />
       <BrowserRouter>
+        <NavBar />
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/singlePage/:id" element={<SingleLiquorPage />} />
@@ -28,13 +28,9 @@ render(
           <Route path="/review" element={<ReviewPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
-        <ToastContainer
-          autoClose={2000}
-          transition={Zoom}
-          position="top-left"
-        />
-        <Footer />
       </BrowserRouter>
+      <Footer />
+      <ToastContainer autoClose={2000} transition={Zoom} position="top-left" />
     </Provider>
   </React.StrictMode>,
   rootElement
