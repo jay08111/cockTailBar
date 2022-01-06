@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AddButton } from "./index";
 import { useDispatch } from "react-redux";
 import { fetchSingleData } from "../redux/liquorSlice";
 function DisPlayMenu({ name, image, description, id, price }) {
   const dispatch = useDispatch();
-  const [readMore, setReadMore] = useState(false);
   const { cart } = useSelector((state) => state.liquor);
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -19,15 +18,13 @@ function DisPlayMenu({ name, image, description, id, price }) {
         <div className="menu__description__inner">
           <h2>{name}</h2>
           <div className="menu__description__content">
-            <p>{readMore ? description : `${description.slice(0, 40)}...`}</p>
-            <p>price : ${price.item1}</p>
+            <p>{description}</p>
           </div>
+          <p className="menu__price">price : ${price.item1}</p>
           <div className="menu__description__button">
-            <button className="des__btn" onClick={() => setReadMore(!readMore)}>
-              {readMore ? "Show Less" : "Read More"}
-            </button>
+            <AddButton />
+            <StyledLink to={`/singlePage/${id}`}>See More</StyledLink>
           </div>
-          <p className="vaccinated">*Proof of vaccination is required.</p>
         </div>
       </div>
       <div className="menu__image">
@@ -48,22 +45,37 @@ const Wrapper = styled.section`
   gap: 20px;
   .menu__description {
     flex: 1.5;
-    position: relative;
     .menu__description__inner {
       border-right: 2px solid #fff;
       height: 100%;
+      .menu__price {
+        margin-top: 10px;
+      }
       .menu__description__content {
         max-width: 60%;
         text-align: left;
       }
       .menu__description__button {
         display: flex;
-        flex-direction: column;
+        justify-content: center;
         gap: 10px;
+        position: relative;
+
+        &:after {
+          content: "*Proof of vaccination is required.";
+          color: #fff;
+          display: block;
+          font-size: 0.8rem;
+          font-weight: 300;
+          position: absolute;
+          bottom: -40px;
+          right: 50%;
+          transform: translate(50%, 0);
+        }
         button {
           border: 1px solid #fff;
           background-color: transparent;
-          padding: 10px;
+          padding: 3px;
           color: #fff;
           cursor: pointer;
           width: 100px;
@@ -99,7 +111,7 @@ const Wrapper = styled.section`
     }
     p {
       color: #fff;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
     }
   }
   .menu__image {
@@ -107,6 +119,32 @@ const Wrapper = styled.section`
     img {
       width: 100%;
     }
+  }
+`;
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #fff;
+  border: 1px solid #fff;
+  background-color: transparent;
+  padding: 3px;
+  color: #fff;
+  cursor: pointer;
+  width: 100px;
+  margin-top: 10px;
+  transition: all 0.2s linear;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    background-color: #fff;
+    color: #000;
+    border-radius: 4px;
+  }
+  &:focus,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
   }
 `;
 

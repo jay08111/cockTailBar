@@ -1,4 +1,4 @@
-import Liquors from "./Liquors";
+import Introduction from "./Introduction";
 import Footer from "./Footer";
 import DisPlayMenu from "./DisPlayMenu";
 import NavBar from "./Navbar";
@@ -12,8 +12,9 @@ import NoItems from "./NoItems";
 import MyCartItem from "./MyCartItem";
 import AddButton from "./AddButton";
 import BarDescription from "./BarDescription";
+import Menu from "./Menu";
 export {
-  Liquors,
+  Introduction,
   Footer,
   DisPlayMenu,
   NavBar,
@@ -27,4 +28,5 @@ export {
   MyCartItem,
   AddButton,
   BarDescription,
+  Menu,
 };

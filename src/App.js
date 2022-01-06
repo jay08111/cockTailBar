@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import {
-  Liquors,
   Header,
-  Pagination,
+  Introduction,
   Loading,
   BarDescription,
 } from "./components/index";
@@ -11,15 +10,12 @@ import { fetchData, fetchSingleData } from "./redux/liquorSlice";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 function App() {
-  const { id } = useParams();
   const { loading } = useSelector((state) => state.liquor);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
-  useEffect(() => {
-    dispatch(fetchSingleData(id));
-  }, [dispatch, id]);
+
   if (loading) {
     return <Loading />;
   }
@@ -28,10 +24,9 @@ function App() {
       <Header />
       <Main className="main">
         <BarDescription />
-        <section>
-          <Liquors />
-          {!loading && <Pagination />}
-        </section>
+        <div>
+          <Introduction />
+        </div>
       </Main>
     </>
   );

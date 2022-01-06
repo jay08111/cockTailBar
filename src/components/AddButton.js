@@ -25,7 +25,7 @@ function AddButton({ id }) {
       ref={buttonRef}
       onClick={() => {
         dispatch(addItemToCart(id));
-        toast.success("예약목록에 추가 완료!");
+        toast.success("Add to Cart!");
       }}
     >
       {disable ? "in cart" : "add to cart"}
@@ -38,7 +38,7 @@ const Button = styled.button`
   text-align: center;
   padding: 0.9rem 0;
   background-color: #ffec99;
-  font-size: 1.8rem;
+  font-size: 1.1rem;
   margin-top: auto;
   text-transform: capitalize;
   cursor: pointer;
