@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsX } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
-import { setShow } from "../redux/liquorSlice";
+import { setShow, setToggledLang } from "../redux/liquorSlice";
 import Aos from "aos";
 function Navbar() {
-  const { show } = useSelector((state) => state.liquor);
+  const { show, toggleLang } = useSelector((state) => state.liquor);
   const dispatch = useDispatch();
   useEffect(() => {
     Aos.init({ duration: 1500 });
@@ -28,6 +28,16 @@ function Navbar() {
             <StyledLink to="/cartPage">Cart</StyledLink>
             <StyledLink to="/">About us</StyledLink>
             <StyledLink to="/review">Review</StyledLink>
+            <div className="nav__toggle">
+              <Switch>
+                <input
+                  type="checkbox"
+                  onChange={(e) => dispatch(setToggledLang(e.target.checked))}
+                />
+                <span className="slider"></span>
+              </Switch>
+              <p>{toggleLang ? "🇰🇷" : "🇺🇸"}</p>
+            </div>
           </div>
         </div>
       </nav>
@@ -44,6 +54,7 @@ const Wrapper = styled.div`
     bottom: 700px;
     z-index: 20;
     border: none;
+    transition: all 0.2s ease-in-out 0s;
     .nav__logo {
       font-size: 2rem;
       color: #fff;
@@ -77,6 +88,16 @@ const Wrapper = styled.div`
         display: flex;
         flex-direction: column;
         gap: 60px;
+        .nav__toggle {
+          color: #fff;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 20px;
+          p {
+            font-size: 2.2rem;
+          }
+        }
       }
     }
   }
@@ -84,6 +105,46 @@ const Wrapper = styled.div`
     transform: translateX(0%);
   }
 `;
+const Switch = styled.label`
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .slider {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #ccc;
+    transition: all 0.4s;
+    border-radius: 34px;
+    &:before {
+      content: "";
+      position: absolute;
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: #fff;
+      transition: all 0.4s;
+      border-radius: 50%;
+    }
+  }
+  input:checked + .slider {
+    background-color: #b32614;
+  }
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+`;
+
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: #fff;
