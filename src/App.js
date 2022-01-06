@@ -4,6 +4,7 @@ import {
   Introduction,
   Loading,
   BarDescription,
+  NavBar,
 } from "./components/index";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData, fetchSingleData } from "./redux/liquorSlice";

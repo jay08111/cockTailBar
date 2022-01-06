@@ -19,6 +19,7 @@ const rootElement = document.getElementById("root");
 render(
   <React.StrictMode>
     <Provider store={store}>
+      <NavBar />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />

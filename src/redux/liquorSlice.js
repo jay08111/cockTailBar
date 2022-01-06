@@ -35,6 +35,7 @@ const initialState = {
   shot: [],
   coffeeAndTea: [],
   punchAndParty: [],
+  show: true,
 };
 
 export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
@@ -131,6 +132,9 @@ const liquorSlice = createSlice({
     },
     setFilter: (state, action) => {
       state.filter = action.payload;
+    },
+    setShow: (state, action) => {
+      state.show = action.payload;
     },
     addReviews: (state) => {
       if (state.reviewNameValue && state.reviewCommentValue) {
@@ -249,6 +253,7 @@ export const {
   setReviewValue,
   setSelected,
   setFilter,
+  setShow,
   addReviews,
   setCommentValue,
   deleteReviews,

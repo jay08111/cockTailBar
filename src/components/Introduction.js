@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { DisPlayMenu, Loading, FetchError, Menu } from "./index";
 function CockTail() {
   useEffect(() => {
-    Aos.init({ duration: 1000 });
+    Aos.init({ duration: 1800 });
   }, []);
   const { loading, error } = useSelector((state) => state.liquor);
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ function CockTail() {
     <Wrapper>
       <div
         className="grid__container max-min__60 margin-left-move"
-        data-aos="fade-left"
+        data-aos="fade-right"
       >
         <div>
           <h2>Lucia CA</h2>
@@ -47,7 +47,7 @@ function CockTail() {
       </div>
       <div
         className="grid__container max-min__60 margin-right-move"
-        data-aos="fade-up"
+        data-aos="fade-left"
       >
         <div>
           <img
@@ -108,7 +108,7 @@ function CockTail() {
       </div>
       <div
         className="grid__container max-min__60 margin-right-move last"
-        data-aos="fade-up"
+        data-aos="fade-left"
       >
         <img
           src="https://www.thecocktaildb.com/images/media/drink/rysb3r1513706985.jpg"
