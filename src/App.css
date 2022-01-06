@@ -8,9 +8,10 @@ input,
 textarea {
   font-family: "Oswald", sans-serif;
 }
-
-.nav__bar {
-  font-family: "Dancing Script", cursive;
+p {
+  font-family: "EB Garamond", serif;
+  color: #b1b1b1;
+  line-height: 1.5;
 }
 .header__img {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), #000),

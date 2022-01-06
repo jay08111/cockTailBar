@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import Aos from "aos";
 function BarDescription() {
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
   return (
     <Wrapper>
-      <div>
+      <div data-aos="fade-up">
         <h2>Hours of Operations</h2>
         <div className="heading__3">
           <h3>Lucia Nappa Valley is Open for Indoor Dining.</h3>
