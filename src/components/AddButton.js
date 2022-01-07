@@ -6,7 +6,7 @@ import styled from "styled-components";
 function AddButton({ id }) {
   const dispatch = useDispatch();
   const [disable, setDisable] = useState(false);
-  const { cart } = useSelector((state) => state.liquor);
+  const { cart, toggleLang } = useSelector((state) => state.liquor);
   const buttonRef = useRef();
   useEffect(() => {
     const forbiddenDuplicates = (id) => {
@@ -28,7 +28,13 @@ function AddButton({ id }) {
         toast.success("Add to Cart!");
       }}
     >
-      {disable ? "in cart" : "add to cart"}
+      {toggleLang
+        ? disable
+          ? "카트에 담김"
+          : "카트에 담기"
+        : disable
+        ? "In Cart"
+        : "Add to Cart"}
     </Button>
   );
 }

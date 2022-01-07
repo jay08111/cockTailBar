@@ -1,21 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Header,
   Introduction,
   Loading,
   BarDescription,
-  NavBar,
 } from "./components/index";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchData, fetchSingleData } from "./redux/liquorSlice";
-import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 function App() {
   const { loading } = useSelector((state) => state.liquor);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchData());
-  }, [dispatch]);
 
   if (loading) {
     return <Loading />;

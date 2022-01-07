@@ -5,25 +5,38 @@ import { useSelector } from "react-redux";
 import { AddButton } from "./index";
 import { useDispatch } from "react-redux";
 import { fetchSingleData } from "../redux/liquorSlice";
-function DisPlayMenu({ name, image, description, id, price }) {
+function DisPlayMenu({
+  name,
+  image,
+  description,
+  id,
+  price,
+  priceKr,
+  descriptionKR,
+}) {
   const dispatch = useDispatch();
-  const { cart } = useSelector((state) => state.liquor);
+  const { cart, toggleLang } = useSelector((state) => state.liquor);
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
-
+  console.log(price);
   return (
     <Wrapper>
       <div className="menu__description">
         <div className="menu__description__inner">
           <h2>{name}</h2>
           <div className="menu__description__content">
-            <p>{description}</p>
+            <p>{toggleLang ? descriptionKR : description}</p>
           </div>
-          <p className="menu__price">price : ${price.item1}</p>
+          <p className="menu__price">
+            {toggleLang ? "가격" : "price"} :
+            {toggleLang ? priceKr + "원" : "$" + price}
+          </p>
           <div className="menu__description__button">
             <AddButton id={id} />
-            <StyledLink to={`/singlePage/${id}`}>See More</StyledLink>
+            <StyledLink to={`/singlePage/${id}`}>
+              {toggleLang ? "더 보기" : "See More"}
+            </StyledLink>
           </div>
         </div>
       </div>
@@ -50,6 +63,7 @@ const Wrapper = styled.section`
       height: 100%;
       .menu__price {
         margin-top: 10px;
+        font-color: #fff;
       }
       .menu__description__content {
         max-width: 60%;

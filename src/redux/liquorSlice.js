@@ -3,8 +3,9 @@ import axios from "axios";
 import { nanoid } from "nanoid";
 import { reviewData } from "../data";
 import { toast } from "react-toastify";
-const url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
+const url = "https://jay08111.github.io/data/liquor.json";
 const urliD = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
+
 export const getLocalStorage = () => {
   let cart = localStorage.getItem("cart");
   if (cart) {
@@ -41,7 +42,9 @@ const initialState = {
 
 export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
   const res = await axios.get(url);
+  console.log(res.data);
   const { drinks } = res.data;
+
   if (drinks) {
     const newLiquors = drinks.slice(0, 24).map((item) => {
       const {
@@ -52,7 +55,9 @@ export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
         strGlass,
         strInstructions,
         strCategory,
-        price = [100, 200],
+        price,
+        priceKr,
+        strInstructionsKR,
       } = item;
       return {
         id: idDrink,
@@ -63,6 +68,8 @@ export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
         description: strInstructions,
         category: strCategory,
         price,
+        priceKr,
+        descriptionKR: strInstructionsKR,
       };
     });
     return newLiquors;

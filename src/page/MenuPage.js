@@ -12,6 +12,7 @@ import {
   filterList,
   setFilter,
   fetchSingleData,
+  fetchData,
 } from "../redux/liquorSlice";
 function Menu() {
   const {
@@ -32,6 +33,9 @@ function Menu() {
   useEffect(() => {
     dispatch(setFilter(false));
     dispatch(setSelected("all"));
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchData());
   }, [dispatch]);
   return (
     <Wrapper>

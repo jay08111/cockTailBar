@@ -109,6 +109,11 @@ const Wrapper = styled.div`
   .works {
     transform: translateX(0%);
   }
+  @media screen and (max-width: 768px) {
+    .nav__container {
+      width: 100vw;
+    }
+  }
 `;
 const Switch = styled.label`
   position: relative;
