@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AddButton } from "./index";
-import { useDispatch } from "react-redux";
-import { fetchSingleData } from "../redux/liquorSlice";
 function DisPlayMenu({
   name,
   image,
@@ -14,12 +12,10 @@ function DisPlayMenu({
   priceKr,
   descriptionKR,
 }) {
-  const dispatch = useDispatch();
   const { cart, toggleLang } = useSelector((state) => state.liquor);
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
-  console.log(price);
   return (
     <Wrapper>
       <div className="menu__description">
@@ -66,18 +62,19 @@ const Wrapper = styled.section`
         font-color: #fff;
       }
       .menu__description__content {
-        max-width: 60%;
-        text-align: left;
+        max-width: 95vw;
+        margin: 0 1rem 0 0;
       }
       .menu__description__button {
         display: flex;
         justify-content: center;
-        gap: 10px;
+        margin-top: 2rem;
+        gap: 2.2rem;
         position: relative;
         button {
           border: 1px solid #fff;
           background-color: transparent;
-          padding: 3px;
+          padding: 8px;
           color: #fff;
           cursor: pointer;
           width: 100px;
@@ -103,6 +100,7 @@ const Wrapper = styled.section`
       color: #fff;
       font-size: 2rem;
       text-align: center;
+      margin-bottom: 1.2rem;
       &:after {
         content: "";
         display: block;
@@ -113,7 +111,7 @@ const Wrapper = styled.section`
     }
     p {
       color: #fff;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
     }
   }
   .menu__image {

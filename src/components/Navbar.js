@@ -29,7 +29,9 @@ function Navbar() {
             <StyledLink to="/cartPage">
               {toggleLang ? "카트" : "Cart"}
             </StyledLink>
-            <StyledLink to="/">{toggleLang ? "루시아" : "About us"}</StyledLink>
+            <StyledLink to="/aboutUs">
+              {toggleLang ? "루시아" : "About us"}
+            </StyledLink>
             <StyledLink to="/review">
               {toggleLang ? "리뷰" : "Review"}
             </StyledLink>
@@ -83,7 +85,7 @@ const Wrapper = styled.div`
     background: rgba(0, 0, 0, 0.9);
     padding: 1.5rem;
     transform: translateX(100%);
-    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1) 0s;
+    transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1) 0s;
     display: flex;
     justify-content: center;
     align-items: center;

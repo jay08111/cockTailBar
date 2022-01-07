@@ -7,7 +7,6 @@ function BarDescription() {
     Aos.init({ duration: 1000 });
   }, []);
   const { toggleLang } = useSelector((state) => state.liquor);
-  const tock = <span>TOCK!</span>;
   return (
     <Wrapper>
       <div data-aos="fade-up">

@@ -48,7 +48,7 @@ function CartPage() {
   );
 }
 const Wrapper = styled.section`
-  min-height: 90vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;

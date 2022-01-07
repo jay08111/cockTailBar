@@ -10,30 +10,42 @@ import { ReviewComment, Nocomment } from "../components/index";
 
 function Review() {
   const dispatch = useDispatch();
-  const { reviewList, reviewNameValue, reviewCommentValue } = useSelector(
-    (state) => state.liquor
-  );
+  const {
+    reviewList,
+    reviewNameValue,
+    reviewCommentValue,
+    toggleLang,
+    reviewListKR,
+  } = useSelector((state) => state.liquor);
   if (reviewList.length === 0) {
     return <Nocomment />;
   }
   return (
     <>
       <Wrapper>
-        <h1>Reviews</h1>
+        <h2>Customers Review</h2>
+        <h3>what our customers think</h3>
         <form onSubmit={(e) => e.preventDefault()}>
-          {reviewList.map((reviews) => {
-            return <ReviewComment key={reviews.id} {...reviews} />;
-          })}
-          <div className="review__inputField">
+          <div className="review__grid">
+            {toggleLang
+              ? reviewListKR.map((reviews) => (
+                  <ReviewComment key={reviews.id} {...reviews} />
+                ))
+              : reviewList.map((reviews) => (
+                  <ReviewComment key={reviews.id} {...reviews} />
+                ))}
+          </div>
+
+          {/* <div className="review__inputField">
             <input
               type="text"
-              placeholder="name"
+              placeholder={toggleLang ? "닉네임" : "name"}
               value={reviewNameValue}
               onChange={(e) => dispatch(setReviewValue(e.target.value))}
             />
             <textarea
               type="text"
-              placeholder="comment"
+              placeholder={toggleLang ? "댓글" : "comment"}
               value={reviewCommentValue}
               onChange={(e) => dispatch(setCommentValue(e.target.value))}
             />
@@ -45,8 +57,8 @@ function Review() {
               dispatch(addReviews());
             }}
           >
-            comment
-          </button>
+            {toggleLang ? "등록" : "comment"}
+          </button> */}
         </form>
       </Wrapper>
     </>
@@ -57,12 +69,25 @@ const Wrapper = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 30px;
-  min-height: 90vh;
+  min-height: 100vh;
   background-image: url("https://images.getbento.com/accounts/b407703cbc06b7de17a1aab05567665c/media/images/90545bg_finished.png");
-  h1 {
-    font-size: 2rem;
-    margin-top: 2rem;
+  h2 {
+    font-size: 4rem;
+    margin-top: 3rem;
     color: #fff;
+  }
+  h3 {
+    font-size: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1.2rem;
+    color: #b1b1b1;
+    font-weight: 300;
+  }
+  .review__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 90vw;
   }
   .review__inputField {
     display: flex;

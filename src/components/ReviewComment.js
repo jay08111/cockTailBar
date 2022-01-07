@@ -4,7 +4,7 @@ import { AiOutlineHeart, AiTwotoneHeart } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { deleteReviews } from "../redux/liquorSlice";
 import styled from "styled-components";
-function ReviewComment({ id, name, review, like }) {
+function ReviewComment({ id, name, review, like, image }) {
   const dispatch = useDispatch();
   const [clickLike, setClickLike] = useState(false);
   const [likeNumber, setLikeNumber] = useState(like);
@@ -19,8 +19,13 @@ function ReviewComment({ id, name, review, like }) {
   };
   return (
     <Wrapper>
-      <p>{name}</p>
-      <p>{review}</p>
+      <div className="review__content">
+        <img src={image} alt={name} />
+        <div>
+          <p>{name}</p>
+          <p>{review}</p>
+        </div>
+      </div>
       <div className="review__btn__container">
         <button onClick={() => dispatch(deleteReviews(id))}>
           <BsTrash />
@@ -38,34 +43,9 @@ function ReviewComment({ id, name, review, like }) {
   );
 }
 const Wrapper = styled.div`
-  background-color: transparent;
-  padding: 10px;
-  width: 60vw;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background-color: #fff;
-  margin-bottom: 30px;
-  .review__btn__container {
-    display: flex;
-    justify-content: flex-end;
-    gap: 2px;
-    margin-bottom: 3px;
-    button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: none;
-      background: none;
-      width: 40px;
-      font-size: 1.4rem;
-      cursor: pointer;
-    }
-    span {
-      margin-left: 1px;
-    }
+  border: 1px solid #fff;
+  border-radius: 20px;
+   padding: 9rem 3rem;
     .red__Heart {
       color: red;
     }

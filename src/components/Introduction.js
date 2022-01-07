@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import Aos from "aos";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { DisPlayMenu, Loading, FetchError, Menu } from "./index";
+import { useSelector } from "react-redux";
+import { Loading, FetchError } from "./index";
 function CockTail() {
   useEffect(() => {
     Aos.init({ duration: 1800 });
   }, []);
   const { loading, error, toggleLang } = useSelector((state) => state.liquor);
-  const dispatch = useDispatch();
 
   if (loading) {
     return <Loading />;

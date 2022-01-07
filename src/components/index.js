@@ -12,6 +12,8 @@ import NoItems from "./NoItems";
 import MyCartItem from "./MyCartItem";
 import AddButton from "./AddButton";
 import BarDescription from "./BarDescription";
+import AboutUs from "./AboutUs";
+import Picture from "./Picture";
 export {
   Introduction,
   Footer,
@@ -27,4 +29,6 @@ export {
   MyCartItem,
   AddButton,
   BarDescription,
+  AboutUs,
+  Picture,
 };

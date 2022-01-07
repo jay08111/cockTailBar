@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { nanoid } from "nanoid";
-import { reviewData } from "../data";
+import { reviewData, reviewDataKR } from "../data";
 import { toast } from "react-toastify";
 const url = "https://jay08111.github.io/data/liquor.json";
 const urliD = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
@@ -23,6 +23,7 @@ const initialState = {
   postPerPage: 4,
   currentPosts: [],
   reviewList: reviewData,
+  reviewListKR: reviewDataKR,
   reviewNameValue: "",
   reviewCommentValue: "",
   clickLike: false,
@@ -42,9 +43,7 @@ const initialState = {
 
 export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
   const res = await axios.get(url);
-  console.log(res.data);
   const { drinks } = res.data;
-
   if (drinks) {
     const newLiquors = drinks.slice(0, 24).map((item) => {
       const {
@@ -156,6 +155,7 @@ const liquorSlice = createSlice({
           like: 0,
         };
         state.reviewList = [...state.reviewList, newValue];
+        state.reviewListKR = [...state.reviewListKR, newValue];
         state.reviewNameValue = "";
         state.reviewCommentValue = "";
       } else if (!state.reviewNameValue && !state.reviewCommentValue) {

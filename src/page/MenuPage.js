@@ -11,7 +11,6 @@ import {
   setSelected,
   filterList,
   setFilter,
-  fetchSingleData,
   fetchData,
 } from "../redux/liquorSlice";
 function Menu() {
@@ -37,6 +36,12 @@ function Menu() {
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
+  if (loading) {
+    return <Loading />;
+  }
+  if (error) {
+    return <FetchError />;
+  }
   return (
     <Wrapper>
       <h2 className="heading__menu">Menu</h2>

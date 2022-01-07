@@ -25,7 +25,9 @@ function AddButton({ id }) {
       ref={buttonRef}
       onClick={() => {
         dispatch(addItemToCart(id));
-        toast.success("Add to Cart!");
+        toggleLang
+          ? toast.success("카트에 담았습니다!")
+          : toast.success("Add to Cart!");
       }}
     >
       {toggleLang
