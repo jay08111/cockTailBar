@@ -8,9 +8,9 @@ function Loading() {
       <div>
         <Loader
           type="Audio"
-          color="#000"
-          height={300}
-          width={400}
+          color="#fff"
+          height={450}
+          width={500}
           timeout={10000}
         />
       </div>
@@ -18,13 +18,11 @@ function Loading() {
   );
 }
 const Wrapper = styled.section`
-  min-height: 80vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  div {
-    height: 50vh;
-  }
+  background-image: url("https://images.getbento.com/accounts/b407703cbc06b7de17a1aab05567665c/media/images/90545bg_finished.png");
 `;
 
 export default Loading;

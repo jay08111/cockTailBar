@@ -27,9 +27,9 @@ function ReviewComment({ id, name, review, like, image }) {
         </div>
       </div>
       <div className="review__btn__container">
-        <button onClick={() => dispatch(deleteReviews(id))}>
+        {/* <button onClick={() => dispatch(deleteReviews(id))}>
           <BsTrash />
-        </button>
+        </button> */}
         <button onClick={addLikeNumber}>
           {clickLike ? (
             <AiTwotoneHeart className="red__Heart" />

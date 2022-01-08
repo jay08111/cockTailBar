@@ -39,10 +39,12 @@ const initialState = {
   punchAndParty: [],
   show: false,
   toggleLang: false,
+  // totalAmount: [],
 };
 
 export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
   const res = await axios.get(url);
+
   const { drinks } = res.data;
   if (drinks) {
     const newLiquors = drinks.slice(0, 24).map((item) => {
@@ -174,7 +176,7 @@ const liquorSlice = createSlice({
       const findItemId = id.find((item) => item === payload);
       const findItemById = state.list.find((item) => item.id === findItemId);
       if (findItemId) {
-        const newCartItem = { ...findItemById };
+        const newCartItem = { ...findItemById, quantity: 1 };
         state.cart = [...state.cart, newCartItem];
       }
     },
@@ -221,6 +223,22 @@ const liquorSlice = createSlice({
         default:
           break;
       }
+    },
+    setTotalAmount: (state) => {
+      state.cart = state.cart.reduce(
+        (total, cartItem) => {
+          const { price, priceKr, quantity } = cartItem;
+          total.totalItems += quantity;
+          total.cartTotalEn = quantity * price;
+          total.cartTotalKr = quantity * priceKr;
+          return total;
+        },
+        {
+          totalItems: 0,
+          cartTotalEn: 0,
+          cartTotalKr: 0,
+        }
+      );
     },
   },
   extraReducers: (builder) => {
@@ -274,5 +292,6 @@ export const {
   deleteCartItemAll,
   filterList,
   handleAmount,
+  setTotalAmount,
 } = liquorSlice.actions;
 export default liquorSlice.reducer;

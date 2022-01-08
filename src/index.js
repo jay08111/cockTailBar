@@ -3,7 +3,6 @@ import App from "./App";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import "aos/dist/aos.css";
-
 import { ToastContainer, Zoom } from "react-toastify";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";

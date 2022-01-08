@@ -12,7 +12,10 @@ import {
   filterList,
   setFilter,
   fetchData,
+  setCurrentPage,
 } from "../redux/liquorSlice";
+import { useLocation } from "react-router-dom";
+
 function Menu() {
   const {
     list,
@@ -29,12 +32,15 @@ function Menu() {
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   const currentPosts = list.slice(indexOfFirstPost, indexOfLastPost);
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
   useEffect(() => {
     dispatch(setFilter(false));
     dispatch(setSelected("all"));
-  }, [dispatch]);
-  useEffect(() => {
     dispatch(fetchData());
+    dispatch(setCurrentPage(1));
   }, [dispatch]);
   if (loading) {
     return <Loading />;
@@ -43,7 +49,7 @@ function Menu() {
     return <FetchError />;
   }
   return (
-    <Wrapper>
+    <Wrapper className="about__us4">
       <h2 className="heading__menu">Menu</h2>
       <Select
         onChange={(e) => {
@@ -72,7 +78,6 @@ function Menu() {
   );
 }
 const Wrapper = styled.article`
-  background-image: url("https://images.getbento.com/accounts/b407703cbc06b7de17a1aab05567665c/media/images/90545bg_finished.png");
   display: flex;
   justify-content: center;
   flex-direction: column;

@@ -1,24 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { deleteCartItem } from "../redux/liquorSlice";
 import { BsTrash } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-function MyCartItem({ id, name, image, info }) {
+import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
+import { setTotalAmount } from "../redux/liquorSlice";
+function MyCartItem({
+  id,
+  name,
+  image,
+  category,
+  price,
+  priceKr,
+  quantity,
+  totalAmount,
+}) {
   const dispatch = useDispatch();
-  const [amount, setAmount] = useState(1);
-  const { cart } = useSelector((state) => state.liquor);
-  const increaseAmount = (e, id) => {
-    console.log(e.target.getAttribute("class"));
-    const findIncId = cart.find((item) => item.id === id);
-    if (findIncId) {
+  // useEffect(() => {
+  //   dispatch(setTotalAmount());
+  // }, []);
+  const [amount, setAmount] = useState(quantity);
+  const { cart, toggleLang } = useSelector((state) => state.liquor);
+  const increaseAmount = (id) => {
+    const findCartId = cart.find((item) => item.id === id);
+    if (findCartId) {
       setAmount(amount + 1);
     }
   };
   const decreaseAmount = (id) => {
-    const findIncId = cart.find((item) => item.id === id);
-    if (findIncId) {
+    const findCartId = cart.find((item) => item.id === id);
+    if (findCartId) {
       if (amount === 1) {
         dispatch(deleteCartItem(id));
       } else {
@@ -27,74 +39,116 @@ function MyCartItem({ id, name, image, info }) {
     }
   };
   return (
-    <Wrapper className="cart__wrapper">
+    <Wrapper>
       <div className="cart__container">
-        <Link to={`/singlePage/${id}`}>
-          <img src={image} alt={name} />
-        </Link>
+        <div className="cart__image">
+          <Link to={`/singlePage/${id}`}>
+            <img src={image} alt={name} />
+          </Link>
+        </div>
         <div className="cart__info">
-          <p>{name}</p>
-          <p>{info}</p>
           <div className="cart__amount">
-            <div
-              className="arrow arrow-down"
-              onClick={() => decreaseAmount(id)}
-            >
-              <AiOutlineArrowLeft />
-            </div>
-            <p> 잔 : {amount}</p>
+            <p>{name}</p>
+            <p>{category}</p>
             <div>
-              <AiOutlineArrowRight
-                className="arrow arrow-up"
-                onClick={(e) => increaseAmount(e, id)}
+              <AiOutlineMinusCircle
+                className="arrow"
+                onClick={() => decreaseAmount(id)}
+              />
+              <p> 잔 : {amount}</p>
+              <AiOutlinePlusCircle
+                className="arrow"
+                onClick={() => increaseAmount(id)}
               />
             </div>
           </div>
-          <button
-            onClick={() => dispatch(deleteCartItem(id))}
-            className="btn btn__delete"
-          >
-            <BsTrash />
-          </button>
+        </div>
+        <div className="cart__price__btn">
+          <div>
+            <p>{toggleLang ? priceKr + "원" : "$" + price}</p>
+          </div>
+          <div>
+            <button
+              onClick={() => dispatch(deleteCartItem(id))}
+              className="btn btn__delete"
+            >
+              <BsTrash />
+            </button>
+          </div>
         </div>
       </div>
     </Wrapper>
   );
 }
 const Wrapper = styled.div`
-  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
-    rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+ border: 25px solid transparent;
+    border-image: url("https://media-cdn.getbento.com/accounts/b407703cbc06b7de17a1aab05567665c/media/accounts/media/TBBjpsToRMaQp7vLG6Ty_border-image-white-decor.png")
+      100 round;
   margin: 0 auto;
   display: flex;
   align-items: center;
   border-radius: 10px;
   overflow: hidden;
-  width: auto;
+  width: 60vw;
+  
   .cart__container {
+    gap: 25px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 0.5fr 2fr 1.5fr;
+    width: 100%;
+    .cart__image { 
+      display: flex;
+      align-items:center;
+    img {
+   
+    width: 150px;
+    height: 150px;
+       }
+  }
     .cart__info {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap:7px;
+      gap:10px;
+      font-size: 1.5rem;
     }
     .cart__amount {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      flex-direction: column;
+      gap: 15px;
+      div {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
       .arrow {
         cursor: pointer;
         display: flex;
+        color:#fff;
+        background-color: transparent;
+        border-radius: 50%;
+        font-size:2rem;
+        &:hover {
+          transition: all 0.2s linear;
+          background-color: #fff;
+         border: 1px solid #fff;
+         color:#000;
+        }
       }
     }
-  }
-  img {
-    display: block;
-    width: 150px;
-    height: 150px;
+    .cart__price__btn {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      justify-content: center;
+      align-items: center;
+      p{
+        text-align: center;
+        font-size: 2rem;
+      }
+    }
   }
   .btn {
     font-size: 20px;
@@ -103,10 +157,14 @@ const Wrapper = styled.div`
   .btn__delete {
     display:flex;
     justify-content: center;
-    background-color: #ff5966;
-    &:hover {
-      background-color: #dc143c;
-    }
+    transition: all 0.2s linear;
+      background-color: transparent;
+      border: 1px solid #fff;
+      &:hover {
+        background-color: #b32614;
+        border: 1px solid #b32614;
+        border-radius: 10px;
+      }
   }
   @media screen and (max-width: 737px) {
     img {

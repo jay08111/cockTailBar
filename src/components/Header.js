@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ReactComponent as Logo } from "../pictures/barlogo222.svg";
+import { ReactComponent as Logo } from "../pictures/reallucialogo.svg";
 function Header() {
   return (
     <Wrapper>
@@ -16,6 +16,26 @@ const Wrapper = styled.header`
     position: relative;
     .logo {
       transform: scale(0.4);
+    }
+    @media screen and (max-width: 1030px) {
+      .logo {
+        transform: scale(0.5);
+      }
+    }
+    @media screen and (max-width: 614px) {
+      .logo {
+        transform: scale(0.6);
+      }
+    }
+    @media screen and (max-width: 419px) {
+      .logo {
+        transform: scale(0.75);
+      }
+    }
+    @media screen and (max-width: 287px) {
+      .logo {
+        transform: scale(0.8);
+      }
     }
   }
 `;

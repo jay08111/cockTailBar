@@ -58,3 +58,35 @@ export const reviewDataKR = [
     like: 0,
   },
 ];
+export const navLink = [
+  {
+    id: 1,
+    link: "/",
+    titleEN: "Home",
+    titleKR: "홈 화면",
+  },
+  {
+    id: 2,
+    link: "/menu",
+    titleEN: "Menu",
+    titleKR: "메뉴",
+  },
+  {
+    id: 3,
+    link: "/cartPage",
+    titleEN: "Cart",
+    titleKR: "카트",
+  },
+  {
+    id: 4,
+    link: "/aboutUs",
+    titleEN: "About us",
+    titleKR: "루시아",
+  },
+  {
+    id: 5,
+    link: "/review",
+    titleEN: "Review",
+    titleKR: "리뷰",
+  },
+];

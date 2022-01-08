@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { AddButton } from "./index";
+import { AddButton, Loading } from "./index";
 function DisPlayMenu({
   name,
   image,
@@ -12,7 +12,7 @@ function DisPlayMenu({
   priceKr,
   descriptionKR,
 }) {
-  const { cart, toggleLang } = useSelector((state) => state.liquor);
+  const { cart, toggleLang, loading } = useSelector((state) => state.liquor);
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);

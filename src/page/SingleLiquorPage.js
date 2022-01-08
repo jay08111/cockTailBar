@@ -24,25 +24,23 @@ function SingleCockTail() {
     return <FetchError />;
   }
   return (
-    <Wrapper className="section-center">
+    <Wrapper>
+      <h1>{name}</h1>
       <div className="container">
         <img src={image} alt={name} className="container__img" />
         <div className="container__right">
-          <h1>{name}</h1>
           <p>Information :{info}</p>
           <p>Category: {category}</p>
           <p>Glass: {glass}</p>
           <p>Instructions: {instructions}</p>
-          <p>
-            Ingredients:
+          <div>
+            <p>Ingredients:</p>
             {ingredients &&
               ingredients.map((item, index) => <p key={index}>{item}</p>)}
-          </p>
-
+          </div>
           <div className="btn__container">
-            <StyledLink to="/" className="btn link__btn">
-              Back to Home
-            </StyledLink>
+            <StyledLink to="/cartPage">back to cart</StyledLink>
+            <StyledLink to="/menu">back to menu</StyledLink>
           </div>
         </div>
       </div>
@@ -50,10 +48,23 @@ function SingleCockTail() {
   );
 }
 const Wrapper = styled.section`
-  min-height: 90vh;
+background-image: url("https://images.getbento.com/accounts/b407703cbc06b7de17a1aab05567665c/media/images/90545bg_finished.png");
+  min-height: 100vh;
   font-size: 32px;
+  color:#fff;
+     h1 {
+    text-align: center;
+    position: absolute;
+    right:50%;
+    top:10%;
+    transform:translateX(50%);
+  }
   .container {
-    padding: 8rem 6rem;
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    padding: 0 1rem;
+    margin-top:3rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     .container__img {
@@ -61,7 +72,7 @@ const Wrapper = styled.section`
       object-fit: cover;
       /* width: 37.5rem; */
       /* height: 660px; */
-      width: 90%;
+      width: 70%;
       height: auto;
       margin: 0 auto;
       border-radius: 10px;
@@ -70,33 +81,21 @@ const Wrapper = styled.section`
       margin-left: 8rem;
       display: flex;
       flex-direction: column;
+      justify-content:center;
       gap: 12.5px;
-    }
-    p {
+      p {
       line-height: 1.3;
-    }
-    .btn__container {
-      display: flex;
-      margin-top: 15px;
-      gap: 15px;
-    }
-    .addcart__btn {
-      padding: 0.5rem;
-      width: 30%;
-      background-color: #e57124;
-      &:hover {
-        background-color: #ffa153;
-      }
-    }
-    .link__btn {
-      padding: 0.5rem;
-      width: 50%;
-      margin: 0 auto;
-      background-color: #e57124;
       font-size: 1.4rem;
-      &:hover {
-        background-color: #ffa153;
-      }
+      margin-top:1.3rem;
+    }
+    }
+    
+    .btn__container {
+      display:flex;
+      width:40vw;
+      justify-content:space-around;
+      gap:10px;
+      text-transform:capitalize;
     }
   }
   @media screen and (max-width: 1220px) {
@@ -170,8 +169,11 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   color: #fff;
   text-align: center;
+  transition: all 0.2s ease-in-out 0s;
+  &:hover {
+    color: #b32614;
+  }
   &:focus,
-  &:hover,
   &:visited,
   &:link,
   &:active {

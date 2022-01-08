@@ -1,24 +1,24 @@
 import React from "react";
 import styled from "styled-components";
-
 function Picture() {
   return (
     <Wrapper>
-      <div className="about__us"></div>
+      <div className="about__us">
+        <h1>About Us</h1>
+      </div>
     </Wrapper>
   );
 }
 const Wrapper = styled.article`
   overflow: hidden;
-  min-height: 100vh;
+  height: 70vh;
   position: relative;
   .about__us {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  h1,
-  p {
+  h1 {
     font-size: 6rem;
     color: #fff;
     position: absolute;

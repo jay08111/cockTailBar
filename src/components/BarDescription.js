@@ -19,8 +19,8 @@ function BarDescription() {
           </h3>
           <h3>
             {toggleLang
-              ? "예약은 받지않습니다 , 먼저 오신분께 먼저 배정해 드립니다."
-              : "Reservations are not accepted. Seating is on a first come, first served basis."}
+              ? "예약을 해주시면 친절히 도와드리겠습니다 ! , 이벤트룸 , 파티룸만 가능하십니다."
+              : "Reservations are accepted only for event , party rooms."}
           </h3>
         </div>
         <p>
@@ -39,8 +39,8 @@ function BarDescription() {
         </p>
         <h3>
           {toggleLang
-            ? "루시아에서는 커피도 판매하고 있습니다! 먼저 오시는분께 먼저 배정해 드려요."
-            : "LUCIA COFFEE BAR ARE OPEN FOR INDOOR DINING! FIRST COME, FIRST SERVED."}
+            ? "루시아에서는 커피도 판매하고 있습니다!"
+            : "LUCIA COFFEE BAR ARE OPEN FOR INDOOR DINING!."}
         </h3>
         <p>
           <strong>Coffee Bar:</strong>
@@ -57,7 +57,7 @@ function BarDescription() {
         <p>
           {toggleLang
             ? "코로나 확진자 증가시 서울특별시 정책으로 조기 마감될 수 있습니다 ."
-            : "if covid situation is incredibly getting worse , we can be closed early than usual with the CA gorvernmet's rule."}
+            : "if the covid situation gets worse , we may close earlier than usual with the CA Government's restriction."}
         </p>
         <p>
           {toggleLang
@@ -67,11 +67,11 @@ function BarDescription() {
         <h3>
           {toggleLang
             ? "루시아에서 판매하는 커피 2022년도 3월까지 15% 할인됩니다!"
-            : `ALL OF COFFIES ARE DISCOUTED FOR 15% 'TILL 03/2022`}
+            : `COFFIE IS DISCOUNTED FOR 15% UNTIL 03/2022`}
         </h3>
         <p>
           {toggleLang
-            ? "테이블은 먼저오신분께 먼저 배정됩니다!"
+            ? "일반석은 먼저오신분께 먼저 배정됩니다!"
             : "Tables are available for walk-ins on a first come, first served basis."}
         </p>
         <p>
@@ -131,6 +131,54 @@ const Wrapper = styled.section`
     strong {
       font-weight: bold;
       margin-right: 7px;
+    }
+  }
+  @media screen and (max-width: 586px) {
+    h2 {
+      font-size: 3rem;
+    }
+    h3 {
+      font-size: 2rem;
+    }
+  }
+  @media screen and (max-width: 446px) {
+    h2 {
+      font-size: 2.5rem;
+    }
+    h3 {
+      font-size: 1.7rem;
+    }
+  }
+  @media screen and (max-width: 390px) {
+    h2 {
+      font-size: 2rem;
+    }
+    h3 {
+      font-size: 1.5rem;
+    }
+  }
+  @media screen and (max-width: 325px) {
+    h2 {
+      font-size: 1.6rem;
+    }
+    h3 {
+      font-size: 1.5rem;
+    }
+  }
+  @media screen and (max-width: 273px) {
+    h2 {
+      font-size: 1.4rem;
+    }
+    h3 {
+      font-size: 1.2rem;
+    }
+  }
+  @media screen and (max-width: 246px) {
+    h2 {
+      font-size: 1.2rem;
+    }
+    h3 {
+      font-size: 1.2rem;
     }
   }
 `;

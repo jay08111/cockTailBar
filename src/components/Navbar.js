@@ -5,6 +5,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { BsX } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { setShow, setToggledLang } from "../redux/liquorSlice";
+import { navLink } from "../data";
 import Aos from "aos";
 function Navbar() {
   const { show, toggleLang } = useSelector((state) => state.liquor);
@@ -24,17 +25,18 @@ function Navbar() {
       <nav className={show ? "nav__container works" : "nav__container"}>
         <div className="nav__inner">
           <div className="nav__link">
-            <StyledLink to="/">{toggleLang ? "홈 화면" : "Home"}</StyledLink>
-            <StyledLink to="/menu">{toggleLang ? "메뉴" : "Menu"}</StyledLink>
-            <StyledLink to="/cartPage">
-              {toggleLang ? "카트" : "Cart"}
-            </StyledLink>
-            <StyledLink to="/aboutUs">
-              {toggleLang ? "루시아" : "About us"}
-            </StyledLink>
-            <StyledLink to="/review">
-              {toggleLang ? "리뷰" : "Review"}
-            </StyledLink>
+            {navLink.map((nav) => {
+              const { id, link, titleEN, titleKR } = nav;
+              return (
+                <StyledLink
+                  key={id}
+                  to={link}
+                  onClick={() => dispatch(setShow(false))}
+                >
+                  {toggleLang ? titleKR : titleEN}
+                </StyledLink>
+              );
+            })}
             <div className="nav__toggle">
               <Switch>
                 <input
