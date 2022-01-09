@@ -19,22 +19,12 @@ function CartPage() {
   if (cart.length === 0) {
     return <NoItems />;
   }
-  const totalAmount = cart.map((item) => {
-    let { quantity, price, priceKr } = item;
-    price = quantity * price;
-    return { quantity, price };
-  });
-  console.log(totalAmount);
   return (
     <Wrapper className="about__us3">
       <h2>My Cart</h2>
       <div className="cart__item">
         {cart.map((cartItem) => (
-          <MyCartItem
-            key={cartItem.id}
-            {...cartItem}
-            totalAmount={totalAmount}
-          />
+          <MyCartItem key={cartItem.id} {...cartItem} />
         ))}
       </div>
       <div className="btn-container">

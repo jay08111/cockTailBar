@@ -249,12 +249,76 @@ const Wrapper = styled.article`
     }
   }
   @media screen and (max-width: 591px) {
+    .max-min__60 {
+      min-width: 100%;
+    }
+    .margin-left-move {
+      margin: 0;
+    }
+    .margin-right-move {
+      margin: 0;
+    }
+  }
+  @media screen and (max-width: 485px) {
     .grid__container {
-      .margin-left-move {
-        margin: 0;
+      p {
+        font-size: 1.2rem;
       }
-      .margin-right-move {
-        margin: 0;
+    }
+  }
+  @media screen and (max-width: 307px) {
+    .grid__container {
+      p {
+        font-size: 1.1rem;
+      }
+      img {
+        width: 110%;
+        height: 110%;
+      }
+    }
+  }
+  @media screen and (max-width: 266px) {
+    .grid__container {
+      p {
+        font-size: 1rem;
+      }
+      img {
+        width: 110%;
+        height: 110%;
+      }
+      .coffee__image {
+        margin-top: 5%;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  @media screen and (max-width: 269px) {
+    .grid__container {
+      .coffee__image {
+        margin-top: 5%;
+        width: 90%;
+        height: 90%;
+      }
+    }
+  }
+  @media screen and (max-width: 254px) {
+    .grid__container {
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  }
+  @media screen and (max-width: 230px) {
+    .grid__container {
+      p {
+        font-size: 0.8rem;
+      }
+      img {
+        width: 90%;
+        height: 90%;
+        object-fit: cover;
+        display: block;
       }
     }
   }

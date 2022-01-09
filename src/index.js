@@ -3,6 +3,8 @@ import App from "./App";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import "aos/dist/aos.css";
+import "swiper/swiper.min.css";
+import "swiper/components/navigation/navigation.min.css";
 import { ToastContainer, Zoom } from "react-toastify";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";

@@ -55,6 +55,67 @@ const Wrapper = styled.div`
       background-color: #fff;
     }
   }
+  @media screen and (max-width: 480px) {
+    .pagination__btn {
+      font-size: 20px;
+      height: 40px;
+      width: 40px;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    .pagination__btn {
+      font-size: 15px;
+      height: 30px;
+      width: 30px;
+    }
+  }
+  @media screen and (max-width: 335px) {
+    .pagination__btn {
+      font-size: 15px;
+      height: 25px;
+      width: 25px;
+    }
+  }
+  @media screen and (max-width: 307px) {
+    gap: 20px;
+    .pagination__btn {
+      font-size: 15px;
+      height: 30px;
+      width: 30px;
+    }
+  }
+  @media screen and (max-width: 285px) {
+    gap: 16px;
+    .pagination__btn {
+      font-size: 15px;
+      height: 30px;
+      width: 30px;
+    }
+  }
+  @media screen and (max-width: 263px) {
+    gap: 10px;
+    .pagination__btn {
+      font-size: 15px;
+      height: 30px;
+      width: 30px;
+    }
+  }
+  @media screen and (max-width: 233px) {
+    gap: 8px;
+    .pagination__btn {
+      font-size: 15px;
+      height: 30px;
+      width: 30px;
+    }
+  }
+  @media screen and (max-width: 211px) {
+    gap: 5px;
+    .pagination__btn {
+      font-size: 15px;
+      height: 30px;
+      width: 30px;
+    }
+  }
 `;
 
 export default Pagination;

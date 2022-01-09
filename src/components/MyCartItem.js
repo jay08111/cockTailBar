@@ -6,20 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 import { setTotalAmount } from "../redux/liquorSlice";
-function MyCartItem({
-  id,
-  name,
-  image,
-  category,
-  price,
-  priceKr,
-  quantity,
-  totalAmount,
-}) {
+function MyCartItem({ id, name, image, category, price, priceKr, quantity }) {
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(setTotalAmount());
-  // }, []);
   const [amount, setAmount] = useState(quantity);
   const { cart, toggleLang } = useSelector((state) => state.liquor);
   const increaseAmount = (id) => {
@@ -65,7 +53,7 @@ function MyCartItem({
         </div>
         <div className="cart__price__btn">
           <div>
-            <p>{toggleLang ? priceKr + "원" : "$" + price}</p>
+            <p>{toggleLang ? `${priceKr}원` : `$${price}`}</p>
           </div>
           <div>
             <button
@@ -93,16 +81,22 @@ const Wrapper = styled.div`
   
   .cart__container {
     gap: 25px;
-    display: grid;
-    grid-template-columns: 0.5fr 2fr 1.5fr;
+    display:flex;
     width: 100%;
     .cart__image { 
       display: flex;
       align-items:center;
+      flex:0.5;
+     
     img {
-   
     width: 150px;
-    height: 150px;
+    height: 150px; 
+    transition: all 0.5s ease;
+    overflow: hidden;
+    &:hover {
+        transform: translateY(-2px);
+        border-radius:10px;
+      }
        }
   }
     .cart__info {
@@ -112,6 +106,7 @@ const Wrapper = styled.div`
       justify-content: center;
       gap:10px;
       font-size: 1.5rem;
+      flex:2;
     }
     .cart__amount {
       display: flex;
@@ -144,6 +139,7 @@ const Wrapper = styled.div`
       grid-template-columns: repeat(2,1fr);
       justify-content: center;
       align-items: center;
+      flex:1.5;
       p{
         text-align: center;
         font-size: 2rem;
@@ -166,6 +162,24 @@ const Wrapper = styled.div`
         border-radius: 10px;
       }
   }
+  @media screen and (max-width: 1015px) {
+    width: 65vw;
+    .cart__container  {
+      .cart__price__btn {
+     gap:1.5rem;
+    }
+    }
+  }
+  @media screen and (max-width: 932px) {
+    width: 90vw;
+    .cart__container  {
+        .cart__amount {
+           p {
+             font-size:1.3rem;
+           }
+         }
+    }
+  }
   @media screen and (max-width: 737px) {
     img {
       display: block;
@@ -175,6 +189,48 @@ const Wrapper = styled.div`
     .cart__info {
       width: 100% 
       margin: 0 auto;
+    }
+  }
+  @media screen and (max-width: 612px) {
+    width: 92vw;
+    .cart__container  {
+        .cart__amount {
+           p {
+             font-size:1.1rem;
+           }
+         }
+    }
+  }
+  @media screen and (max-width: 591px) {
+    width: 60vw;
+    .cart__container  {
+      flex-direction: column;
+      .cart__image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+        .cart__amount {
+           p {
+             font-size:1.1rem;
+           }
+         }
+    }
+  }
+  @media screen and (max-width: 377px) {
+    width: 90vw;
+    .cart__container  {
+      flex-direction: column;
+      .cart__image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+        .cart__amount {
+           p {
+             font-size:1.1rem;
+           }
+         }
     }
   }
 `;

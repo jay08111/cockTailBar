@@ -116,5 +116,14 @@ const Select = styled.select`
     padding: 2px 0;
     transition: color 0.3s ease-in;
   }
+  @media screen and (max-width: 315px) {
+    min-width: 250px;
+  }
+  @media screen and (max-width: 254px) {
+    min-width: 200px;
+  }
+  @media screen and (max-width: 210px) {
+    min-width: 150px;
+  }
 `;
 export default Menu;

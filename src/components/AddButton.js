@@ -51,5 +51,8 @@ const Button = styled.button`
   text-transform: capitalize;
   cursor: pointer;
   font-family: "Oswald", sans-serif;
+  @media screen and (max-width: 300px) {
+    font-size: 0.8rem;
+  }
 `;
 export default AddButton;

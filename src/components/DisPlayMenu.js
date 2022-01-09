@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { AddButton, Loading } from "./index";
+import { AddButton } from "./index";
 function DisPlayMenu({
   name,
   image,
@@ -12,7 +12,7 @@ function DisPlayMenu({
   priceKr,
   descriptionKR,
 }) {
-  const { cart, toggleLang, loading } = useSelector((state) => state.liquor);
+  const { cart, toggleLang } = useSelector((state) => state.liquor);
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
@@ -71,6 +71,7 @@ const Wrapper = styled.section`
         margin-top: 2rem;
         gap: 2.2rem;
         position: relative;
+
         button {
           border: 1px solid #fff;
           background-color: transparent;
@@ -83,7 +84,7 @@ const Wrapper = styled.section`
           &:hover {
             background-color: #fff;
             color: #000;
-            border-radius: 4px;
+            border-radius: 9px;
           }
         }
       }
@@ -116,8 +117,128 @@ const Wrapper = styled.section`
   }
   .menu__image {
     flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     img {
       width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  @media screen and (max-width: 1156px) {
+    .menu__image {
+      img {
+        width: 100%;
+        height: 90%;
+      }
+    }
+  }
+  @media screen and (max-width: 1000px) {
+    .menu__image {
+      img {
+        width: 100%;
+        height: 80%;
+      }
+    }
+  }
+  @media screen and (max-width: 986px) {
+    max-width: 70%;
+    min-width: 70%;
+    .menu__image {
+      img {
+        width: 100%;
+        height: 95%;
+      }
+    }
+  }
+  @media screen and (max-width: 793px) {
+    max-width: 90%;
+    min-width: 90%;
+    flex-direction: column;
+    .menu__description {
+      h2 {
+        font-size: 1.8rem;
+      }
+      .menu__description__inner {
+        border-right: 0px;
+      }
+    }
+    .menu__image {
+      img {
+        width: 60%;
+      }
+    }
+  }
+  @media screen and (max-width: 664px) {
+    max-width: 77%;
+    min-width: 77%;
+    .menu__description {
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+    .menu__image {
+      img {
+        width: 100%;
+        height: 95%;
+      }
+    }
+  }
+  @media screen and (max-width: 361px) {
+    max-width: 90%;
+    min-width: 90%;
+    .menu__image {
+      img {
+        width: 100%;
+        height: 95%;
+      }
+    }
+  }
+  @media screen and (max-width: 300px) {
+    max-width: 80%;
+    min-width: 80%;
+    .menu__description {
+      h2 {
+        font-size: 1.5rem;
+      }
+      .menu__description__content {
+        p {
+          font-size: 1.2rem;
+        }
+      }
+      .menu__description__button {
+        font-size: 0.8rem;
+      }
+    }
+    .menu__image {
+      img {
+        width: 100%;
+        height: 95%;
+      }
+    }
+  }
+  @media screen and (max-width: 260px) {
+    max-width: 60%;
+    min-width: 60%;
+    .menu__description {
+      h2 {
+        font-size: 1rem;
+      }
+      .menu__description__content {
+        p {
+          font-size: 0.8rem;
+        }
+      }
+      .menu__description__button {
+        font-size: 0.8rem;
+      }
+    }
+    .menu__image {
+      img {
+        width: 100%;
+        height: 95%;
+      }
     }
   }
 `;
@@ -145,6 +266,12 @@ const StyledLink = styled(Link)`
   &:link,
   &:active {
     text-decoration: none;
+  }
+  @media screen and (max-width: 300px) {
+    padding: 4px;
+  }
+  @media screen and (max-width: 260px) {
+    padding: 10px;
   }
 `;
 

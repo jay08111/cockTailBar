@@ -26,5 +26,45 @@ const Wrapper = styled.article`
     right: 50%;
     transform: translate(50%, -50%);
   }
+  @media screen and (max-width: 702px) {
+    h1 {
+      font-size: 5rem;
+    }
+  }
+  @media screen and (max-width: 586px) {
+    h1 {
+      font-size: 4rem;
+    }
+  }
+  @media screen and (max-width: 469px) {
+    h1 {
+      font-size: 3.5rem;
+    }
+  }
+  @media screen and (max-width: 410px) {
+    h1 {
+      font-size: 3rem;
+    }
+  }
+  @media screen and (max-width: 352px) {
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
+  @media screen and (max-width: 292px) {
+    h1 {
+      font-size: 2rem;
+    }
+  }
+  @media screen and (max-width: 235px) {
+    h1 {
+      font-size: 1.8rem;
+    }
+  }
+  @media screen and (max-width: 210px) {
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
 `;
 export default Picture;
