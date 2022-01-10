@@ -38,30 +38,32 @@ function Review() {
                 <ReviewComment key={reviews.id} {...reviews} />
               ))}
         </div>
-
-        {/* <div className="review__inputField">
-            <input
-              type="text"
-              placeholder={toggleLang ? "닉네임" : "name"}
-              value={reviewNameValue}
-              onChange={(e) => dispatch(setReviewValue(e.target.value))}
-            />
-            <textarea
-              type="text"
-              placeholder={toggleLang ? "댓글" : "comment"}
-              value={reviewCommentValue}
-              onChange={(e) => dispatch(setCommentValue(e.target.value))}
-            />
+        <div className="new__comment"></div>
+        <div className="review__inputField">
+          <input
+            type="text"
+            placeholder={toggleLang ? "닉네임" : "name"}
+            value={reviewNameValue}
+            onChange={(e) => dispatch(setReviewValue(e.target.value))}
+          />
+          <textarea
+            type="text"
+            placeholder={toggleLang ? "댓글" : "comment"}
+            value={reviewCommentValue}
+            onChange={(e) => dispatch(setCommentValue(e.target.value))}
+          />
+          <div className="review__btn__box">
+            <button
+              className="review__btn btn"
+              type="submit"
+              onClick={() => {
+                dispatch(addReviews());
+              }}
+            >
+              {toggleLang ? "등록" : "comment"}
+            </button>
           </div>
-          <button
-            className="review__btn btn"
-            type="submit"
-            onClick={() => {
-              dispatch(addReviews());
-            }}
-          >
-            {toggleLang ? "등록" : "comment"}
-          </button> */}
+        </div>
       </form>
     </Wrapper>
   );
@@ -72,7 +74,6 @@ const Wrapper = styled.section`
   align-items: center;
   gap: 30px;
   min-height: 100vh;
-
   h2 {
     font-size: 4rem;
     margin-top: 3rem;
@@ -88,8 +89,9 @@ const Wrapper = styled.section`
   .review__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
     gap: 20px;
-    width: 90vw;
+    width: 40vw;
   }
   .review__inputField {
     display: flex;
@@ -115,7 +117,6 @@ const Wrapper = styled.section`
       border-radius: 4px;
       font-size: 20px;
     }
-
     textarea {
       resize: none;
       min-height: 60px;
@@ -126,13 +127,19 @@ const Wrapper = styled.section`
       text-align: left;
     }
   }
-  .review__btn {
-    background-color: #cba779;
-    padding: 1rem;
-    margin-top: 1rem;
-    transition: all 0.5s;
-    &:hover {
-      background-color: #e57124;
+  .review__btn__box {
+    display: flex;
+    justify-content: flex-end;
+    .review__btn {
+      background-color: #cba779;
+      padding: 1rem;
+      margin-top: 0.5rem;
+      margin-bottom: 2rem;
+      transition: all 0.5s;
+      width: 150px;
+      &:hover {
+        background-color: #e57124;
+      }
     }
   }
 `;

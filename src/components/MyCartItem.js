@@ -94,8 +94,7 @@ const Wrapper = styled.div`
     transition: all 0.5s ease;
     overflow: hidden;
     &:hover {
-        transform: translateY(-2px);
-        border-radius:10px;
+        border-radius:20px;
       }
        }
   }

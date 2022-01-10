@@ -155,6 +155,7 @@ const liquorSlice = createSlice({
           name: state.reviewNameValue,
           review: state.reviewCommentValue,
           like: 0,
+          image: "https://i.ibb.co/0rnrj19/default-image.png",
         };
         state.reviewList = [...state.reviewList, newValue];
         state.reviewListKR = [...state.reviewListKR, newValue];

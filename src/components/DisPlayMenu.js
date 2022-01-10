@@ -17,7 +17,7 @@ function DisPlayMenu({
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
   return (
-    <Wrapper>
+    <Wrapper lang={toggleLang}>
       <div className="menu__description">
         <div className="menu__description__inner">
           <h2>{name}</h2>
@@ -43,6 +43,9 @@ function DisPlayMenu({
   );
 }
 const Wrapper = styled.section`
+ font-family: ${({ lang }) =>
+   lang ? "'Noto Sans KR', sans-serif" : "'EB Garamond', sans-serif"};
+ }
   max-width: 60%;
   min-width: 60%;
   padding: 0.9rem;
@@ -64,6 +67,9 @@ const Wrapper = styled.section`
       .menu__description__content {
         max-width: 95vw;
         margin: 0 1rem 0 0;
+        p {
+          font-size: 1.4rem;
+        }
       }
       .menu__description__button {
         display: flex;
@@ -71,11 +77,9 @@ const Wrapper = styled.section`
         margin-top: 2rem;
         gap: 2.2rem;
         position: relative;
-
         button {
           border: 1px solid #fff;
           background-color: transparent;
-
           color: #fff;
           cursor: pointer;
           width: 100px;
@@ -171,8 +175,8 @@ const Wrapper = styled.section`
     }
   }
   @media screen and (max-width: 664px) {
-    max-width: 77%;
-    min-width: 77%;
+    max-width: 100%;
+    min-width: 100%;
     .menu__description {
       h2 {
         font-size: 1.5rem;
@@ -186,8 +190,6 @@ const Wrapper = styled.section`
     }
   }
   @media screen and (max-width: 361px) {
-    max-width: 90%;
-    min-width: 90%;
     .menu__image {
       img {
         width: 100%;
@@ -219,14 +221,19 @@ const Wrapper = styled.section`
     }
   }
   @media screen and (max-width: 260px) {
-    max-width: 60%;
-    min-width: 60%;
+    max-width: 70%;
+    min-width: 70%;
     .menu__description {
       h2 {
         font-size: 1rem;
       }
-      .menu__description__content {
-        p {
+      .menu__description__inner {
+        .menu__description__content {
+          p {
+            font-size: 1rem;
+          }
+        }
+        .menu__price {
           font-size: 0.8rem;
         }
       }
@@ -271,7 +278,10 @@ const StyledLink = styled(Link)`
     padding: 4px;
   }
   @media screen and (max-width: 260px) {
-    padding: 10px;
+    padding: 8px;
+    font-size: 0.7rem;
+    display: block;
+    text-align: center;
   }
 `;
 

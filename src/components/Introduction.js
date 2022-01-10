@@ -17,7 +17,7 @@ function CockTail() {
   }
 
   return (
-    <Wrapper>
+    <Wrapper lang={toggleLang}>
       <div
         className="grid__container max-min__60 margin-left-move"
         data-aos="fade-right"
@@ -183,6 +183,9 @@ function CockTail() {
   );
 }
 const Wrapper = styled.article`
+ font-family: ${({ lang }) =>
+   lang ? "'Noto Sans KR', sans-serif" : "'EB Garamond', sans-serif"};
+ } 
   color: #fff;
   padding: 50px 0;
   display: flex;

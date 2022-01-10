@@ -9,13 +9,13 @@ textarea {
   font-family: "Oswald", sans-serif;
 }
 p {
-  font-family: "EB Garamond", serif;
+  /* font-family: "EB Garamond", serif; */
   color: #b1b1b1;
   line-height: 1.5;
 }
 .header__img {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), #000),
-    url("./pictures/barPic2.jpg");
+    url("https://i.ibb.co/3rSGqJX/barPic2.jpg");
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -46,7 +46,7 @@ p {
 }
 .about__us {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), #000),
-    url("./pictures/barPicAboutus1.jpg");
+    url("https://i.ibb.co/Dwp32LV/bar-Pic-Aboutus1.jpg");
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -54,14 +54,14 @@ p {
 }
 .about__us2 {
   background-image: linear-gradient(rgba(0, 0, 0, 0.8), #000),
-    url("./pictures/barPicAboutus2.jpg");
+    url("https://i.ibb.co/QFmPf1X/bar-Pic-Aboutus2.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 .about__us3 {
   background-image: linear-gradient(rgba(0, 0, 0, 0.9), #000),
-    url("./pictures/barPicAboutus3.jpg");
+    url("https://i.ibb.co/tp5NCJ5/bar-Pic-Aboutus3.jpg");
 
   background-position: center;
   background-repeat: no-repeat;
@@ -69,7 +69,7 @@ p {
 }
 .about__us4 {
   background-image: linear-gradient(rgba(0, 0, 0, 0.85), #000),
-    url("./pictures/barPicAboutus4.jpg");
+    url("https://i.ibb.co/5jjgSn3/bar-Pic-Aboutus4.jpg");
 
   background-position: center;
   background-repeat: no-repeat;

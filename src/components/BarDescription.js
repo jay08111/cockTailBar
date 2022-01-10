@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import { useSelector } from "react-redux";
 import Aos from "aos";
 function BarDescription() {
@@ -9,7 +9,8 @@ function BarDescription() {
   const { toggleLang } = useSelector((state) => state.liquor);
   return (
     <Wrapper>
-      <div data-aos="fade-up">
+      <GlobalStyle lang={toggleLang} />
+      <div data-aos="fade-up" className="fade-up">
         <h2>{toggleLang ? "운영 지침" : "Hours of Operations"}</h2>
         <div className="heading__3">
           <h3>
@@ -17,7 +18,7 @@ function BarDescription() {
               ? "루시아는 실내 주점입니다."
               : "Lucia Nappa Valley is Open for Indoor Dining."}
           </h3>
-          <h3>
+          <h3 className="heading__event">
             {toggleLang
               ? "예약을 해주시면 친절히 도와드리겠습니다 ! , 이벤트룸 , 파티룸만 가능하십니다."
               : "Reservations are accepted only for event , party rooms."}
@@ -27,7 +28,7 @@ function BarDescription() {
           <strong>Open Daily:</strong>
           6pm - 1am
         </p>
-        <p>
+        <p lang={toggleLang}>
           {toggleLang
             ? "파티룸 , 이벤트룸은 8명이상부터 수용가능합니다."
             : "We can accommodate parties of up to 8 people."}
@@ -89,6 +90,12 @@ function BarDescription() {
     </Wrapper>
   );
 }
+const GlobalStyle = createGlobalStyle`
+ .fade-up > p {
+  font-family: ${({ lang }) =>
+    lang ? "'Noto Sans KR', sans-serif" : "'EB Garamond', sans-serif"};
+ }
+`;
 const Wrapper = styled.section`
   color: #fff;
   text-align: center;
@@ -111,6 +118,9 @@ const Wrapper = styled.section`
   }
   .heading__3 {
     margin-top: 0;
+    .heading__event {
+      font-size: 1.9rem;
+    }
   }
   h3 {
     margin-top: 20px;
@@ -124,7 +134,6 @@ const Wrapper = styled.section`
     margin-top: 30px;
     font-size: 1.2rem;
     font-weight: 300;
-    font-family: "EB Garamond", serif;
     .exception {
       margin-right: 0px;
     }

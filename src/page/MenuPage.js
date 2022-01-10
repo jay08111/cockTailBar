@@ -119,7 +119,7 @@ const Select = styled.select`
   @media screen and (max-width: 315px) {
     min-width: 250px;
   }
-  @media screen and (max-width: 254px) {
+  @media screen and (max-width: 260px) {
     min-width: 200px;
   }
   @media screen and (max-width: 210px) {

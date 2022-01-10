@@ -13,8 +13,9 @@ function Navbar() {
   useEffect(() => {
     Aos.init({ duration: 1500 });
   }, []);
+
   return (
-    <Wrapper>
+    <Wrapper lang={toggleLang}>
       <button onClick={() => dispatch(setShow(!show))} className="nav__button">
         {show ? (
           <BsX className="nav__logo  x__button" />
@@ -53,7 +54,11 @@ function Navbar() {
     </Wrapper>
   );
 }
+
 const Wrapper = styled.div`
+ font-family : ${({ lang }) =>
+   lang ? "'Noto Sans KR', sans-serif" : "'Oswald', sans-serif"}
+  }
   .nav__button {
     cursor: pointer;
     background: transparent;

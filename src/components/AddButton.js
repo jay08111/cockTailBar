@@ -54,5 +54,8 @@ const Button = styled.button`
   @media screen and (max-width: 300px) {
     font-size: 0.8rem;
   }
+  @media screen and (max-width: 260px) {
+    font-size: 0.8rem;
+  }
 `;
 export default AddButton;
