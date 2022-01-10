@@ -73,7 +73,7 @@ const Wrapper = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 30px;
-  min-height: 100vh;
+  min-height: 110vh;
   h2 {
     font-size: 4rem;
     margin-top: 3rem;
