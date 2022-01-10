@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { NoItems, MyCartItem } from "../components/index";
-import { deleteCartItemAll } from "../redux/liquorSlice";
-import { setTotalAmount } from "../redux/liquorSlice";
+// import { deleteCartItemAll } from "../redux/liquorSlice";
+
 function CartPage() {
   const location = useLocation();
   const { cart } = useSelector((state) => state.liquor);
 
-  const dispatch = useDispatch();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);

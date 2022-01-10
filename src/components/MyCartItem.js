@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { deleteCartItem } from "../redux/liquorSlice";
 import { BsTrash } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
-import { setTotalAmount } from "../redux/liquorSlice";
 function MyCartItem({ id, name, image, category, price, priceKr, quantity }) {
   const dispatch = useDispatch();
   const [amount, setAmount] = useState(quantity);

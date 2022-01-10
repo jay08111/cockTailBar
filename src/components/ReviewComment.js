@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { BsTrash } from "react-icons/bs";
+// import { BsTrash } from "react-icons/bs";
 import { AiOutlineHeart, AiTwotoneHeart } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteReviews } from "../redux/liquorSlice";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 function ReviewComment({ id, name, review, like, image }) {
   const { toggleLang } = useSelector((state) => state.liquor);
-  const dispatch = useDispatch();
   const [clickLike, setClickLike] = useState(false);
   const [likeNumber, setLikeNumber] = useState(like);
 
