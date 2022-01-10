@@ -75,7 +75,7 @@ const Wrapper = styled.section`
         button {
           border: 1px solid #fff;
           background-color: transparent;
-          padding: 8px;
+
           color: #fff;
           cursor: pointer;
           width: 100px;

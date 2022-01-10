@@ -59,8 +59,8 @@ const Wrapper = styled.div`
     background: transparent;
     position: fixed;
     top: 0;
-    right: 20px;
-    bottom: 700px;
+    right: 2%;
+    bottom: 85%;
     z-index: 20;
     border: none;
     transition: all 0.2s ease-in-out 0s;

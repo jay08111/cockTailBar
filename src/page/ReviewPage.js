@@ -8,7 +8,6 @@ import {
 } from "../redux/liquorSlice";
 import { ReviewComment, Nocomment } from "../components/index";
 import { useLocation } from "react-router-dom";
-import AwesomeSlider from "react-awesome-slider";
 function Review() {
   const location = useLocation();
   useEffect(() => {
