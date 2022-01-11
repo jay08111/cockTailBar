@@ -41,9 +41,8 @@ const initialState = {
   toggleLang: false,
   cartTotalEn: 0,
   cartTotalKr: 0,
-  cartAmount: 0,
-  cartAmountEn: 1,
-  cartAmountKr: 0,
+  cartPriceEn: 1,
+  cartPriceKr: 0,
 };
 
 export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
@@ -206,10 +205,10 @@ const liquorSlice = createSlice({
       }
     },
     countTotal: (state) => {
-      let { totalEn, totalKr, amountEn, amountKr } = state.cart.reduce(
+      let { totalEn, totalKr } = state.cart.reduce(
         (acc, cur) => {
           const { quantity, price, priceKr } = cur;
-          console.log(quantity, price, priceKr);
+          console.log(price, quantity);
           const itemTotalEn = price * quantity;
           const itemTotalKr = priceKr * quantity;
           acc.totalEn += itemTotalEn;
@@ -219,14 +218,10 @@ const liquorSlice = createSlice({
         {
           totalEn: 0,
           totalKr: 0,
-          amountEn: 0,
-          amountKr: 0,
         }
       );
       state.cartTotalEn = totalEn;
       state.cartTotalKr = totalKr;
-      state.cartAmountEn = amountEn;
-      state.cartAmountKr = amountKr;
     },
     increaseAmount: (state, { payload }) => {
       const findCartId = state.cart.find((item) => item.id === payload);
@@ -287,22 +282,6 @@ const liquorSlice = createSlice({
         default:
           break;
       }
-    },
-    setTotalAmount: (state) => {
-      state.cart = state.cart.reduce(
-        (total, cartItem) => {
-          const { price, priceKr, quantity } = cartItem;
-          total.totalItems += quantity;
-          total.cartTotalEn = quantity * price;
-          total.cartTotalKr = quantity * priceKr;
-          return total;
-        },
-        {
-          totalItems: 0,
-          cartTotalEn: 0,
-          cartTotalKr: 0,
-        }
-      );
     },
   },
   extraReducers: (builder) => {

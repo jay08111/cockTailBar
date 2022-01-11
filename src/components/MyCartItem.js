@@ -11,8 +11,7 @@ import { Link } from "react-router-dom";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 function MyCartItem({ id, name, image, category, price, priceKr, quantity }) {
   const dispatch = useDispatch();
-  const { cart, toggleLang, cartAmountEn, cartTotalEn, cartAmountKr } =
-    useSelector((state) => state.liquor);
+  const { toggleLang } = useSelector((state) => state.liquor);
   return (
     <Wrapper>
       <div className="cart__container">
@@ -42,7 +41,9 @@ function MyCartItem({ id, name, image, category, price, priceKr, quantity }) {
         </div>
         <div className="cart__price__btn">
           <div>
-            <p>{toggleLang ? `${priceKr}원` : `$${price}`}</p>
+            <p>
+              {toggleLang ? `${priceKr * quantity}원` : `$${price * quantity}`}
+            </p>
           </div>
           <div>
             <button
@@ -128,7 +129,7 @@ const Wrapper = styled.article`
       flex:1.5;
       p{
         text-align: center;
-        font-size: 2rem;
+        font-size: 1.6rem;
       }
     }
   }
