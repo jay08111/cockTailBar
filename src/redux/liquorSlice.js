@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import axios from "axios";
 import { nanoid } from "nanoid";
 import { reviewData, reviewDataKR } from "../data";
@@ -39,6 +39,11 @@ const initialState = {
   punchAndParty: [],
   show: false,
   toggleLang: false,
+  cartTotalEn: 0,
+  cartTotalKr: 0,
+  cartAmount: 0,
+  cartAmountEn: 1,
+  cartAmountKr: 0,
 };
 
 export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
@@ -200,6 +205,45 @@ const liquorSlice = createSlice({
         state.cart = [...state.cart, newCartItem];
       }
     },
+    countTotal: (state) => {
+      let { totalEn, totalKr, amountEn, amountKr } = state.cart.reduce(
+        (acc, cur) => {
+          const { quantity, price, priceKr } = cur;
+          console.log(quantity, price, priceKr);
+          const itemTotalEn = price * quantity;
+          const itemTotalKr = priceKr * quantity;
+          acc.totalEn += itemTotalEn;
+          acc.totalKr += itemTotalKr;
+          return acc;
+        },
+        {
+          totalEn: 0,
+          totalKr: 0,
+          amountEn: 0,
+          amountKr: 0,
+        }
+      );
+      state.cartTotalEn = totalEn;
+      state.cartTotalKr = totalKr;
+      state.cartAmountEn = amountEn;
+      state.cartAmountKr = amountKr;
+    },
+    increaseAmount: (state, { payload }) => {
+      const findCartId = state.cart.find((item) => item.id === payload);
+      if (findCartId) {
+        findCartId.quantity += 1;
+        console.log(current(findCartId));
+      }
+    },
+    decreaseAmount: (state, { payload }) => {
+      const findCartId = state.cart.find((item) => item.id === payload);
+      if (findCartId) {
+        if (findCartId.quantity === 1) {
+        } else {
+          findCartId.quantity -= 1;
+        }
+      }
+    },
     deleteCartItem: (state, { payload }) => {
       state.cart = state.cart.filter((item) => item.id !== payload);
     },
@@ -314,5 +358,8 @@ export const {
   filterList,
   handleAmount,
   setTotalAmount,
+  countTotal,
+  increaseAmount,
+  decreaseAmount,
 } = liquorSlice.actions;
 export default liquorSlice.reducer;

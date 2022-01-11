@@ -4,7 +4,7 @@ function Picture() {
   return (
     <Wrapper>
       <div className="about__us">
-        <h1>About Us</h1>
+        <h2>About Us</h2>
       </div>
     </Wrapper>
   );
@@ -18,7 +18,7 @@ const Wrapper = styled.article`
     justify-content: center;
     align-items: center;
   }
-  h1 {
+  h2 {
     font-size: 6rem;
     color: #fff;
     position: absolute;
@@ -27,42 +27,42 @@ const Wrapper = styled.article`
     transform: translate(50%, -50%);
   }
   @media screen and (max-width: 702px) {
-    h1 {
+    h2 {
       font-size: 5rem;
     }
   }
   @media screen and (max-width: 586px) {
-    h1 {
+    h2 {
       font-size: 4rem;
     }
   }
   @media screen and (max-width: 469px) {
-    h1 {
+    h2 {
       font-size: 3.5rem;
     }
   }
   @media screen and (max-width: 410px) {
-    h1 {
+    h2 {
       font-size: 3rem;
     }
   }
   @media screen and (max-width: 352px) {
-    h1 {
+    h2 {
       font-size: 2.5rem;
     }
   }
   @media screen and (max-width: 292px) {
-    h1 {
+    h2 {
       font-size: 2rem;
     }
   }
   @media screen and (max-width: 235px) {
-    h1 {
+    h2 {
       font-size: 1.8rem;
     }
   }
   @media screen and (max-width: 210px) {
-    h1 {
+    h2 {
       font-size: 1.5rem;
     }
   }

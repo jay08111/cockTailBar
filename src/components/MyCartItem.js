@@ -1,30 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { deleteCartItem } from "../redux/liquorSlice";
+import {
+  deleteCartItem,
+  increaseAmount,
+  decreaseAmount,
+} from "../redux/liquorSlice";
 import { BsTrash } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 function MyCartItem({ id, name, image, category, price, priceKr, quantity }) {
   const dispatch = useDispatch();
-  const [amount, setAmount] = useState(quantity);
-  const { cart, toggleLang } = useSelector((state) => state.liquor);
-  const increaseAmount = (id) => {
-    const findCartId = cart.find((item) => item.id === id);
-    if (findCartId) {
-      setAmount(amount + 1);
-    }
-  };
-  const decreaseAmount = (id) => {
-    const findCartId = cart.find((item) => item.id === id);
-    if (findCartId) {
-      if (amount === 1) {
-        dispatch(deleteCartItem(id));
-      } else {
-        setAmount(amount - 1);
-      }
-    }
-  };
+  const { cart, toggleLang, cartAmountEn, cartTotalEn, cartAmountKr } =
+    useSelector((state) => state.liquor);
   return (
     <Wrapper>
       <div className="cart__container">
@@ -40,14 +28,14 @@ function MyCartItem({ id, name, image, category, price, priceKr, quantity }) {
             <div>
               <AiOutlineMinusCircle
                 className="arrow"
-                onClick={() => decreaseAmount(id)}
+                onClick={() => dispatch(decreaseAmount(id))}
               />
               <p>
-                {toggleLang ? "잔" : "amount"} : {amount}
+                {toggleLang ? "잔" : "amount"} : {quantity}
               </p>
               <AiOutlinePlusCircle
                 className="arrow"
-                onClick={() => increaseAmount(id)}
+                onClick={() => dispatch(increaseAmount(id))}
               />
             </div>
           </div>
@@ -69,7 +57,7 @@ function MyCartItem({ id, name, image, category, price, priceKr, quantity }) {
     </Wrapper>
   );
 }
-const Wrapper = styled.div`
+const Wrapper = styled.article`
  border: 25px solid transparent;
     border-image: url("https://media-cdn.getbento.com/accounts/b407703cbc06b7de17a1aab05567665c/media/accounts/media/TBBjpsToRMaQp7vLG6Ty_border-image-white-decor.png")
       100 round;

@@ -7,7 +7,6 @@ import Loading from "./Loading";
 import FetchError from "./FetchError";
 import Pagination from "./Pagination";
 import ReviewComment from "./ReviewComment";
-import Nocomment from "./Nocomment";
 import NoItems from "./NoItems";
 import MyCartItem from "./MyCartItem";
 import AddButton from "./AddButton";
@@ -25,7 +24,6 @@ export {
   FetchError,
   Pagination,
   ReviewComment,
-  Nocomment,
   NoItems,
   MyCartItem,
   AddButton,

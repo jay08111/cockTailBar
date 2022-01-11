@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 // import { BsTrash } from "react-icons/bs";
 import { AiOutlineHeart, AiTwotoneHeart } from "react-icons/ai";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { deleteReviewsEN, deleteReviewsKR } from "../redux/liquorSlice";
+import { BsTrash } from "react-icons/bs";
 import styled from "styled-components";
 function ReviewComment({ id, name, review, like, image }) {
+  const dispatch = useDispatch();
   const { toggleLang } = useSelector((state) => state.liquor);
   const [clickLike, setClickLike] = useState(false);
   const [likeNumber, setLikeNumber] = useState(like);
@@ -50,7 +52,7 @@ function ReviewComment({ id, name, review, like, image }) {
   );
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.article`
  font-family: ${(props) =>
    props.$lang ? "'Noto Sans KR', sans-serif" : "'Oswald', sans-serif"};
  border: 35px solid transparent;
@@ -73,13 +75,18 @@ const Wrapper = styled.div`
      bottom : 2%;
      right: 2%;
      display:flex;
+     gap:15px;
      .review__delete__btn {
        padding: 11px;
        background:transparent;
        color: #fff;
        border:1px solid #fff;
-       font-size: 1rem;
+       font-size: 1.2rem;
        cursor:pointer;
+       transition: all 0.3s linear;
+       &:hover {
+         color:#b32614;
+       }
      }
      .review__like__btn {
        padding: 7px;
@@ -91,6 +98,10 @@ const Wrapper = styled.div`
        align-items:center;
        gap: 10px;
        cursor:pointer;
+       transition: all 0.3s linear;
+       &:hover {
+        color:#b32614;
+       }
      .red__Heart {
       color: red;
       font-size:2rem;

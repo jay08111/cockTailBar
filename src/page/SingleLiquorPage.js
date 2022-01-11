@@ -31,7 +31,7 @@ function SingleCockTail() {
   return (
     <Wrapper>
       <h1>About {name}</h1>
-      <div className="descriptions">
+      <article className="descriptions">
         <div className="descriptions__inner">
           <p>
             name : <span>{name}</span>
@@ -59,7 +59,7 @@ function SingleCockTail() {
           </p>
         </div>
         <img src={image} alt={name} />
-      </div>
+      </article>
       <div className="goBack__btns">
         <StyledLink to="/menu">Go to Menu</StyledLink>
         <StyledLink to="/cartPage">Go to Cart</StyledLink>

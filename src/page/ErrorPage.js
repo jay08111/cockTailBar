@@ -21,6 +21,7 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 3rem;
+  padding: 3rem;
   div {
     margin-bottom: 3rem;
     h1 {
@@ -33,6 +34,17 @@ const Wrapper = styled.div`
       text-transform: capitalize;
     }
   }
+  @media screen and (max-width: 768px) {
+    padding: 2rem;
+    div {
+      h1 {
+        font-size: 4rem;
+      }
+      h2 {
+        font-size: 2.5rem;
+      }
+    }
+  }
   @media screen and (max-width: 515px) {
     div {
       h1 {
@@ -40,6 +52,17 @@ const Wrapper = styled.div`
       }
       h2 {
         font-size: 2rem;
+      }
+    }
+  }
+  @media screen and (max-width: 360px) {
+    padding: 2rem;
+    div {
+      h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.5rem;
       }
     }
   }

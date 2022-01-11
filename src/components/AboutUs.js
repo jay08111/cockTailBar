@@ -5,8 +5,8 @@ function AboutUs() {
   const { toggleLang } = useSelector((state) => state.liquor);
   return (
     <Wrapper $lang={toggleLang}>
-      <h2>WELCOME TO LUCIA</h2>
-      <div className={toggleLang ? "bold" : undefined}>
+      <h1>WELCOME TO LUCIA</h1>
+      <article className={toggleLang ? "bold" : undefined}>
         <p>
           {toggleLang
             ? "술을 마시는 것은 그늘진 삶을 사는 것이라고 생각했습니다. 술을 마시는 자는 죽음과 교제한다는 것입니다."
@@ -62,11 +62,11 @@ function AboutUs() {
             ? "이러한 성장을 통해 우리는 훌륭한 제품과 탁월한 경험에 대한 약속, 환대에 중점, 지역사회의 중심이 되고자 하는 깊은 열망을 유지해 왔습니다."
             : "Through this growth, we've maintained our commitment to fine product and exceptional experiences, a focus on hospitality, and a deep desire to be a center for our communities."}
         </p>
-      </div>
+      </article>
     </Wrapper>
   );
 }
-const Wrapper = styled.section`
+const Wrapper = styled.article`
   background-image: url("https://images.getbento.com/accounts/b407703cbc06b7de17a1aab05567665c/media/images/90545bg_finished.png");
   text-align: center;
   padding: 1rem 3.5rem 2.5rem;
@@ -75,7 +75,7 @@ const Wrapper = styled.section`
   justify-content: center;
   flex-direction: column;
   line-height: 1.5;
-  div {
+  article {
     p {
       margin-bottom: 1rem;
       font-size: 1.4rem;
@@ -89,29 +89,29 @@ const Wrapper = styled.section`
       font-weight: bold;
     }
   }
-  h2 {
+  h1 {
     font-size: 4rem;
     margin-top: 2rem;
     margin-bottom: 4.5rem;
     font-family: "Oswald", sans-serif !important;
   }
   @media screen and (max-width: 610px) {
-    h2 {
+    h1 {
       font-size: 3.6rem;
     }
   }
   @media screen and (max-width: 562px) {
-    h2 {
+    h1 {
       font-size: 3.4rem;
     }
   }
   @media screen and (max-width: 537px) {
-    h2 {
+    h1 {
       font-size: 3.2rem;
     }
   }
   @media screen and (max-width: 512px) {
-    h2 {
+    h1 {
       font-size: 3rem;
     }
     p {
@@ -119,12 +119,12 @@ const Wrapper = styled.section`
     }
   }
   @media screen and (max-width: 487px) {
-    h2 {
+    h1 {
       font-size: 2.4rem;
     }
   }
   @media screen and (max-width: 412px) {
-    h2 {
+    h1 {
       font-size: 2rem;
     }
     div {
@@ -133,8 +133,9 @@ const Wrapper = styled.section`
       }
     }
   }
-  @media screen and (max-width: 276px) {
-    h2 {
+  @media screen and (max-width: 280px) {
+    padding: 1rem 2rem 2.5rem;
+    h1 {
       font-size: 2rem;
     }
   }

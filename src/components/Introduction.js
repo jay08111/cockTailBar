@@ -18,6 +18,7 @@ function CockTail() {
 
   return (
     <Wrapper $lang={toggleLang}>
+      <h1>coffee && alcohol</h1>
       <div
         className="grid__container max-min__60 margin-left-move"
         data-aos="fade-right"
@@ -89,7 +90,7 @@ function CockTail() {
               : "Breakfast & Lunch - 7am - 2pm daily Open Thursday - Sunday at 5pm."}
           </p>
           <p>
-            <strong>Kitchen:</strong>{" "}
+            <strong>Kitchen:</strong>
             {toggleLang
               ? " 4pm - 10pm , 목,금,토는 11pm"
               : "4pm - 10pm, 11pm on Thursday, Friday & Saturday"}
@@ -190,6 +191,10 @@ const Wrapper = styled.article`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  h1 {
+    visibility: hidden;
+    height: 0px;
+  }
   .grid__container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

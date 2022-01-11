@@ -12,7 +12,7 @@ function InputField() {
     (state) => state.liquor
   );
   return (
-    <Wrapper className="review__inputField">
+    <Wrapper>
       <div className="review__inner">
         <input
           type="text"
@@ -43,13 +43,22 @@ function InputField() {
 }
 const Wrapper = styled.div`
   width: 50vw;
+  margin-left: 20%;
   .review__inner {
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
   }
   @media screen and (max-width: 1161px) {
+    width: 50vw;
+  }
+  @media screen and (max-width: 487px) {
+    width: 70vw;
+    margin-left: 10%;
+  }
+  @media screen and (max-width: 260px) {
     width: 80vw;
+    margin-left: 0;
   }
 `;
 

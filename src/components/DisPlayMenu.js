@@ -258,6 +258,13 @@ const Wrapper = styled.section`
       }
     }
   }
+  @media screen and (max-width: 280px) {
+    max-width: 80%;
+    min-width: 80%;
+    border: 7px solid transparent;
+    border-image: url("https://media-cdn.getbento.com/accounts/b407703cbc06b7de17a1aab05567665c/media/accounts/media/TBBjpsToRMaQp7vLG6Ty_border-image-white-decor.png")
+      100 round;
+  }
   @media screen and (max-width: 260px) {
     max-width: 70%;
     min-width: 70%;

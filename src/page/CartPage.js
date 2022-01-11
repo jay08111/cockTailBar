@@ -3,11 +3,12 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, Link } from "react-router-dom";
 import { NoItems, MyCartItem } from "../components/index";
-import { deleteCartItemAll } from "../redux/liquorSlice";
+import { deleteCartItemAll, countTotal } from "../redux/liquorSlice";
 import { toast } from "react-toastify";
 function CartPage() {
   const location = useLocation();
-  const { cart, toggleLang } = useSelector((state) => state.liquor);
+  const { cart, toggleLang, cartTotalEn, cartTotalKr, cartAmount } =
+    useSelector((state) => state.liquor);
   const dispatch = useDispatch();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -15,17 +16,20 @@ function CartPage() {
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
+  useEffect(() => {
+    dispatch(countTotal());
+  }, [dispatch, cart]);
   if (cart.length === 0) {
     return <NoItems />;
   }
   return (
     <Wrapper className="about__us3">
-      <h2>My Cart</h2>
-      <div className="cart__item">
+      <h1>My Cart</h1>
+      <section className="cart__item">
         {cart.map((cartItem) => (
           <MyCartItem key={cartItem.id} {...cartItem} />
         ))}
-      </div>
+      </section>
       <div className="btn-container">
         {cart.length > 0 && (
           <div>
@@ -50,7 +54,7 @@ function CartPage() {
         )}
         <div>
           <p>Total:</p>
-          <p>100$</p>
+          <p>{toggleLang ? `${cartTotalKr}원` : `$${cartTotalEn}`}</p>
         </div>
       </div>
     </Wrapper>
@@ -63,7 +67,7 @@ const Wrapper = styled.section`
   align-items: center;
   gap: 5px;
 
-  h2 {
+  h1 {
     margin-top: 3rem;
     color: #fff;
     font-size: 4rem;
@@ -82,7 +86,7 @@ const Wrapper = styled.section`
     justify-content: space-between;
     width: 60vw;
     padding: 0 0 5rem 0;
-    border: 1px solid #fff;
+    margin-top: 30px;
     .btn__delete__all {
       transition: all 0.2s linear;
       background-color: transparent;
@@ -103,10 +107,35 @@ const Wrapper = styled.section`
       }
     }
   }
+  @media screen and (max-width: 1015px) {
+    .btn-container {
+      width: 65vw;
+    }
+  }
   @media screen and (max-width: 963px) {
     .cart__item {
       display: grid;
       grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  @media screen and (max-width: 932px) {
+    .btn-container {
+      width: 90vw;
+    }
+  }
+
+  @media screen and (max-width: 590px) {
+    .btn-container {
+      flex-direction: column;
+      align-items: center;
+      width: 60vw;
+    }
+  }
+  @media screen and (max-width: 377px) {
+    .btn-container {
+      flex-direction: column;
+      align-items: center;
+      width: 90vw;
     }
   }
 `;

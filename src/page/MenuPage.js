@@ -50,7 +50,7 @@ function Menu() {
   }
   return (
     <Wrapper className="about__us4">
-      <h2 className="heading__menu">Menu</h2>
+      <h1 className="heading__menu">Menu</h1>
       <Select
         onChange={(e) => {
           dispatch(setSelected(e.target.value));
@@ -64,7 +64,7 @@ function Menu() {
           </option>
         ))}
       </Select>
-      <div className="flex">
+      <article className="flex">
         {!loading && filter
           ? filteredList.map((items) => (
               <DisPlayMenu key={items.id} {...items} />
@@ -72,12 +72,12 @@ function Menu() {
           : currentPosts.map((items) => (
               <DisPlayMenu key={items.id} {...items} />
             ))}
-      </div>
+      </article>
       {!loading && <Pagination />}
     </Wrapper>
   );
 }
-const Wrapper = styled.article`
+const Wrapper = styled.section`
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -119,6 +119,7 @@ const Select = styled.select`
   @media screen and (max-width: 315px) {
     min-width: 250px;
   }
+
   @media screen and (max-width: 260px) {
     min-width: 200px;
   }

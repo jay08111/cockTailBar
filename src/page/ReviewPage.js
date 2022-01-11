@@ -14,10 +14,10 @@ function Review() {
 
   return (
     <Wrapper className="about__us2" $lang={toggleLang}>
-      <h2>Customers Review</h2>
+      <h1>Customers Review</h1>
       <h3>what our customers think</h3>
       <form onSubmit={(e) => e.preventDefault()}>
-        <div className="review__grid">
+        <section className="review__grid">
           {toggleLang
             ? reviewListKR.map((reviews) => (
                 <ReviewComment key={reviews.id} {...reviews} />
@@ -25,7 +25,7 @@ function Review() {
             : reviewList.map((reviews) => (
                 <ReviewComment key={reviews.id} {...reviews} />
               ))}
-        </div>
+        </section>
         <InputField />
       </form>
     </Wrapper>
@@ -37,7 +37,7 @@ const Wrapper = styled.section`
   align-items: center;
   gap: 30px;
   min-height: 110vh;
-  h2 {
+  h1 {
     font-size: 4rem;
     margin-top: 3rem;
     color: #fff;
@@ -106,7 +106,7 @@ const Wrapper = styled.section`
       padding: 1rem;
       margin-top: 0.5rem;
       margin-bottom: 2rem;
-      transition: all 0.5s;
+      transition: all 0.3s ease-in;
       border: 1px solid #fff;
       width: 150px;
       font-size: 1rem;
@@ -132,12 +132,12 @@ const Wrapper = styled.section`
   }
   }
   @media screen and (max-width: 575px) {
-  h2 {
+  h1 {
     font-size:3rem;
   }
   }
   @media screen and (max-width: 416px) {
-  h2 {
+  h1 {
     font-size:2.5rem;
   }
   h3 {
@@ -145,7 +145,7 @@ const Wrapper = styled.section`
   }
   }
   @media screen and (max-width: 319px) {
-  h2 {
+  h1 {
     font-size:2rem;
   }
   h3 {

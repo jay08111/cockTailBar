@@ -10,7 +10,8 @@ function BarDescription() {
   return (
     <Wrapper>
       <GlobalStyle $lang={toggleLang} />
-      <div data-aos="fade-up" className="fade-up">
+      <article data-aos="fade-up" className="fade-up">
+        <h1>Lucia</h1>
         <h2>{toggleLang ? "운영 지침" : "Hours of Operations"}</h2>
         <div className="heading__3">
           <h3>
@@ -86,7 +87,7 @@ function BarDescription() {
             ? "백신패스 필수로 지참하셔야 합니다."
             : "Proof of vaccination is required."}
         </p>
-      </div>
+      </article>
     </Wrapper>
   );
 }
@@ -103,6 +104,10 @@ const Wrapper = styled.section`
   min-height: 90vh;
   margin: auto;
   max-width: 1160px;
+  h1 {
+    visibility: hidden;
+    height: 0;
+  }
   .red {
     color: #b32614;
   }
