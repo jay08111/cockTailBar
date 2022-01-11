@@ -39,7 +39,6 @@ const initialState = {
   punchAndParty: [],
   show: false,
   toggleLang: false,
-  // totalAmount: [],
 };
 
 export const fetchData = createAsyncThunk("users/fetchLiquor", async () => {
@@ -157,20 +156,40 @@ const liquorSlice = createSlice({
           like: 0,
           image: "https://i.ibb.co/0rnrj19/default-image.png",
         };
-        state.reviewList = [...state.reviewList, newValue];
-        state.reviewListKR = [...state.reviewListKR, newValue];
+        if (state.toggleLang) {
+          state.reviewListKR = [...state.reviewListKR, newValue];
+        } else {
+          state.reviewList = [...state.reviewList, newValue];
+        }
         state.reviewNameValue = "";
         state.reviewCommentValue = "";
       } else if (!state.reviewNameValue && !state.reviewCommentValue) {
-        toast.error("입력을 해주세요 !");
+        if (state.toggleLang) {
+          toast.error("입력을 해주세요 !");
+        } else {
+          toast.error("plase put something !");
+        }
       } else if (!state.reviewNameValue) {
-        toast.error("이름을 입력해 주세요!");
+        if (state.toggleLang) {
+          toast.error("이름을 입력해 주세요!");
+        } else {
+          toast.error("please put your name!");
+        }
       } else if (!state.reviewCommentValue) {
-        toast.error("코멘트를 입력해 주세요!");
+        if (state.toggleLang) {
+          toast.error("코멘트를 입력해 주세요!");
+        } else {
+          toast.error("please put your comment!");
+        }
       }
     },
-    deleteReviews: (state, { payload }) => {
+    deleteReviewsEN: (state, { payload }) => {
       state.reviewList = state.reviewList.filter((item) => item.id !== payload);
+    },
+    deleteReviewsKR: (state, { payload }) => {
+      state.reviewListKR = state.reviewListKR.filter(
+        (item) => item.id !== payload
+      );
     },
     addItemToCart: (state, { payload }) => {
       const id = state.list.map((item) => item.id);
@@ -287,7 +306,8 @@ export const {
   setToggledLang,
   addReviews,
   setCommentValue,
-  deleteReviews,
+  deleteReviewsEN,
+  deleteReviewsKR,
   addItemToCart,
   deleteCartItem,
   deleteCartItemAll,

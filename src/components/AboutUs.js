@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 function AboutUs() {
   const { toggleLang } = useSelector((state) => state.liquor);
   return (
-    <Wrapper lang={toggleLang}>
+    <Wrapper $lang={toggleLang}>
       <h2>WELCOME TO LUCIA</h2>
-      <div>
+      <div className={toggleLang ? "bold" : undefined}>
         <p>
           {toggleLang
             ? "술을 마시는 것은 그늘진 삶을 사는 것이라고 생각했습니다. 술을 마시는 자는 죽음과 교제한다는 것입니다."
@@ -39,7 +39,7 @@ function AboutUs() {
         </p>
         <p>
           {toggleLang
-            ? "2006/07년 새해 전야에 캘리포니아 이스트 빌리지에서 문을 연 루시아는 창의적인 바텐더와 놀라운 서버로 구성된 직원 덕분에"
+            ? "2006/07년 새해 전야에 역삼동에서 문을 연 루시아는 창의적인 바텐더와 놀라운 서버로 구성된 직원 덕분에"
             : " Opened on New Year's Eve 2006/07 in California's East Village,"}
         </p>
         <p>
@@ -67,8 +67,6 @@ function AboutUs() {
   );
 }
 const Wrapper = styled.section`
-  font-family: ${({ lang }) =>
-    lang ? "'Noto Sans KR', sans-serif" : "'Oswald', sans-serif"};
   background-image: url("https://images.getbento.com/accounts/b407703cbc06b7de17a1aab05567665c/media/images/90545bg_finished.png");
   text-align: center;
   padding: 1rem 3.5rem 2.5rem;
@@ -82,8 +80,13 @@ const Wrapper = styled.section`
       margin-bottom: 1rem;
       font-size: 1.4rem;
       line-height: 1.3;
-      font-family: ${({ lang }) =>
-        lang ? "'Noto Sans KR', sans-serif" : "'EB Garamond', sans-serif"};
+      font-family: ${(props) =>
+        props.$lang ? "'Gowun Batang', serif" : "'EB Garamond', sans-serif"};
+    }
+  }
+  .bold {
+    p {
+      font-weight: bold;
     }
   }
   h2 {

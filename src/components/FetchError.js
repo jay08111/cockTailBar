@@ -10,10 +10,12 @@ function FetchError() {
   );
 }
 const Wrapper = styled.section`
-  height: 90vh;
+  height: 100vh;
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url("https://images.getbento.com/accounts/b407703cbc06b7de17a1aab05567665c/media/images/90545bg_finished.png");
   h1 {
     font-size: 2rem;
   }

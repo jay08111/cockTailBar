@@ -1,31 +1,19 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  setReviewValue,
-  addReviews,
-  setCommentValue,
-} from "../redux/liquorSlice";
-import { ReviewComment, Nocomment } from "../components/index";
+import { useSelector } from "react-redux";
+import { ReviewComment, InputField } from "../components/index";
 import { useLocation } from "react-router-dom";
 function Review() {
   const location = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
-  const dispatch = useDispatch();
-  const {
-    reviewList,
-    reviewNameValue,
-    reviewCommentValue,
-    toggleLang,
-    reviewListKR,
-  } = useSelector((state) => state.liquor);
-  if (reviewList.length === 0) {
-    return <Nocomment />;
-  }
+  const { reviewList, toggleLang, reviewListKR } = useSelector(
+    (state) => state.liquor
+  );
+
   return (
-    <Wrapper className="about__us2">
+    <Wrapper className="about__us2" $lang={toggleLang}>
       <h2>Customers Review</h2>
       <h3>what our customers think</h3>
       <form onSubmit={(e) => e.preventDefault()}>
@@ -38,32 +26,7 @@ function Review() {
                 <ReviewComment key={reviews.id} {...reviews} />
               ))}
         </div>
-        <div className="new__comment"></div>
-        <div className="review__inputField">
-          <input
-            type="text"
-            placeholder={toggleLang ? "닉네임" : "name"}
-            value={reviewNameValue}
-            onChange={(e) => dispatch(setReviewValue(e.target.value))}
-          />
-          <textarea
-            type="text"
-            placeholder={toggleLang ? "댓글" : "comment"}
-            value={reviewCommentValue}
-            onChange={(e) => dispatch(setCommentValue(e.target.value))}
-          />
-          <div className="review__btn__box">
-            <button
-              className="review__btn btn"
-              type="submit"
-              onClick={() => {
-                dispatch(addReviews());
-              }}
-            >
-              {toggleLang ? "등록" : "comment"}
-            </button>
-          </div>
-        </div>
+        <InputField />
       </form>
     </Wrapper>
   );
@@ -90,15 +53,23 @@ const Wrapper = styled.section`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     justify-content: center;
+    padding: 5rem;
     gap: 20px;
-    width: 40vw;
+    width:80vw;
+    margin-bottom: 1rem;
   }
+ 
   .review__inputField {
     display: flex;
     flex-direction: column;
     gap: 15px;
     justify-content: flex-end;
     margin-top: 2rem;
+    input,textarea{
+     font-family: ${(props) =>
+       props.$lang ? "'Noto Sans KR', sans-serif" : "'Oswald', sans-serif"};
+         }
+     } 
     input {
       width: 50vw;
       min-height: 30px;
@@ -131,16 +102,56 @@ const Wrapper = styled.section`
     display: flex;
     justify-content: flex-end;
     .review__btn {
-      background-color: #cba779;
+      background-color: transparent;
       padding: 1rem;
       margin-top: 0.5rem;
       margin-bottom: 2rem;
       transition: all 0.5s;
+      border: 1px solid #fff;
       width: 150px;
+      font-size: 1rem;
       &:hover {
-        background-color: #e57124;
+        color:#b32614;
       }
     }
   }
+
+  @media screen and (max-width: 1400px) {
+    .review__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  }
+  @media screen and (max-width: 1035px) {
+    .review__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  }
+  @media screen and (max-width: 693px) {
+    .review__grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  }
+  @media screen and (max-width: 575px) {
+  h2 {
+    font-size:3rem;
+  }
+  }
+  @media screen and (max-width: 416px) {
+  h2 {
+    font-size:2.5rem;
+  }
+  h3 {
+    font-size:1.4rem;
+  }
+  }
+  @media screen and (max-width: 319px) {
+  h2 {
+    font-size:2rem;
+  }
+  h3 {
+    font-size:1.4rem;
+  }
+  }
+ 
 `;
 export default Review;

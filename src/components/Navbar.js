@@ -15,24 +15,24 @@ function Navbar() {
   }, []);
 
   return (
-    <Wrapper lang={toggleLang}>
+    <Wrapper $lang={toggleLang}>
       <button onClick={() => dispatch(setShow(!show))} className="nav__button">
         {show ? (
           <BsX className="nav__logo  x__button" />
         ) : (
-          <GiHamburgerMenu className="nav__logo" />
+          <GiHamburgerMenu className="nav__logo hamburger__button" />
         )}
       </button>
       <nav className={show ? "nav__container works" : "nav__container"}>
         <div className="nav__inner">
           <div className="nav__link">
-            {navLink.map((nav) => {
-              const { id, link, titleEN, titleKR } = nav;
+            {navLink.map(({ id, link, titleEN, titleKR }) => {
               return (
                 <StyledLink
                   key={id}
                   to={link}
                   onClick={() => dispatch(setShow(false))}
+                  $lang={toggleLang}
                 >
                   {toggleLang ? titleKR : titleEN}
                 </StyledLink>
@@ -56,16 +56,15 @@ function Navbar() {
 }
 
 const Wrapper = styled.div`
- font-family : ${({ lang }) =>
-   lang ? "'Noto Sans KR', sans-serif" : "'Oswald', sans-serif"}
-  }
+  font-family: ${(props) =>
+    props.$lang ? "'Noto Sans KR', sans-serif" : "'Oswald', sans-serif"};
   .nav__button {
     cursor: pointer;
     background: transparent;
+    height: 40px;
     position: fixed;
-    top: 0;
+    top: 5%;
     right: 2%;
-    bottom: 85%;
     z-index: 20;
     border: none;
     transition: all 0.2s ease-in-out 0s;
@@ -78,7 +77,10 @@ const Wrapper = styled.div`
       }
     }
     .x__button {
-      font-size: 3rem;
+      font-size: 3.5rem;
+    }
+    .hamburger__button {
+      font-size: 2.5rem;
     }
   }
   .nav__container {
@@ -169,6 +171,7 @@ const StyledLink = styled(Link)`
   color: #fff;
   font-size: 2rem;
   transition: color 0.2s ease-in-out;
+  font-size: ${(props) => (props.$lang ? "1.75rem" : "2rem")};
   &:hover {
     color: #b32614;
   }

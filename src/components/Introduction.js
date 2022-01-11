@@ -17,7 +17,7 @@ function CockTail() {
   }
 
   return (
-    <Wrapper lang={toggleLang}>
+    <Wrapper $lang={toggleLang}>
       <div
         className="grid__container max-min__60 margin-left-move"
         data-aos="fade-right"
@@ -183,9 +183,8 @@ function CockTail() {
   );
 }
 const Wrapper = styled.article`
- font-family: ${({ lang }) =>
-   lang ? "'Noto Sans KR', sans-serif" : "'EB Garamond', sans-serif"};
- } 
+  font-family: ${(props) =>
+    props.$lang ? "'Noto Sans KR', sans-serif" : "'EB Garamond', sans-serif"};
   color: #fff;
   padding: 50px 0;
   display: flex;
@@ -226,7 +225,7 @@ const Wrapper = styled.article`
       display: block;
     }
     .coffee__image {
-      margin-top: 20%;
+      margin-top: 10%;
       width: 85%;
       height: 80%;
     }

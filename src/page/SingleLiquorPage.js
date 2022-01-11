@@ -105,6 +105,7 @@ const Wrapper = styled.section`
     width: 250px;
     height: 520px;
     flex: 1;
+    object-fit: contain;
   }
   .goBack__btns {
     margin-top: 5rem;

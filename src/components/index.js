@@ -14,6 +14,7 @@ import AddButton from "./AddButton";
 import BarDescription from "./BarDescription";
 import AboutUs from "./AboutUs";
 import Picture from "./Picture";
+import InputField from "./InputField";
 export {
   Introduction,
   Footer,
@@ -31,4 +32,5 @@ export {
   BarDescription,
   AboutUs,
   Picture,
+  InputField,
 };
