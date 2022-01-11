@@ -11,8 +11,8 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-image: url("https://images.getbento.com/accounts/b407703cbc06b7de17a1aab05567665c/media/images/90545bg_finished.png");
+  height: 20vh;
+  background: transparent;
   h1 {
     text-transform: capitalize;
     display: flex;

@@ -42,7 +42,9 @@ function MyCartItem({ id, name, image, category, price, priceKr, quantity }) {
                 className="arrow"
                 onClick={() => decreaseAmount(id)}
               />
-              <p> 잔 : {amount}</p>
+              <p>
+                {toggleLang ? "잔" : "amount"} : {amount}
+              </p>
               <AiOutlinePlusCircle
                 className="arrow"
                 onClick={() => increaseAmount(id)}
@@ -77,7 +79,6 @@ const Wrapper = styled.div`
   border-radius: 10px;
   overflow: hidden;
   width: 60vw;
-  
   .cart__container {
     gap: 25px;
     display:flex;
@@ -86,7 +87,6 @@ const Wrapper = styled.div`
       display: flex;
       align-items:center;
       flex:0.5;
-     
     img {
     width: 150px;
     height: 150px; 
@@ -230,6 +230,17 @@ const Wrapper = styled.div`
            }
          }
     }
+  }
+  @media screen and (max-width: 325px) {
+    width: 90vw;
+    .cart__container  {
+     .cart__price__btn {
+       div {
+         p {
+           font-size: 1.6rem;
+         }
+       }
+     }
   }
 `;
 export default MyCartItem;

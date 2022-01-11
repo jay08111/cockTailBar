@@ -13,7 +13,9 @@ function Error() {
   );
 }
 const Wrapper = styled.div`
-  min-height: 90vh;
+  background-image: url("https://images.getbento.com/accounts/b407703cbc06b7de17a1aab05567665c/media/images/90545bg_finished.png");
+  color: #fff;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,17 +33,37 @@ const Wrapper = styled.div`
       text-transform: capitalize;
     }
   }
+  @media screen and (max-width: 515px) {
+    div {
+      h1 {
+        font-size: 3rem;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+    }
+  }
 `;
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: #000;
+  color: #fff;
+  font-size: 3rem;
+  border: 1px solid #fff;
+  padding: 20px;
+  border-radius: 10px;
+  transition: color 0.3s ease-in;
+  &:hover {
+    color: #b32614;
+  }
   &:focus,
-  &:hover,
   &:visited,
   &:link,
   &:active {
     text-decoration: none;
   }
   margin-top: 3rem auto;
+  @media screen and (max-width: 515px) {
+    font-size: 1.5rem;
+  }
 `;
 export default Error;

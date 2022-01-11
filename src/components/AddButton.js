@@ -29,6 +29,7 @@ function AddButton({ id }) {
           ? toast.success("카트에 담았습니다!")
           : toast.success("Add to Cart!");
       }}
+      $lang={toggleLang}
     >
       {toggleLang
         ? disable
@@ -41,6 +42,8 @@ function AddButton({ id }) {
   );
 }
 const Button = styled.button`
+  font-family: ${(props) =>
+    props.$lang ? "'Noto Sans KR', sans-serif" : "'Oswald', sans-serif"};
   color: #000;
   border: none;
   text-align: center;
@@ -50,7 +53,6 @@ const Button = styled.button`
   margin-top: auto;
   text-transform: capitalize;
   cursor: pointer;
-  font-family: "Oswald", sans-serif;
   @media screen and (max-width: 300px) {
     font-size: 0.8rem;
   }

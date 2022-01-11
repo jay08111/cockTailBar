@@ -17,7 +17,7 @@ function DisPlayMenu({
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
   return (
-    <Wrapper lang={toggleLang}>
+    <Wrapper $lang={toggleLang}>
       <div className="menu__description">
         <div className="menu__description__inner">
           <h2>{name}</h2>
@@ -30,7 +30,7 @@ function DisPlayMenu({
           </p>
           <div className="menu__description__button">
             <AddButton id={id} />
-            <StyledLink to={`/singlePage/${id}`}>
+            <StyledLink to={`/singlePage/${id}`} $lang={toggleLang}>
               {toggleLang ? "더 보기" : "See More"}
             </StyledLink>
           </div>
@@ -43,9 +43,8 @@ function DisPlayMenu({
   );
 }
 const Wrapper = styled.section`
- font-family: ${({ lang }) =>
-   lang ? "'Noto Sans KR', sans-serif" : "'EB Garamond', sans-serif"};
- }
+  font-family: ${(props) =>
+    props.$lang ? "'Noto Sans KR', sans-serif" : "'EB Garamond', sans-serif"};
   max-width: 60%;
   min-width: 60%;
   padding: 0.9rem;
@@ -63,6 +62,7 @@ const Wrapper = styled.section`
       .menu__price {
         margin-top: 10px;
         font-color: #fff;
+        font-size: 1.8rem;
       }
       .menu__description__content {
         max-width: 95vw;
@@ -91,14 +91,6 @@ const Wrapper = styled.section`
             border-radius: 9px;
           }
         }
-      }
-      .vaccinated {
-        font-size: 0.8rem;
-        font-weight: 300;
-        position: absolute;
-        bottom: 0;
-        right: 50%;
-        transform: translate(50%, 0);
       }
     }
     h2 {
@@ -156,6 +148,30 @@ const Wrapper = styled.section`
       }
     }
   }
+  @media screen and (max-width: 824px) {
+    .menu__description {
+      h2 {
+        font-size: 1.8rem;
+      }
+      .menu__description__inner {
+        .menu__price {
+          font-size: 1.5rem;
+        }
+        .menu__description__content {
+          p {
+            font-size: 1.2rem;
+          }
+        }
+      }
+    }
+    .menu__image {
+      img {
+        width: 100%;
+        margin-left: 20px;
+        display: block;
+      }
+    }
+  }
   @media screen and (max-width: 793px) {
     max-width: 90%;
     min-width: 90%;
@@ -166,11 +182,17 @@ const Wrapper = styled.section`
       }
       .menu__description__inner {
         border-right: 0px;
+        .menu__description__content {
+          p {
+            font-size: 1.4rem;
+          }
+        }
       }
     }
     .menu__image {
       img {
         width: 60%;
+        margin-left: 0;
       }
     }
   }
@@ -181,15 +203,31 @@ const Wrapper = styled.section`
       h2 {
         font-size: 1.5rem;
       }
+      .menu__description__inner {
+        .menu__description__content {
+          p {
+            font-size: 1.3rem;
+          }
+        }
+      }
     }
     .menu__image {
       img {
-        width: 100%;
+        width: 80%;
         height: 95%;
       }
     }
   }
   @media screen and (max-width: 361px) {
+    .menu__description {
+      .menu__description__inner {
+        .menu__description__content {
+          p {
+            font-size: 1.1rem;
+          }
+        }
+      }
+    }
     .menu__image {
       img {
         width: 100%;
@@ -250,6 +288,8 @@ const Wrapper = styled.section`
   }
 `;
 const StyledLink = styled(Link)`
+  font-family: ${(props) =>
+    props.$lang ? "'Noto Sans KR', sans-serif" : "'Oswald', sans-serif"};
   text-decoration: none;
   color: #fff;
   border: 1px solid #fff;
