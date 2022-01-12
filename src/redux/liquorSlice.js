@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { nanoid } from "nanoid";
 import { reviewData, reviewDataKR } from "../data";
@@ -209,7 +209,6 @@ const liquorSlice = createSlice({
       let { totalEn, totalKr, amountEn, amountKr } = state.cart.reduce(
         (acc, cur) => {
           const { quantity, price, priceKr } = cur;
-          console.log(quantity, price, priceKr);
           const itemTotalEn = price * quantity;
           const itemTotalKr = priceKr * quantity;
           acc.totalEn += itemTotalEn;
@@ -232,7 +231,6 @@ const liquorSlice = createSlice({
       const findCartId = state.cart.find((item) => item.id === payload);
       if (findCartId) {
         findCartId.quantity += 1;
-        console.log(current(findCartId));
       }
     },
     decreaseAmount: (state, { payload }) => {

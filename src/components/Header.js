@@ -15,7 +15,7 @@ const Wrapper = styled.header`
   .header__img {
     position: relative;
     .logo {
-      transform: scale(0.5);
+      transform: scale(0.4);
     }
     @media screen and (max-width: 1280px) {
       .logo {
@@ -39,7 +39,7 @@ const Wrapper = styled.header`
     }
     @media screen and (max-width: 820px) {
       .logo {
-        transform: scale(0.9);
+        transform: scale(0.7);
       }
     }
     @media screen and (max-width: 614px) {

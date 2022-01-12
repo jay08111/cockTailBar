@@ -41,7 +41,9 @@ function MyCartItem({ id, name, image, category, price, priceKr, quantity }) {
         </div>
         <div className="cart__price__btn">
           <div>
-            <p>{toggleLang ? `${priceKr}원` : `$${price}`}</p>
+            <p>
+              {toggleLang ? `${priceKr * quantity}원` : `$${price * quantity}`}
+            </p>
           </div>
           <div>
             <button
@@ -146,6 +148,16 @@ const Wrapper = styled.article`
         border: 1px solid #b32614;
         border-radius: 10px;
       }
+  }
+  @media screen and (max-width: 1024px) { 
+    width: 80vw;
+    .cart__container  {
+      .cart__price__btn {
+        p {
+          font-size: 1.5rem;
+        }
+        }
+       }
   }
   @media screen and (max-width: 1015px) {
     width: 65vw;
