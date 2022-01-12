@@ -7,8 +7,9 @@ import { deleteCartItemAll, countTotal } from "../redux/liquorSlice";
 import { toast } from "react-toastify";
 function CartPage() {
   const location = useLocation();
-  const { cart, toggleLang, cartTotalEn, cartTotalKr, cartAmount } =
-    useSelector((state) => state.liquor);
+  const { cart, toggleLang, cartTotalEn, cartTotalKr } = useSelector(
+    (state) => state.liquor
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     window.scrollTo(0, 0);

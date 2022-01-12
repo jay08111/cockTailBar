@@ -11,8 +11,7 @@ import { Link } from "react-router-dom";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 function MyCartItem({ id, name, image, category, price, priceKr, quantity }) {
   const dispatch = useDispatch();
-  const { cart, toggleLang, cartAmountEn, cartTotalEn, cartAmountKr } =
-    useSelector((state) => state.liquor);
+  const { toggleLang } = useSelector((state) => state.liquor);
   return (
     <Wrapper>
       <div className="cart__container">
