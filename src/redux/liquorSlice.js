@@ -286,22 +286,6 @@ const liquorSlice = createSlice({
           break;
       }
     },
-    setTotalAmount: (state) => {
-      state.cart = state.cart.reduce(
-        (total, cartItem) => {
-          const { price, priceKr, quantity } = cartItem;
-          total.totalItems += quantity;
-          total.cartTotalEn = quantity * price;
-          total.cartTotalKr = quantity * priceKr;
-          return total;
-        },
-        {
-          totalItems: 0,
-          cartTotalEn: 0,
-          cartTotalKr: 0,
-        }
-      );
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -355,7 +339,6 @@ export const {
   deleteCartItemAll,
   filterList,
   handleAmount,
-  setTotalAmount,
   countTotal,
   increaseAmount,
   decreaseAmount,

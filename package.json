@@ -1,5 +1,5 @@
 {
-  "name": "react_pastashop",
+  "name": "react_lucia",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -18,8 +18,7 @@
     "react-scripts": "4.0.3",
     "react-toastify": "^8.1.0",
     "redux": "^4.1.2",
-    "styled-components": "^5.3.3",
-    "swiper": "6.8.4"
+    "styled-components": "^5.3.3"
   },
   "scripts": {
     "start": "react-scripts start",
