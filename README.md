@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://thebar-react.netlify.app/">
-    <img src="./src/pictures/TheBar.png" alt="Logo" width="100" height="100">
+    <img src="./src/pictures/reallucialogo.svg" alt="Logo" width="100" height="100">
   </a>
 
 <h3 align="center">The Bar</h3>
