@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://thebar-react.netlify.app/">
-    <img src="./src/pictures/TheBar.png" alt="Logo" width="100" height="100">
+    <img src="https://i.ibb.co/yVt3L9D/TheBar.png" alt="Logo" width="100" height="100">
   </a>
 
 <h3 align="center">The Bar</h3>
@@ -50,6 +50,14 @@
 <p>git flow 방식을 채택하여 진행하였습니다 .</p>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+## Update
+
+<ol>
+<li>각종 UI 개선</li>
+<li>카트 total을 계산하는 함수 생성</li>
+<li>다국어 지원</li>
+</ol>
 
 ### Built With
 
@@ -145,12 +153,12 @@ axios를 활용해 비동기로 data를 fetch 했습니다 .
 <li>댓글이 아무것도 없다면 댓글이 달리지 않았다는 컴포넌트를 렌더링</li>
 <li>카트에 담긴 목록을 지우기 , 한번에 모든 아이템 지우기</li>
 <li>카트의 정보를 localStorage에 담아서 저장</li>
-<li>카트의 아이템 수량 조절 가능</li>
+<li>카트의 아이템 수량 조절및 계산 기능</li>
 </ol>
 
 #### 간단한 조직도
 
- <img src="/src/pictures/cockTailBarMap.png" alt="Logo" width="800" height="800">
+https://www.figma.com/file/lpILRXm0DlqEgZQOSH9j2c/cockTailBarProjectMindMap?node-id=0%3A1
 
 #### Router
 
@@ -736,7 +744,7 @@ deleteCartItem: (state, { payload }) => {
 
 <p>해당 array를 빈 array로 초기화를 시켜 전체를 한번에 삭제시킵니다 .</p>
 
-#### 무엇인가 값을 만족할때 어떠한 컴포넌트를 return해주고싶다 , 할때 쓰는 방법
+#### 무엇인가 값을 만족할때 어떠한 컴포넌트를 return해주고싶다 , 할때 쓰는 방법 ( 조건부 렌더링 )
 
 ```
   if (loading) {
@@ -748,6 +756,31 @@ deleteCartItem: (state, { payload }) => {
 ```
 
 <p>loading , error의 값이 true일때 각 조건에 맞는 컴포넌트를 이런식으로 return 해 줄수 있습니다 .</p>
+
+#### 카트의 총 합계를 계산해주는 함수
+
+```
+  countTotal: (state) => {
+      let { totalEn, totalKr } = state.cart.reduce(
+        (acc, cur) => {
+          const { quantity, price, priceKr } = cur;
+          acc.totalEn = price * quantity;
+          acc.totalKr = priceKr * quantity;
+          return acc;
+        },
+        {
+          totalEn: 0,
+          totalKr: 0,
+        }
+      );
+      state.cartTotalEn = totalEn;
+      state.cartTotalKr = totalKr;
+    },
+```
+
+<p>우선 누적을 시키는데 가장 용이한 고차함수 reducer를 사용하였구요 , acc파라미터는 return을 시켜줄 누적 변수고 , cur는 현재상태의 배열입니다.</p>
+<p>두번째 배열에는 초깃값을 넣어주고 , acc로 접근해서 값을 넣어줍니다.</p>
+<p>넣어준 값을 필요한 곳에 렌더링하기 위해 state에 할당해줍니다 .</p>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -769,6 +802,9 @@ deleteCartItem: (state, { payload }) => {
 <li>Filter진행시 첫렌더링은 되나 두번째 부터 렌더링이 전혀 되지않는 문제</li>
 => 상단에서 진행한것처럼 각 카테고리마다 따로 array를 만들어서 값을 담아 문제 해결 *비효율적임
 <li>svg파일의 class를 e.target 으로 접근하려고하는데 발생하는 문제</li>
+<li>styled-components props error</li>
+<li>Netlify 배포후 새로고침 하면 404 not found가 뜨는 오류</li>
+ 해결 방안 :  https://www.youtube.com/watch?v=JCM_xoWbF70 
 </ol>
 
 ##### 2번. Button Disabled하는 과정
@@ -978,6 +1014,37 @@ e.target.getAttribute("class")
 <p>amount가 1보다 작아지면 목록에서 삭제를시키고 , 아닐땐 빼거나 더할수 있는 함수로 대체를 했습니다 .</p>
 
 출처 : https://stackoverflow.com/questions/29454340/detecting-classname-of-svganimatedstring/29454358
+
+##### 9번 styled-component props error
+
+```
+ vendors~main.chunk.js:38403
+ Warning: Received `false` for a non-boolean attribute `lang`.
+
+ If you want to write it to the DOM, pass a string instead: lang="false" or lang={value.toString()}.
+
+ If you used to conditionally omit it with lang={condition && value}, pass lang={condition ? value :
+ undefined} instead
+
+```
+
+<p>이 오류의 원인은 우선 attribute 에는 string타입만 들어가야하는데 , 어떠한 조건을 넣으려고 제가 styled component prop을 넘기는 과정에서 attribute에 변하는 boolean 값을 넣어서 발생하는 오류입니다 .</p>
+<p>저는 영어와 한국어의 폰트를 다르게 하고싶었습니다 . 그렇게 하기위해서 prop을 styled-component에 보내 prop의 값으로 제 state를 대입해서 , 
+                 state의 값이 true 인경우엔 이폰트를 , false인 경우에는 이 폰트를 렌더링 하게  하고싶었습니다 . 그런데 prop을 보내서 구현을 해보니 ,
+                위와 같은 에러가 발생하였습니다 .</p>
+<p>styled-component 5.1 버전 패치로 prop을 보낼때 jsx쪽에서 $사인을 붙이고 , 받은 prop을 이용할때에  $(props) => props.$lang 로 $사인을 붙여서 해결할수 있습니다 .</p>
+
+```
+ <Wrapper $lang={toggleLang}></Wrapper>
+
+const Wrapper = styled.section`
+  font-family: ${(props) =>
+    props.$lang ? "'Noto Sans KR', sans-serif" : "'EB Garamond', sans-serif"}; `
+```
+
+원인 : https://stackoverflow.com/questions/49784294/warning-received-false-for-a-non-boolean-attribute-how-do-i-pass-a-boolean-f
+
+해결방법 : https://styled-components.com/docs/api#transient-props
 
 ## Contact
 
