@@ -17,7 +17,19 @@ import {
   AboutUsPage,
 } from "./page/index";
 import { Footer, NavBar } from "./components/index";
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import { languages } from "./locales/i18n";
 const rootElement = document.getElementById("root");
+i18n.use(initReactI18next).init({
+  resources: {
+    languages,
+  },
+  fallbackLng: "en",
+  interpolation: {
+    escapeValue: false,
+  },
+});
 render(
   <React.StrictMode>
     <Provider store={store}>
