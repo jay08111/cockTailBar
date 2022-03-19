@@ -1,5 +1,31 @@
 {
-  "default": {
-    "helloworld": "hello"
+  "about": {
+    "aboutDes1": "It was thought that to drink alcohol was to live a life shadowed by death; that those who drank were keeping company with death.",
+    "aboutDes2": "It's taken us nearly a century to restore flavor to the drink and class to the specialty cocktail.",
+    "aboutDes3": "In our time, a night to celebrate life's simple pleasures with fine wine, exquisitely crafted cocktails, beautifully prepared food, and impeccable sipping spirits is a rare gift.",
+    "aboutDes4": "and impeccable sipping spirits is a rare gift.",
+    "aboutDes5": "To those who shun the night, we tip our hat. To those who shine after dusk, we offer a warm embrace.",
+    "aboutDes6": "Welcome to the new golden age. Welcome to Lucia.",
+    "aboutDes7": "Opened on New Year's Eve 2006/07 in California's East Village,",
+    "aboutDes8": "Lucia quickly became a cocktail institution, owed greatly to our staff of creative bartenders and incredible servers.",
+    "aboutDes9": "Since then, we have evolved and changed; from an intimate bar in NYC to a sprawling cocktail lounge and restaurant in Chicago. ,",
+    "aboutDes10": "Our third installment in Los Angeles pays homage to NYC as it is an intimate seated only bar, paired this time with a more casual standing room only bar.",
+    "aboutDes11": "Through this growth, we've maintained our commitment to fine product and exceptional experiences, a focus on hospitality, and a deep desire to be a center for our communities."
+  },
+  "barDescription": {
+    "operation": "Hours of Operations",
+    "title": "Lucia Nappa Valley is Open for Indoor Dining.",
+
+    "barIntroduction1": "Lucia Nappa Valley is Open for Indoor Dining.",
+    "barIntroduction2": "Reservations are accepted only for event , party rooms.",
+    "barIntroduction3": "We can accommodate parties of up to 8 people.",
+    "barIntroduction4": "Proof of vaccination is required.",
+    "barIntroduction5": "LUCIA COFFEE BAR ARE OPEN FOR INDOOR DINING!.",
+    "barSchedule": "on Thursday,Friday & Saturday",
+    "barDisclaimer1": "if the covid situation gets worse , we may close earlier than usual with the CA Government's restriction.",
+    "barDisclaimer2": "FACE COVERINGS REQUIRED FOR ALL INDIVIDUALS per City and County of CA Public Health Order, issued November 24, 2021.",
+    "barDisclaimer3": "Tables are available for walk-ins on a first come, first served basis.",
+    "barEvent": "COFFIE IS DISCOUNTED FOR 15% UNTIL 03/2022",
+    "barWarning": "Proof of vaccination is required."
   }
 }
