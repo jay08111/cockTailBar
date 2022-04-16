@@ -1,77 +1,52 @@
-* {
-  padding: 0;
+body {
   margin: 0;
-  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-body,
-input,
-textarea {
-  font-family: "Oswald", sans-serif;
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
-p {
-  /* font-family: "EB Garamond", serif; */
-  color: #b1b1b1;
-  line-height: 1.5;
+
+.App {
+  text-align: center;
 }
-.header__img {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2), #000),
-    url("https://i.ibb.co/3rSGqJX/barPic2.jpg");
-  height: 100vh;
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
-.main {
-  background-image: url("https://images.getbento.com/accounts/b407703cbc06b7de17a1aab05567665c/media/images/90545bg_finished.png");
-}
-.section__center {
-  width: 90vw;
-  margin: 0 auto;
-}
-.btn {
-  border: none;
-  font-size: 1rem;
-  border-radius: 5px;
-  color: #fff;
-  cursor: pointer;
-  transition: all 0.4s;
-}
-.active {
-  background-color: #fff !important;
-  color: #000 !important;
-}
-.about__us {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), #000),
-    url("https://i.ibb.co/Dwp32LV/bar-Pic-Aboutus1.jpg");
-  height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.about__us2 {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.8), #000),
-    url("https://i.ibb.co/QFmPf1X/bar-Pic-Aboutus2.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.about__us3 {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.9), #000),
-    url("https://i.ibb.co/tp5NCJ5/bar-Pic-Aboutus3.jpg");
 
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+.App-link {
+  color: #61dafb;
 }
-.about__us4 {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.85), #000),
-    url("https://i.ibb.co/5jjgSn3/bar-Pic-Aboutus4.jpg");
 
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
