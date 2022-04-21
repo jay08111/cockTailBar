@@ -6,13 +6,18 @@ import { BsX } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { setShow, setToggledLang } from "../redux/liquorSlice";
 import { navLink } from "../data";
+import { useTranslation } from "react-i18next";
 import Aos from "aos";
 function Navbar() {
+  const { i18n } = useTranslation();
   const { show, toggleLang } = useSelector((state) => state.liquor);
   const dispatch = useDispatch();
   useEffect(() => {
     Aos.init({ duration: 1500 });
   }, []);
+  useEffect(() => {
+    console.log(i18n);
+  }, [i18n]);
 
   return (
     <Wrapper $lang={toggleLang}>

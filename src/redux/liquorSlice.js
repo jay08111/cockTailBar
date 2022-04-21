@@ -5,7 +5,6 @@ import { reviewData, reviewDataKR } from "../data";
 import { toast } from "react-toastify";
 const url = "https://jay08111.github.io/data/liquor.json";
 const urliD = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
-
 export const getLocalStorage = () => {
   let cart = localStorage.getItem("cart");
   if (cart) {
